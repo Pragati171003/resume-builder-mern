@@ -1,0 +1,11 @@
+#but {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background-color: #0073e6;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-bottom:300px;
+}
