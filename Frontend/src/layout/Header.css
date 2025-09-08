@@ -1,8 +1,72 @@
 .header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between; /* spreads items across */
-  align-items: center;           /* vertically centers */
-  padding: 10px 20px;
-  background-color: #f8f9fa;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background-color: #f5f2f2;
+  border-bottom: 1px solid #eee;
+  font-family: Arial, sans-serif;
+   width: 100%; 
+}
+
+.header3:first-child {
+  font-weight: bold;
+  font-size: 18px;
+  color: #222;
+}
+
+.header2 {
+  display: flex;
+  gap: 24px;
+}
+
+.header2 a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.header2 a:hover {
+  color: #0073e6;
+}
+
+/* Right buttons */
+.header3:last-child {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.header3 button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* Login button (outlined) */
+.header3 button:first-child {
+  border: 1px solid #0073e6;
+  background-color: #fff;
+  color: #0073e6;
+}
+
+.header3 button:first-child:hover {
+  background-color: #e6f0ff;
+}
+
+/* Get Started button (filled) */
+.header3 button:last-child {
+  background-color: #0073e6;
+  color: #fff;
+  border: 1px solid #0073e6;
+}
+
+.header3 button:last-child:hover {
+  background-color: #005bb5;
 }
