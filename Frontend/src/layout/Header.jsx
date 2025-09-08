@@ -1,16 +1,21 @@
 import './Header.css';
 function Header(){
     return (
-        <>
+        <div className="header">
+            <div className="header3"></div>
             {/* Insert icon */}
-            <div className="header">
-                <a href="https://app.resumebuilder.com/build-resume">Resume Builder App</a>
-                <a href="">Resume Examples</a>
-                <a href="">Resume Templates</a>
-                <a href="">My account</a>
-                <button>Build your resume</button>
+            <div className="header2">
+                <a>Home</a>
+                <a>Features</a>
+                <a>Templates</a>
+                <a>Testimonials</a>
+                <a>FAQ</a>
             </div>
-        </>
+            <div className="header3">
+                <button>Login</button>
+                <button>Get Started</button>
+            </div>
+        </div>
     );
 }
 export { Header };
