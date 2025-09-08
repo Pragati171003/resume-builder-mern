@@ -1,13 +1,12 @@
-import {Header} from './layout/Header'
-import './App.css'
+import React from "react";
+import SignUppage from "./pages/SignUppage";   
 
 function App() {
-
   return (
-    <>
-      <Header/>
-    </>
-  )
+    <div>
+      <SignUppage />   
+    </div>
+  );
 }
 
-export default App
+export default App;
