@@ -1,11 +1,11 @@
-import {Header} from './layout/Header'
+import {Loginpage}from './pages/Loginpage'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <Header/>
+      <Loginpage/>
     </>
   )
 }
