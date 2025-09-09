@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./ResumeForm.css";
 const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 
-function ResumeForm() {
+function ResumeForm({onSubmit}) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
-    countryCode: "+91", 
+    countryCode: "+91", // ✅ Default India
     linkedin: "",
     gitlab: "",
     education: {
@@ -19,7 +19,7 @@ function ResumeForm() {
     skills: [],
     skillInput: "",
     experience: "",
-    projects: "",
+    projects: [{ title: "", description: "" }],
     achievements: "",
     certifications: "",
   });
@@ -45,18 +45,49 @@ function ResumeForm() {
       return;
     }
 
-    if (name.includes(".")) {
-      const [section, field] = name.split(".");
-      setFormData((prev) => ({
-        ...prev,
-        education: {
-          ...prev.education,
-          [section]: { ...prev.education[section], [field]: value },
-        },
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+    // ✅ Fix: handle countryCode
+    if (name === "countryCode") {
+      setFormData((prev) => ({ ...prev, countryCode: value }));
+      return;
     }
+
+    if (name.startsWith("education.")) {
+  const [, level, field] = name.split(".");
+  setFormData((prev) => ({
+    ...prev,
+    education: {
+      ...prev.education,
+      [level]: {
+        ...prev.education[level],
+        [field]: value,
+      },
+    },
+  }));
+  return;
+}
+  setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleProjectChange = (index, field, value) => {
+    setFormData((prev) => {
+      const projects = prev.projects.slice();
+      projects[index] = { ...projects[index], [field]: value };
+      return { ...prev, projects };
+    });
+  };
+
+  const addProject = () => {
+    setFormData((prev) => ({
+      ...prev,
+      projects: [...prev.projects, { title: "", description: "" }],
+    }));
+  };
+
+  const removeProject = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      projects: prev.projects.filter((_, i) => i !== index),
+    }));
   };
 
   const addSkill = () => {
@@ -96,29 +127,34 @@ function ResumeForm() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
       const fullMobile = formData.countryCode + formData.mobile;
-      console.log("Resume Submitted:", { ...formData, fullMobile });
-      alert("Resume Submitted! Check console for details.");
+      const finalData = { ...formData, fullMobile };
+      
+      console.log("Resume Submitted:", finalData);
+
+      // ✅ send data back to App.jsx
+      if (onSubmit) {
+        onSubmit(finalData);
+      }
     } else {
       alert("Please fill all mandatory fields");
     }
   };
 
   return (
-    <div style={{ margin: "20px", padding: "20px", border: "1px solid black" }}>
+    <div>
       <h2>Resume Form</h2>
       <form onSubmit={handleSubmit}>
-
-        
         <div>
-          <label>
+          <h3>
             Full Name <span style={{ color: "red" }}>*</span>
-          </label>
+          </h3>
           <br />
-          <textarea
+          <input
+            type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -128,11 +164,10 @@ function ResumeForm() {
         </div>
         <br />
 
-        
         <div>
-          <label>
+          <h3>
             Email <span style={{ color: "red" }}>*</span>
-          </label>
+          </h3>
           <br />
           <input
             type="email"
@@ -145,11 +180,10 @@ function ResumeForm() {
         </div>
         <br />
 
-        
         <div>
-          <label>
+          <h3>
             Mobile <span style={{ color: "red" }}>*</span> (10 digits)
-          </label>
+          </h3>
           <br />
           <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <select
@@ -184,9 +218,9 @@ function ResumeForm() {
         </div>
         <br />
 
-        
         <div>
-          <label>LinkedIn (Optional)</label><br />
+          <h3>LinkedIn (Optional)</h3>
+          <br />
           <input
             type="url"
             name="linkedin"
@@ -197,9 +231,9 @@ function ResumeForm() {
         </div>
         <br />
 
-        
         <div>
-          <label>GitLab (Optional)</label><br />
+          <h3>GitLab (Optional)</h3>
+          <br />
           <input
             type="url"
             name="gitlab"
@@ -210,54 +244,58 @@ function ResumeForm() {
         </div>
         <br />
 
-       
         <h3>Education</h3>
-        {["tenth", "twelth", "ug", "pg"].map((level) => (
-          <div key={level} style={{ marginBottom: "15px" }}>
-            <strong>
-              {level.toUpperCase()}
-              {level !== "pg" ? <span style={{ color: "red" }}>*</span> : " (Optional)"}
-            </strong>
-            <br />
-            
-            Marks/CGPA:{" "}
-            <input
-              type="text"
-              name={`education.${level}.marks`}
-              value={formData.education[level].marks}
-              onChange={handleChange}
-              placeholder="e.g., 85 or 8.5"
-            />
-            <br />
-            College:{" "}
-            <input
-              type="text"
-              name={`education.${level}.college`}
-              value={formData.education[level].college}
-              onChange={handleChange}
-              placeholder="College Name"
-            />
-            <div style={{ color: "red" }}>{errors[level]}</div>
-            <br />
-            Year of Passing:{" "}
-            <select
-              name={`education.${level}.year`}
-              value={formData.education[level].year}
-              onChange={handleChange}
-            >
-              {years.map((yr) => (
-                <option key={yr} value={yr}>{yr}</option>
-              ))}
-            </select>
-            <br /><br />
-          </div>
-        ))}
+        <div className="education">
+          {["tenth", "twelth", "ug", "pg"].map((level) => (
+            <div key={level} style={{ marginBottom: "15px" }}>
+              <label style={{ fontWeight: "bold" }} className="degree-label">
+                {level.toUpperCase()}
+                {level !== "pg" ? (
+                  <span style={{ color: "red" }}>*</span>
+                ) : (
+                  " (Optional)"
+                )}
+              </label>
 
-        
+              <label>Marks/CGPA:</label>
+              <input
+                type="text"
+                name={`education.${level}.marks`}
+                value={formData.education[level].marks}
+                onChange={handleChange}
+                placeholder="e.g., 85 or 8.5"
+              />
+
+              <label>College:</label>
+              <input
+                type="text"
+                name={`education.${level}.college`}
+                value={formData.education[level].college}
+                onChange={handleChange}
+                placeholder="College Name"
+              />
+              <div style={{ color: "red" }}>{errors[level]}</div>
+
+              <label>Year of Passing:</label>
+              <select
+                name={`education.${level}.year`}
+                value={formData.education[level].year}
+                onChange={handleChange}
+              >
+                {years.map((yr) => (
+                  <option key={yr} value={yr}>
+                    {yr}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+
         <div>
-          <label>
+          <h3>
             Skills <span style={{ color: "red" }}>*</span>
-          </label>
+          </h3>
           <br />
           <div>
             <input
@@ -267,12 +305,17 @@ function ResumeForm() {
               onChange={handleChange}
               placeholder="Enter a skill"
             />
-            <button type="button" onClick={addSkill}>Add</button>
+            <button type="button" onClick={addSkill}>
+              Add
+            </button>
           </div>
           <div>
             {formData.skills.map((skill, idx) => (
               <span key={idx} style={{ marginRight: "10px" }}>
-                {skill} <button type="button" onClick={() => removeSkill(skill)}>x</button>
+                {skill}{" "}
+                <button type="button" onClick={() => removeSkill(skill)}>
+                  x
+                </button>
               </span>
             ))}
           </div>
@@ -280,9 +323,9 @@ function ResumeForm() {
         </div>
         <br />
 
-       
         <div>
-          <label>Experience (Optional)</label><br />
+          <h3>Experience (Optional)</h3>
+          <br />
           <textarea
             name="experience"
             value={formData.experience}
@@ -292,23 +335,60 @@ function ResumeForm() {
         </div>
         <br />
 
-        
         <div>
-          <label>Projects (Optional)</label><br />
-          <textarea
-            name="projects"
-            value={formData.projects}
-            onChange={handleChange}
-            placeholder="Write here..."
-          />
+          <h3>Projects (Optional)</h3>
+          <br />
+          {formData.projects.map((proj, idx) => (
+            <div
+              key={idx}
+              style={{
+                border: "1px solid #e6eef3",
+                padding: "12px",
+                borderRadius: "8px",
+                marginBottom: "10px",
+                background: "#fafcff",
+              }}
+            >
+              <label>Project Title</label>
+              <input
+                type="text"
+                value={proj.title}
+                onChange={(e) =>
+                  handleProjectChange(idx, "title", e.target.value)
+                }
+                placeholder="Project title"
+              />
+
+              <label>Project Description</label>
+              <textarea
+                value={proj.description}
+                onChange={(e) =>
+                  handleProjectChange(idx, "description", e.target.value)
+                }
+                placeholder="Describe the project..."
+              />
+
+              <div
+                style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}
+              >
+                <button type="button" onClick={() => removeProject(idx)}>
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+
+          <button type="button" onClick={addProject}>
+            Add Project
+          </button>
         </div>
         <br />
 
-        
         <div>
-          <label>
+          <h3>
             Achievements <span style={{ color: "red" }}>*</span>
-          </label><br />
+          </h3>
+          <br />
           <textarea
             name="achievements"
             value={formData.achievements}
@@ -319,11 +399,11 @@ function ResumeForm() {
         </div>
         <br />
 
-        
         <div>
-          <label>
+          <h3>
             Certifications <span style={{ color: "red" }}>*</span>
-          </label><br />
+          </h3>
+          <br />
           <textarea
             name="certifications"
             value={formData.certifications}
