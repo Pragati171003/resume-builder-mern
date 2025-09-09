@@ -1,13 +1,13 @@
 import {Header} from './layout/Header'
 import './App.css'
-import SignUppage from './pages/SignUppage';
 
 function App() {
   return (
     <>
-      <SignUppage/>
+      <Header/>
     </>
-  )
+  );
 }
+
 
 export default App;
