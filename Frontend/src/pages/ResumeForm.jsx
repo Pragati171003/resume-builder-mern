@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./ResumeForm.css";
+import { useNavigate } from 'react-router-dom';
 const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 
 function ResumeForm({onSubmit}) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +25,6 @@ function ResumeForm({onSubmit}) {
     achievements: "",
     certifications: "",
   });
-
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -134,6 +135,7 @@ function ResumeForm({onSubmit}) {
       const finalData = { ...formData, fullMobile };
       
       console.log("Resume Submitted:", finalData);
+      navigate('/templates-preview', { state: { resumeData: finalData } });
 
       // ✅ send data back to App.jsx
       if (onSubmit) {
@@ -416,6 +418,13 @@ function ResumeForm({onSubmit}) {
 
         <button type="submit">Submit Resume</button>
       </form>
+      <div>
+      
+      <form onSubmit={handleSubmit}>
+        {/* ... all your input fields ... */}
+        <button type="submit">Preview Resume</button> {/* Changed button text */}
+      </form>
+    </div>
     </div>
   );
 }
