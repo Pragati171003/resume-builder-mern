@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import './Loginpage.css'; // We will replace the CSS next
+import './Loginpage.css'; 
 
 export function Loginpage() {
   const [showPassword, setShowPassword] = useState(false);
