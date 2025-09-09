@@ -18,8 +18,8 @@ function Header() {
         <NavLink to="/faq-page">FAQ</NavLink> {/* Renamed to avoid confusion with the component */}
       </nav>
       <div className="header-right">
-        <button className="btn-login">Login</button>
-        <button className="btn-get-started">Get Started</button>
+        <Link to="/login" className="btn-login">Login</Link>
+        <Link to="/signup" className="btn-get-started">Get Started</Link>
       </div>
     </header>
   );
