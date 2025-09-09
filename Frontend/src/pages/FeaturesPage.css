@@ -1,0 +1,113 @@
+/* src/pages/FeaturesPage.css */
+
+.features-page {
+  /* This ensures the page has no unwanted default margins */
+  width: 100%;
+}
+
+/* --- Hero Section --- */
+.features-hero {
+  background: linear-gradient(to right, #0052d4, #65c7f7, #9cecfb);
+  color: white;
+  text-align: center;
+  padding: 80px 40px;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* --- Features Grid Section --- */
+.features-grid-section {
+  padding: 80px 40px;
+  background-color: #f8f9fa; /* Light grey background for contrast */
+}
+
+.features-grid {
+  display: grid;
+  /* Creates 3 columns on desktop, 2 on tablet, 1 on mobile */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  color: #007bff; /* Primary blue color */
+  margin-bottom: 20px;
+}
+
+.feature-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.feature-description {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* --- Call to Action Section --- */
+.features-cta-section {
+  text-align: center;
+  padding: 80px 40px;
+  background-color: #ffffff;
+}
+
+.features-cta-section h2 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 16px;
+}
+
+.features-cta-section p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}

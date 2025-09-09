@@ -1,11 +1,267 @@
-#but {
-  padding: 12px 24px;
+/* General Section Styling */
+main section {
+  padding: 80px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.section-subtitle {
+  color: #555;
+  font-size: 18px;
+  max-width: 600px;
+  margin: 10px auto 40px;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: #f8f9fa;
+  background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+  background-repeat: repeat;
+}
+.hero-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+.hero-section h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #222;
+  line-height: 1.2;
+}
+.hero-subtitle {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 32px;
+}
+.hero-button {
+  display: inline-block;
+  padding: 14px 28px;
   border-radius: 8px;
   border: none;
-  background-color: #0073e6;
+  background-color: #007bff;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
   transition: background 0.2s ease;
-  margin-bottom:300px;
+  margin-top: 14px; 
+}
+.hero-button:hover {
+  background-color: #0056b3;
+}
+
+/* Features Section */
+.features-section h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.features-showcase {
+  margin-top: 50px;
+}
+.laptop-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* How It Works Section */
+.how-it-works-section {
+  background-color: #f8f9fa;
+}
+.how-it-works-section h2 {
+  font-size: 36px;
+}
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  margin-top: 60px;
+  text-align: left;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.step.reverse {
+  flex-direction: row-reverse;
+}
+.step img {
+  max-width: 50%;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: 350px;           
+  width: 50%;              
+  object-fit: cover; 
+}
+.step-text {
+  flex: 1;
+}
+.step-number {
+  display: inline-block;
+  background-color: #e7f3ff;
+  color: #007bff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.step-text h3 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.step-text p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Templates Section */
+.templates-section h2 {
+  font-size: 36px;
+}
+.templates-gallery {
+  max-width: 100%;
+  margin-top: 40px;
+}
+
+/* Pricing Section */
+.pricing-section {
+  background-color: #f8f9fa;
+}
+.pricing-section h2 {
+  font-size: 36px;
+}
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+.pricing-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 30px;
+  width: 320px;
+  text-align: left;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+.pricing-card.popular {
+  border-color: #007bff;
+}
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.pricing-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.price {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 12px;
+}
+.price span {
+  font-size: 40px;
+  font-weight: bold;
+  color: #222;
+}
+.card-desc {
+  font-size: 14px;
+  color: #666;
+  height: 40px;
+  margin-bottom: 20px;
+}
+.btn-price {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid;
+  margin-bottom: 20px;
+}
+.btn-free {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+.btn-pro {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+.btn-enterprise {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+}
+.pricing-card li {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* Testimonial Section */
+.testimonial-section {
+  background-color: #f8f9fa;
+}
+.testimonial-content {
+  max-width: 750px;
+  margin: 0 auto;
+  position: relative;
+}
+.quote {
+  font-size: 24px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30px;
+}
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.author img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.author-info {
+  text-align: left;
+}
+.author-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+.author-title {
+  color: #666;
+  font-size: 15px;
 }
