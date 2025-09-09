@@ -1,24 +1,16 @@
-import {Loginpage}from './pages/Loginpage'
-import {Header} from './layout/Header'
-import {Footer} from './layout/Footer'
-import './App.css'
-import { Body } from './layout/Body'
+import AppRoutes from './AppRoutes'
+import Homepage from './pages/Homepage'
 import ResumeForm from './pages/ResumeForm'
-import FAQ from './layout/FAQ'
+import {Loginpage}from './pages/Loginpage'
 
 function App() {
-
   return (
     <>
-      <Loginpage/>
-      <Header/>
-      <Body/>
-      <FAQ/>
-      <Footer/>
-      
-      <ResumeForm/>
+      {/*<Loginpage/>*/}
+      <AppRoutes />
+      {/*<ResumeForm/>*/}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
