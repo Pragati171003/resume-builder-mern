@@ -9,13 +9,12 @@ function App() {
   return (
     <>
       <Header/>
-      {/*<Loginpage/>*/}
+      <Loginpage/>
       <AppRoutes />
-      {/*<ResumeForm/>*/}
+      <ResumeForm/>
     </>
   );
 }
 
-export default App;
 
 export default App;
