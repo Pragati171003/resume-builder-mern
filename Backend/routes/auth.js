@@ -1,40 +1,71 @@
-const express = require("express");
+import express from "express";
+import User from "../model/user.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import authMiddleware from "../middleware/authMiddleware.js";
+
 const router = express.Router();
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const SECRET_KEY = process.env.SECRET_KEY || "secret";
 
-// Register new user
-router.post("/register", async (req,res) => {
-  const { username, email, password } = req.body;
+// REGISTER
+router.post("/register", async (req, res) => {
   try {
-    const exists = await User.findOne({ email });
-    if(exists) return res.status(400).json({ message: "User already exists" });
-    
-    const user = new User({ username, email, password });
-    await user.save();
-    res.json({ message: "User registered" });
-  } catch(err) {
-    res.status(500).json({ message: err.message });
+    const { firstName, lastName, email, password, dob, mobile } = req.body;
+
+    // check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ msg: "User already exists" });
+
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ firstName, lastName, email, password: hashedPassword, dob, mobile });
+    await newUser.save();
+
+    // generate token
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    res.status(201).json({
+      msg: "User registered successfully",
+      token,
+      user: { id: newUser._id, email: newUser.email }
+    });
+  } catch (err) {
+    res.status(500).json({ msg: "Server error", error: err.message });
   }
 });
 
-// Login
-router.post("/login", async (req,res) => {
-  const { email, password } = req.body;
+// LOGIN
+router.post("/login", async (req, res) => {
   try {
+    const { email, password } = req.body;
+
     const user = await User.findOne({ email });
-    if(!user) return res.status(400).json({ message: "User not found" });
+    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
 
-    const match = await bcrypt.compare(password, user.password);
-    if(!match) return res.status(400).json({ message: "Wrong password" });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id, email: user.email }, SECRET_KEY, { expiresIn: "2h" });
-    res.json({ token, username: user.username });
-  } catch(err) {
-    res.status(500).json({ message: err.message });
+    // generate token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    res.status(200).json({
+      msg: "Login successful",
+      token,
+      user: { id: user._id, email: user.email }
+    });
+  } catch (err) {
+    res.status(500).json({ msg: "Server error", error: err.message });
   }
 });
 
-module.exports = router;
+// ✅ Example protected route
+router.get("/profile", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+export default router;
