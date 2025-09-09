@@ -1,108 +1,123 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+/* Full-screen wrapper for centering the form */
+.login-page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
-  margin: 0;
-  padding: 5px;
+  min-height: 100vh;
+  background-color: #f4f7fc;
+  font-family: 'Poppins', sans-serif; /* A modern font for a clean look */
 }
 
+/* The main white container for the form */
 .login-container {
-  background-color: #fff;
-  padding: 20px 25px;  
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 320px;  
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
   text-align: center;
 }
-h2 {
-  font-size: 24px;  
 
+.login-container h2 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 10px;
 }
 
-
-form {
-  display: flex;
-  flex-direction: column;
-  
-
-}
-label {
-  font-weight: bold;
-  color: #555;
-
-  display: block; 
+.login-container .subtitle {
+  font-size: 16px;
+  color: #718096;
+  margin-bottom: 30px;
 }
 
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;  
-   
-  font-size: 14px;  
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box; 
-  padding: 10px;
-}
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-  border-color: #007bff; 
-  outline: none; 
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+/* This is the new container for each label + input */
+.input-group {
+  display: flex; /* Aligns label and input side-by-side */
+  align-items: center;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button[type="submit"] {
-  background-color: #007bff;
-  color: white;
-  padding: 12px 5px;
+/* Modern focus effect: applied to the container when the input inside is focused */
+.input-group:focus-within {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+.input-group label {
+  padding: 0 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  border-right: 1px solid #cbd5e0; /* The vertical line */
+  white-space: nowrap; /* Prevents the label from wrapping */
+}
+
+/* The input field itself should have no border or background */
+.input-group input {
+  flex-grow: 1; /* Allows the input to fill the remaining space */
+  width: 100%;
+  padding: 14px 16px;
   border: none;
-  border-radius: 4px;
+  outline: none;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+/* The primary action button */
+form button[type="submit"] {
+  width: 100%;
+  background-color: #3182ce;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 18px;
-  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #0056b3;
+form button[type="submit"]:hover {
+  background-color: #2b6cb0;
 }
 
-p {
-
-  color: #666;
-  font-size: 15px;
+/* The "Register here" link at the bottom */
+.bottom-text {
+  margin-top: 25px;
+  color: #718096;
+  font-size: 14px;
 }
 
-p a {
-  color: #007bff;
+.bottom-text a {
+  color: #3182ce;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-p a:hover {
+.bottom-text a:hover {
   text-decoration: underline;
 }
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
 
-.password-container input {
-  padding-right: 35px; 
-  width: 100%;
+/* --- Password Visibility Toggle --- */
+
+/* The password group needs to be relative to position the icon */
+.password-group {
+  position: relative;
 }
 
 .toggle-password {
   position: absolute;
-  right: 10px;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%); /* Perfectly centers the icon vertically */
   cursor: pointer;
   user-select: none;
-  font-size: 18px;
+  font-size: 22px;
+  color: #a0aec0;
 }
