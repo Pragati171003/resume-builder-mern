@@ -9,23 +9,15 @@ import ResumeForm from './pages/ResumeForm'
 import ResumeTemplate2 from './components/resumetemplates/ResumeTemplate2'
 
 function App() {
- 
+
 
   return (
-    
-  
-    <div>
-      {!submittedData ? (
-        <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
-      ) : (
-        <ResumeTemplate2 data={submittedData}/>
-      )}
-    </div>
+    <>
+
+      <AppRoutes />
+    </>
   );
 }
-
-
-
 
 
 

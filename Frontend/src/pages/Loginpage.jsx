@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import './Loginpage.css'; 
+import './Loginpage.css';
 
 export function Loginpage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,23 +10,18 @@ export function Loginpage() {
   };
 
   return (
-    <div className="login-page-wrapper"> 
+    <div className="login-page-wrapper">
       <div className="login-container">
         <h2>Login</h2>
         <p className="subtitle">Welcome back! Please enter your details.</p>
         <form>
-          {/* New structure for the input fields */}
-          <div className="input-group">
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" required />
-          </div>
-
+          {/* Email field */}
           <div className="input-group">
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" required />
           </div>
-          
-          {/* The password group needs to be relative for the icon */}
+         
+          {/* Password field */}
           <div className="input-group password-group">
             <label htmlFor="password">Password:</label>
             <input
@@ -39,7 +34,7 @@ export function Loginpage() {
               {showPassword ? "🙈" : "👁️"}
             </span>
           </div>
-          
+         
           <button type="submit">Login</button>
         </form>
         <p className="bottom-text">
