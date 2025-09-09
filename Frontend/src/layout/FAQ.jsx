@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import "./FAQ.css";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
@@ -21,24 +22,23 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(0); // default first open
-
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const [openIndex, setOpenIndex] = useState(0);
+  const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
   return (
     <section className="faq-section">
-      {/* Left side text */}
       <div className="faq-left">
         <span className="faq-badge">FAQs</span>
         <h2>Answers to Your Most Common Resume Questions</h2>
         <p>Get clarity on how our AI resume builder works.</p>
-        <button className="faq-btn">View all FAQs</button>
+        
+        {/* 2. CHANGE THE BUTTON TO A LINK that goes to the new page */}
+        <Link to="/all-faqs" className="faq-btn">
+          View all FAQs
+        </Link>
       </div>
-
-      {/* Right side accordions */}
       <div className="faq-right">
+        {/* The rest of this component stays exactly the same */}
         {faqs.map((faq, index) => (
           <div
             key={index}
@@ -50,9 +50,7 @@ export default function FAQ() {
               {openIndex === index ? <FaMinus /> : <FaPlus />}
             </div>
             {openIndex === index && (
-              <div className="faq-answer">
-                <p>{faq.answer}</p>
-              </div>
+              <div className="faq-answer"><p>{faq.answer}</p></div>
             )}
           </div>
         ))}

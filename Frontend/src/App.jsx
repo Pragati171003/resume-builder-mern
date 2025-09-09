@@ -8,13 +8,14 @@ import {Loginpage}from './pages/Loginpage'
 function App() {
   return (
     <>
-      <Header/>
-      <Loginpage/>
+     
+      {/*<Loginpage/>*/}
       <AppRoutes />
-      <ResumeForm/>
+      {/*<ResumeForm/>*/}
     </>
   );
 }
+
 
 
 export default App;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import './Loginpage.css'
 export function Loginpage() {
   return (
@@ -17,7 +18,9 @@ export function Loginpage() {
         <button type="submit">Login</button>
       </form>
       <p>
-        Don’t have an account? <a href="/register">Register here</a>
+        Don’t have an account?{' '}
+        {/* 2. REPLACE <a> with <Link> and point to /signup */}
+        <Link to="/signup">Register here</Link>
       </p>
     </div>
   );
