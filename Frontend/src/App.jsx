@@ -12,12 +12,20 @@ function App() {
  
 
   return (
-    <>
-      
-      <ResumeForm/>
-    </>
+    
+  
+    <div>
+      {!submittedData ? (
+        <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
+      ) : (
+        <ResumeTemplate2 data={submittedData}/>
+      )}
+    </div>
   );
 }
+
+
+
 
 
 
