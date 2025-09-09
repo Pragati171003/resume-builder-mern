@@ -11,10 +11,10 @@ function CallToAction() {
   );
 }
 
-function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+// function Footer() {
+//   const scrollToTop = () => {
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   };
 
   return (
     <>
@@ -57,6 +57,6 @@ function Footer() {
       </footer>
     </>
   );
-}
+
 
 export { Footer };
