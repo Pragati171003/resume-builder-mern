@@ -12,12 +12,20 @@ function App() {
   const [submittedData, setSubmittedData] = useState(null);
 
   return (
-    <>
-      
-      <AppRoutes />
-    </>
+    
+  
+    <div>
+      {!submittedData ? (
+        <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
+      ) : (
+        <ResumeTemplate2 data={submittedData} />
+      )}
+    </div>
   );
 }
+
+
+
 
 
 
