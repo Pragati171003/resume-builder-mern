@@ -38,7 +38,7 @@ export default function SignUppage() {
   };
 
   return (
-    <div className="register-container" style={{ backgroundImage: `url(${bgimage})` }}>
+  <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h2 className="form-title">Register</h2>
 
