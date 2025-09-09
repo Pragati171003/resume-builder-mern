@@ -1,6 +1,13 @@
-import React from "react";
-import './Loginpage.css'
+import React, { useState } from "react";
+import "./Loginpage.css";
+
 export function Loginpage() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-container">
       <h2>Login</h2>
@@ -12,7 +19,18 @@ export function Loginpage() {
         <input type="email" id="email" name="email" required /><br /><br />
 
         <label htmlFor="password">Password:</label><br />
-        <input type="password" id="password" name="password" required /><br /><br />
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            required
+          />
+          <span className="toggle-password" onClick={togglePassword}>
+            {showPassword ? "🙈" : "👁️"}
+          </span>
+        </div>
+        <br /><br />
 
         <button type="submit">Login</button>
       </form>
@@ -22,4 +40,3 @@ export function Loginpage() {
     </div>
   );
 }
-
