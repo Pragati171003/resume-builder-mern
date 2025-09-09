@@ -2,7 +2,7 @@ import './Body.css';
 import myScreenshot1 from '../assets/images/Screenshot 2025-09-08 235014.png';
 import myScreenshot2 from '../assets/images/Screenshot 2025-09-08 235043.png';
 import myScreenshot3 from '../assets/images/Screenshot 2025-09-08 235055.png';
-
+import { Link } from 'react-router-dom';
 
 
 function Body() {
@@ -13,7 +13,9 @@ function Body() {
         <img src="https://i.imgur.com/2JtF2gP.png" alt="AI Icon" className="hero-icon" />
         <h1>Build a Job-Winning <br /> Resume in Minutes</h1>
         <p className="hero-subtitle">Our website helps you craft professional, ATS-friendly resumes effortlessly.</p>
-        <button className="hero-button">Get Started for Free</button>
+        <Link to="/signup" className="hero-button">
+          Get Started for Free
+        </Link>
       </section>
 
       {/* Features Section */}
