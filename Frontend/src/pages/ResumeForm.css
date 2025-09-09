@@ -1,91 +1,185 @@
-
-
-
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f6fa;
+  margin: 0;
+  padding: 0;
 }
 
+/* Form container */
 form {
   background-color: #fff;
-  padding: 25px;
-  border-radius: 8px;
-  max-width: 700px;
-  margin: 20px auto;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+  padding: 60px;
+  border-radius: 12px;
+  max-width: 950px;
+  margin: 40px auto;
+  box-shadow: 0px 8px 30px rgba(0, 119, 182, 0.25);
+  border: none;
+  font-family: inherit;
+  transform: translateY(20px);
+  animation: formFadeIn 0.8s ease-out forwards;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Form animation */
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h2, h3 {
-  text-align: center;
-  color: #333;
+  text-align: left;
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+h2:hover, h3:hover {
+  color: #0077b6;
 }
 
 label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: inline-block;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
+label:hover {
+  color: #0077b6;
+  transform: translateX(3px);
+}
+
+.education label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Input, select, textarea */
 input[type="text"],
 input[type="email"],
 input[type="url"],
 select,
 textarea {
   width: 100%;
-  padding: 8px 10px;
-  margin: 5px 0 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 20px;  /* Increased padding */
+  margin-bottom: 5px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;  /* Increased font size */
+  font-family: inherit;
+  transition: all 0.3s ease-in-out;
 }
 
-textarea {
-  min-height: 60px;
-  resize: vertical;
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0096c7;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 150, 199, 0.4);
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
 }
 
+/* Button */
 button {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
   color: white;
-  padding: 8px 15px;
-  margin-top: 10px;
+  padding: 10px 22px; /* Slightly bigger */
+  margin-top: 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 15px; /* Increased font size */
+  transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 3px 10px rgba(0, 119, 182, 0.3);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #0096c7, #023e8a);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0px 6px 14px rgba(0, 119, 182, 0.4);
 }
 
-span {
-  font-weight: bold;
-}
-
-
-
+/* Skills styling */
 div.skills span {
   display: inline-block;
-  background-color: #e1e1e1;
-  padding: 5px 8px;
-  border-radius: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
+  background-color: #edf6f9;
+  padding: 8px 12px; /* Slightly bigger */
+  border-radius: 6px;
+  margin-right: 6px;
+  margin-top: 6px;
+  font-size: 14px; /* Increased font size */
+  color: #0077b6;
+  transition: all 0.3s ease, transform 0.3s ease;
+}
+
+div.skills span:hover {
+  background-color: #d7f3fa;
+  transform: scale(1.1);
 }
 
 div.skills span button {
-  margin-left: 5px;
+  margin-left: 6px;
   background-color: transparent;
   border: none;
   cursor: pointer;
   color: #ff4d4f;
   font-weight: bold;
+  transition: transform 0.3s ease;
 }
 
+div.skills span button:hover {
+  transform: rotate(90deg) scale(1.2);
+}
+
+/* Error */
 div.error {
-  color: red;
-  font-size: 13px;
+  color: #e63946;
+  font-size: 14px; /* slightly bigger */
   margin-top: -5px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Additional smooth transitions for all inputs and textareas */
+input, select, textarea, button {
+  transition: all 0.3s ease;
+}
+
+
+
+/* Education section degree labels bold only */
+.education label.degree-label {
+  font-weight: 700;  /* bold */
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+/* Other education inputs labels normal weight */
+.education label:not(.degree-label) {
+  font-weight: 400;  /* normal */
+  font-size: 16px;
+  margin-top: 4px;
+  display: block;
 }
