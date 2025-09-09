@@ -15,7 +15,7 @@ function App() {
       {!submittedData ? (
         <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
       ) : (
-        <ResumeTemplate2 data={submittedData} />
+        <ResumeTemplate2 data={submittedData}/>
       )}
     </div>
   );
