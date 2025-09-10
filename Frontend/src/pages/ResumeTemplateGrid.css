@@ -1,0 +1,124 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;   
+  align-items: center;      /* center vertically */
+  
+}
+
+.container {
+  max-width: 1200px;
+  width: 90%;               /* responsive width */
+  margin: auto;
+  padding: 30px;
+  background: white;        /* white box */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.heading {
+  font-size: 22px;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  gap: 25px;
+  justify-content: center;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  width: 220px;              /* fixed width */
+  height: 280px;             /* fixed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  overflow: hidden;          /* ensures no overflow */
+  text-align: center;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card.selected {
+  border: 2px solid #4f46e5;
+  background: #f0f0ff;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.template-box {
+  flex: 1;                   /* take up remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* center content vertically */
+  align-items: center;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;       /* prevents text from breaking out */
+}
+
+.button-container {
+  margin-top: 30px;
+}
+
+.choose-btn {
+  background: #4f46e5;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.choose-btn:hover {
+  background: #3730a3;
+}
+/* .template-preview {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+ 
+  transform: scale(0.25);
+  transform-origin: top left;
+}
+
+.template-preview > * {
+  width: 800px;   
+  height: auto;
+} */

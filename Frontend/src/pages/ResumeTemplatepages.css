@@ -1,0 +1,102 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  background: #f4f4f9;      /* light background for contrast */
+}
+
+.container {
+  max-width: 1200px;
+  width: 90%;               /* responsive width */
+  margin: auto;
+  padding: 30px;
+  background: white;        /* white box */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.heading {
+  font-size: 22px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  gap: 25px;
+  justify-content: center;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  width: 220px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card.selected {
+  border: 2px solid #4f46e5;
+  background: #f0f0ff;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.template-box {
+  padding: 8px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid #e0e0e0;
+}
+
+.button-container {
+  margin-top: 30px;
+}
+
+.choose-btn {
+  background: #4f46e5;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.choose-btn:hover {
+  background: #3730a3;
+}

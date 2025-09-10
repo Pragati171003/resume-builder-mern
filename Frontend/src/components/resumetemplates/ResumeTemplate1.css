@@ -1,0 +1,26 @@
+.resume-2col {
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.left-col {
+  width: 30%;
+  background: #007acc;
+  color: white;
+  padding: 20px;
+}
+.right-col {
+  width: 70%;
+  padding: 20px;
+}
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+h2 {
+  margin-top: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}

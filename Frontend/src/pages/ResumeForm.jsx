@@ -131,7 +131,22 @@ function ResumeForm({onSubmit}) {
     e.preventDefault();
     if (validate()) {
       const fullMobile = formData.countryCode + formData.mobile;
-      const finalData = { ...formData, fullMobile };
+      const finalData = {
+      ...formData,
+      fullMobile,
+      tenthCollege: formData.education.tenth.college,
+      tenthYear: formData.education.tenth.year,
+      tenthMarks: formData.education.tenth.marks,
+      twelthCollege: formData.education.twelth.college,
+      twelthYear: formData.education.twelth.year,
+      twelthMarks: formData.education.twelth.marks,
+      ugCollege: formData.education.ug.college,
+      ugYear: formData.education.ug.year,
+      ugMarks: formData.education.ug.marks,
+      pgCollege: formData.education.pg.college,
+      pgYear: formData.education.pg.year,
+      pgMarks: formData.education.pg.marks,
+    }
       
       console.log("Resume Submitted:", finalData);
 
@@ -146,7 +161,7 @@ function ResumeForm({onSubmit}) {
 
   return (
     <div>
-      <h2>Resume Form</h2>
+      <h1>Resume Form</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <h3>
