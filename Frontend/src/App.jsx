@@ -4,19 +4,15 @@ import { useState } from 'react';
 import './App.css';
 // import SignUppage from "./pages/SignUppage";
 import ResumeForm from './pages/ResumeForm.jsx';
-//import ResumeTemplate2 from './components/ResumeTemplate2.jsx'; // <-- import added
+//import ResumeTemplate2 from './components/ResumeTemplate2.jsx'; 
 import ResumeTemplate2 from './components/resumetemplates/ResumeTemplate2.jsx';
+import AppRoutes from './AppRoutes.jsx';
 
 function App() {
-  const [submittedData, setSubmittedData] = useState(null);
 
   return (
     <div>
-      {!submittedData ? (
-        <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
-      ) : (
-        <ResumeTemplate2 data={submittedData}/>
-      )}
+      <AppRoutes/>
     </div>
   );
 }

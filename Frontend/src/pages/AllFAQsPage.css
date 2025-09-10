@@ -1,17 +1,141 @@
-.all-faqs-page { width: 100%; }
-.faq-list-container { padding: 80px 40px; text-align: center; }
-.faq-list-container h1 { font-size: 48px; margin-bottom: 40px; color: #222; }
-.faq-list-full { max-width: 800px; margin: 0 auto; text-align: left; display: flex; flex-direction: column; gap: 16px; }
-.faq-item-full { border: 1px solid #ddd; border-radius: 10px; padding: 16px 20px; cursor: pointer; background: #fff; }
-.faq-item-full.open { border-color: #0073e6; }
-.faq-question-full { display: flex; justify-content: space-between; font-weight: 600; font-size: 18px; }
-.faq-answer-full { margin-top: 12px; color: #555; line-height: 1.6; }
+.all-faqs-page {
+  width: 100%;
+  background-color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+}
 
-.ask-question-container { padding: 80px 40px; background-color: #f8f9fa; text-align: center; }
-.ask-question-container h2 { font-size: 36px; margin-bottom: 16px; }
-.ask-question-container p { max-width: 600px; margin: 0 auto 30px auto; color: #555; }
-.faq-submission-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
-.faq-submission-form input, .faq-submission-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
-.faq-submission-form button { background-color: #007bff; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease; }
-.faq-submission-form button:hover { background-color: #0056b3; }
-.thank-you-message { padding: 30px; border: 1px solid #28a745; background-color: #e9f7ec; border-radius: 8px; color: #155724; max-width: 600px; margin: 0 auto; }
+.faq-list-container {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.faq-list-container h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #212529;
+}
+
+.faq-list-full {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item-full {
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 20px 24px;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.faq-item-full.open {
+  border-color: #0d6efd;
+  box-shadow: 0 5px 20px rgba(13, 110, 253, 0.1);
+}
+
+.faq-question-full {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+  color: #212529;
+}
+
+.faq-item-full.open .faq-question-full {
+  color: #0d6efd;
+}
+
+.faq-answer-full {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e9ecef;
+  color: #495057;
+  line-height: 1.7;
+}
+
+.ask-question-container {
+  padding: 80px 40px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.ask-question-container h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #212529;
+  text-align:center;
+}
+
+.ask-question-container p {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  color: #495057;
+  font-size: 20px;
+}
+
+.faq-submission-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-submission-form input,
+.faq-submission-form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 18px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.faq-submission-form input:focus,
+.faq-submission-form textarea:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+.ask-question-container .faq-submission-form button {
+  background: #0d6efd; 
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ask-question-container .faq-submission-form button:hover {
+  background: #0b5ed7; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.thank-you-message {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #0d6efd;
+  background-color: #e7f5ff;
+  border-radius: 12px;
+  color: #0a58ca;
+}
+
+.thank-you-message h3 {
+    margin-bottom: 10px;
+}

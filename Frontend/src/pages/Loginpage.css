@@ -1,14 +1,12 @@
-/* Full-screen wrapper for centering the form */
 .login-page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f4f7fc;
-  font-family: 'Poppins', sans-serif; /* A modern font for a clean look */
+  font-family: 'Poppins', sans-serif; 
 }
 
-/* The main white container for the form */
 .login-container {
   background-color: #ffffff;
   padding: 40px;
@@ -32,9 +30,8 @@
   margin-bottom: 30px;
 }
 
-/* This is the new container for each label + input */
 .input-group {
-  display: flex; /* Aligns label and input side-by-side */
+  display: flex; 
   align-items: center;
   border: 1px solid #cbd5e0;
   border-radius: 8px;
@@ -42,7 +39,6 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Modern focus effect: applied to the container when the input inside is focused */
 .input-group:focus-within {
   border-color: #3182ce;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
@@ -53,13 +49,12 @@
   font-size: 14px;
   font-weight: 600;
   color: #4a5568;
-  border-right: 1px solid #cbd5e0; /* The vertical line */
-  white-space: nowrap; /* Prevents the label from wrapping */
+  border-right: 1px solid #cbd5e0; 
+  white-space: nowrap; 
 }
 
-/* The input field itself should have no border or background */
 .input-group input {
-  flex-grow: 1; /* Allows the input to fill the remaining space */
+  flex-grow: 1; 
   width: 100%;
   padding: 14px 16px;
   border: none;
@@ -68,10 +63,9 @@
   background-color: transparent;
 }
 
-/* The primary action button */
 form button[type="submit"] {
   width: 100%;
-  background-color: #3182ce;
+  background: #0d6efd;
   color: white;
   padding: 14px;
   border: none;
@@ -84,10 +78,9 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-  background-color: #2b6cb0;
+  background-color: #0b5ed7;
 }
 
-/* The "Register here" link at the bottom */
 .bottom-text {
   margin-top: 25px;
   color: #718096;
@@ -104,9 +97,6 @@ form button[type="submit"]:hover {
   text-decoration: underline;
 }
 
-/* --- Password Visibility Toggle --- */
-
-/* The password group needs to be relative to position the icon */
 .password-group {
   position: relative;
 }
@@ -115,7 +105,7 @@ form button[type="submit"]:hover {
   position: absolute;
   right: 15px;
   top: 50%;
-  transform: translateY(-50%); /* Perfectly centers the icon vertically */
+  transform: translateY(-50%); 
   cursor: pointer;
   user-select: none;
   font-size: 22px;
