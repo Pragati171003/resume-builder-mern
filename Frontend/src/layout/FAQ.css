@@ -11,12 +11,14 @@
 .faq-left {
   flex: 1;
 }
-
+#clarity{
+  font-size:18px;
+}
 .faq-badge {
   display: inline-block;
   background: #f0f7ff;
   color: #0073e6;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 8px;
@@ -42,13 +44,14 @@
   border-radius: 8px;
   background: #0073e6;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .faq-btn:hover {
   background: #005bb5;
+  color:white;
 }
 
 /* Right Accordion */
@@ -77,13 +80,13 @@
   display: flex;
   justify-content: space-between;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 18px;
   color: #222;
 }
 
 .faq-answer {
   margin-top: 12px;
   color: #555;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
 }

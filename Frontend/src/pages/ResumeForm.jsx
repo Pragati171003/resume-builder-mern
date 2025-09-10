@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./ResumeForm.css";
-import { useNavigate } from 'react-router-dom';
+import {useEffect} from 'react'
+import { useResume } from '../context/ResumeContext';
+
+
 const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 
 function ResumeForm({onSubmit}) {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const { formData, setFormData } = useResume();
+  {/*const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
@@ -24,7 +27,7 @@ function ResumeForm({onSubmit}) {
     projects: [{ title: "", description: "" }],
     achievements: "",
     certifications: "",
-  });
+  });*/}
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -130,25 +133,27 @@ function ResumeForm({onSubmit}) {
 
    const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      const fullMobile = formData.countryCode + formData.mobile;
-      const finalData = { ...formData, fullMobile };
-      
-      console.log("Resume Submitted:", finalData);
-      navigate('/templates-preview', { state: { resumeData: finalData } });
-
-      // ✅ send data back to App.jsx
-      if (onSubmit) {
-        onSubmit(finalData);
-      }
-    } else {
-      alert("Please fill all mandatory fields");
-    }
+    // if (validate()) { // You can re-enable validation
+      console.log("Form data sent to preview:", formData);
+      // This is the key: navigate to the preview page and pass the data
+      navigate('/preview', { state: { resumeData: formData } });
+    // } else {
+    //   alert("Please fill all mandatory fields");
+    // }
   };
 
   return (
     <div>
       <h2>Resume Form</h2>
+      <div className="resume-title-group">
+        <input 
+          type="text" 
+          name="resumeTitle"
+          className="resume-title-input"
+          value={formData.resumeTitle} 
+          onChange={handleChange}
+        />
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
           <h3>
@@ -416,15 +421,9 @@ function ResumeForm({onSubmit}) {
         </div>
         <br />
 
-        <button type="submit">Submit Resume</button>
+        <button type="submit" className="submit-resume-btn">Submit Resume</button>
+        
       </form>
-      <div>
-      
-      <form onSubmit={handleSubmit}>
-        {/* ... all your input fields ... */}
-        <button type="submit">Preview Resume</button> {/* Changed button text */}
-      </form>
-    </div>
     </div>
   );
 }

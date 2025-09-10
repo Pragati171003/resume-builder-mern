@@ -1,11 +1,9 @@
 import React from 'react';
-import './FeaturesPage.css'; // We will create this CSS file next
+import './FeaturesPage.css'; 
 import { Link } from 'react-router-dom'; // To link the CTA button
 
-// Importing icons for a professional look
 import { FaBrain, FaRegFileAlt, FaPaintBrush, FaShareAlt, FaShieldAlt, FaCogs } from 'react-icons/fa';
 
-// Array of features to make the code cleaner and easier to manage
 const features = [
   
   {
@@ -42,7 +40,7 @@ function FeaturesPage() {
       <section className="features-hero">
         <div className="hero-content">
           <h1>Powerful Features to Land Your Dream Job</h1>
-          <p className="hero-subtitle">Discover the smart tools that make our AI Resume Builder the best choice for serious job seekers.</p>
+          <p className="hero-subtitle">Build a polished resume that gets noticed. Our smart tools make it simple to showcase your skills.</p>
         </div>
       </section>
 
@@ -57,15 +55,6 @@ function FeaturesPage() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Section 3: Call to Action */}
-      <section className="features-cta-section">
-        <h2>Ready to Build Your Winning Resume?</h2>
-        <p>Take the next step in your career. Get started for free and experience the power of AI.</p>
-        <Link to="/build-resume" className="cta-button"> {/* This link can go to your resume builder page */}
-          Create My Resume Now
-        </Link>
       </section>
     </div>
   );

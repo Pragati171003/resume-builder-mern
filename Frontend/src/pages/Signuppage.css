@@ -8,7 +8,6 @@
   overflow: hidden;
 }
 
-/* Background image with blur */
 .register-container::before {
   content: "";
   filter : none;
@@ -22,7 +21,6 @@
   z-index: -2;
 }
 
-/* White transparent overlay */
 .register-container::after {
   content: "";
   position: fixed;
@@ -37,11 +35,11 @@
 
 .register-form {
   position: relative;
-  background: #fff; /* fully solid */
-  padding: 40px; /* increased */
+  background: #fff; 
+  padding: 40px; 
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  width: 500px; /* bigger */
+  width: 500px; 
   max-width: 90%;
   z-index: 1;
 }
@@ -180,4 +178,13 @@
   left: 6px;
   font-size: 12px;
   color: #000;
+}
+.resume-title-group { margin-bottom: 30px; }
+.resume-title-input {
+  width: 100%;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
 }
