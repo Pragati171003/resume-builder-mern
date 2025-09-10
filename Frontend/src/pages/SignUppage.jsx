@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../pages/Signuppage.css";
-import bgimage from "../assets/Resumetemplate.png";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUppage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -11,72 +13,84 @@ export default function SignUppage() {
     dob: "",
     mobile: ""
   });
-
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError("");
+    setSuccess("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.firstName || !form.lastName || !form.email || !form.password || !form.dob || !form.mobile) {
-      setError("All fields are required.");
-      return;
+    try {
+      await axios.post("http://localhost:5000/api/auth/register", form);
+      setSuccess("Registered successfully! Please login.");
+      setForm({ firstName: "", lastName: "", email: "", password: "", dob: "", mobile: "" });
+      navigate("/login");
+    } catch (err) {
+      setError(err.response?.data?.msg || "Something went wrong");
     }
-    if (!/^\d{10}$/.test(form.mobile)) {
-      setError("Enter a valid 10-digit mobile number.");
-      return;
-    }
-    if (!/\S+@\S+\.\S+/.test(form.email)) {
-      setError("Enter a valid email address.");
-      return;
-    }
-    alert("Form submitted (frontend only, no backend).");
-    setForm({ firstName: "", lastName: "", email: "", password: "", dob: "", mobile: "" });
   };
 
   return (
-    <div className="register-container" style={{ backgroundImage: `url(${bgimage})` }}>
+    <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h2 className="form-title">Register</h2>
 
         <div className="form-group">
-          <input type="text" name="firstName" value={form.firstName} onChange={handleChange} required />
           <label>First Name</label>
+          <div className="input-icon">
+            <input type="text" name="firstName" value={form.firstName} onChange={handleChange} required />
+            <i className="fas fa-user"></i>
+          </div>
         </div>
 
         <div className="form-group">
-          <input type="text" name="lastName" value={form.lastName} onChange={handleChange} required />
           <label>Last Name</label>
+          <div className="input-icon">
+            <input type="text" name="lastName" value={form.lastName} onChange={handleChange} required />
+            <i className="fas fa-user"></i>
+          </div>
         </div>
 
         <div className="form-group">
-          <input type="email" name="email" value={form.email} onChange={handleChange} required />
-          <label>Email Address</label>
+          <label>Email</label>
+          <div className="input-icon">
+            <input type="email" name="email" value={form.email} onChange={handleChange} required />
+            <i className="fas fa-envelope"></i>
+          </div>
         </div>
 
         <div className="form-group">
-          <input type="password" name="password" value={form.password} onChange={handleChange} required />
           <label>Password</label>
+          <div className="input-icon">
+            <input type="password" name="password" value={form.password} onChange={handleChange} required />
+            <i className="fas fa-lock"></i>
+          </div>
         </div>
 
         <div className="form-group">
-          <input type="text" name="mobile" value={form.mobile} onChange={handleChange} required />
+          <label>Date of Birth</label>
+          <input type="date" name="dob" value={form.dob} onChange={handleChange} required className="date-input" />
+        </div>
+
+        <div className="form-group">
           <label>Mobile Number</label>
-        </div>
-
-        <div className="form-group">
-          <input type="date" name="dob" value={form.dob} onChange={handleChange} required />
-          <label>D.O.B</label>
+          <div className="input-icon">
+            <input type="text" name="mobile" value={form.mobile} onChange={handleChange} required />
+            <i className="fas fa-phone"></i>
+          </div>
         </div>
 
         {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
 
         <button type="submit" className="btn-register">Register</button>
+
         <p className="login-link">
-          Already have an account? <a href="/login">Login</a>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </form>
     </div>

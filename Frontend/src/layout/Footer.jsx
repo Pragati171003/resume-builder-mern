@@ -1,12 +1,12 @@
 import './Footer.css';
 import { FaArrowUp } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
 function CallToAction() {
   return (
     <section className="cta-section">
       <h2>Start Your Resume Today!</h2>
       <p>Land your dream job with an optimized resume—fast & hassle-free!</p>
-      <button className="cta-button">Create my Resume Now</button>
+      <Link to="/build-resume" className="cta-button">Create my Resume Now</Link>
     </section>
   );
 }
