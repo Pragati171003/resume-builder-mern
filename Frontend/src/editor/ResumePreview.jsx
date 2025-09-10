@@ -2,7 +2,7 @@ import React, { useState, useEffect ,useRef} from 'react';
 import { useResume } from '../context/ResumeContext';
 import LoadingSpinner from '../utils/LoadingSpinner';
 
-import './ResumePreview.css'; // <-- 1. IMPORT THE NEW CSS FILE
+import './ResumePreview.css'; 
 
 const SectionContent = ({ section, data }) => {
   const { formData } = data;
