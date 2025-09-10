@@ -2,68 +2,85 @@ import express from "express";
 import User from "../model/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import authMiddleware from "../middleware/authMiddleware.js";
+import crypto from "crypto";
 
 const router = express.Router();
 
-// REGISTER
+// Register
 router.post("/register", async (req, res) => {
   try {
     const { firstName, lastName, email, password, dob, mobile } = req.body;
-
-    // check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ msg: "User already exists" });
 
-    // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ firstName, lastName, email, password: hashedPassword, dob, mobile });
-    await newUser.save();
+    const user = new User({ firstName, lastName, email, password: hashedPassword, dob, mobile });
+    await user.save();
 
-    // generate token
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-
-    res.status(201).json({
-      msg: "User registered successfully",
-      token,
-      user: { id: newUser._id, email: newUser.email }
-    });
+    res.status(201).json({ msg: "User registered successfully" });
   } catch (err) {
-    res.status(500).json({ msg: "Server error", error: err.message });
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
   }
 });
 
-// LOGIN
+// Login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!user) return res.status(400).json({ msg: "Invalid email or password" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!isMatch) return res.status(400).json({ msg: "Invalid email or password" });
 
-    // generate token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-
-    res.status(200).json({
-      msg: "Login successful",
-      token,
-      user: { id: user._id, email: user.email }
-    });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    res.json({ token, msg: "Login successful" });
   } catch (err) {
-    res.status(500).json({ msg: "Server error", error: err.message });
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
   }
 });
 
-// ✅ Example protected route
-router.get("/profile", authMiddleware, async (req, res) => {
+// Forgot Password
+router.post("/forgot-password", async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ msg: "User not found" });
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
+    res.json({ msg: "Password reset link generated", resetUrl });
   } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+// Reset Password
+router.post("/reset-password/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+    if (!user) return res.status(400).json({ msg: "Invalid or expired token" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.json({ msg: "Password reset successful" });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: "Server error" });
   }
 });
