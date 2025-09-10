@@ -568,49 +568,50 @@ function ResumeForm({onSubmit}) {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-     if (validate()) { // You can re-enable validation
-      console.log("Form data sent to preview:", formData);
-      // This is the key: navigate to the preview page and pass the data
-      navigate('/preview', { state: { resumeData: formData } });
-    
-      try {
-        const token = localStorage.getItem("token");
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-        const res = await axios.post(
-          "http://localhost:5000/api/resume",
-          finalData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+  // ✅ First validate the form
+  if (!validate()) {
+    alert("Please fill all mandatory fields");
+    return;
+  }
 
-        console.log("Resume saved in DB:", res.data);
-
-        // ✅ Redirect to preview page with saved resume
-        navigate("/templates-preview", { state: { resumeData: res.data.resume } });
-
-        if (onSubmit) onSubmit(res.data.resume);
-      } catch (err) {
-        console.error("Error saving resume:", err.response?.data || err.message);
-        alert("Failed to save resume. Please try again.");
-      const finalData = {
-      ...formData,
-      fullMobile,
-      tenthCollege: formData.education.tenth.college,
-      tenthYear: formData.education.tenth.year,
-      tenthMarks: formData.education.tenth.marks,
-      twelthCollege: formData.education.twelth.college,
-      twelthYear: formData.education.twelth.year,
-      twelthMarks: formData.education.twelth.marks,
-      ugCollege: formData.education.ug.college,
-      ugYear: formData.education.ug.year,
-      ugMarks: formData.education.ug.marks,
-      pgCollege: formData.education.pg.college,
-      pgYear: formData.education.pg.year,
-      pgMarks: formData.education.pg.marks,
-    }
+  console.log("Form data sent to preview:", formData);
+  const fullMobile = `${formData.countryCode}${formData.mobile}`;
+  const finalData = {
+    ...formData,
+    fullMobile,
+    tenthCollege: formData.education.tenth.college,
+    tenthYear: formData.education.tenth.year,
+    tenthMarks: formData.education.tenth.marks,
+    twelthCollege: formData.education.twelth.college,
+    twelthYear: formData.education.twelth.year,
+    twelthMarks: formData.education.twelth.marks,
+    ugCollege: formData.education.ug.college,
+    ugYear: formData.education.ug.year,
+    ugMarks: formData.education.ug.marks,
+    pgCollege: formData.education.pg.college,
+    pgYear: formData.education.pg.year,
+    pgMarks: formData.education.pg.marks,
+  };
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.post(
+      "http://localhost:5000/api/resume",
+      finalData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log("Resume saved in DB:", res.data);
+    navigate("/templates-preview", { state: { resumeData: res.data.resume } });
+    if (onSubmit) onSubmit(res.data.resume);
+  } catch (err) {
+    console.error("Error saving resume:", err.response?.data || err.message);
+    alert("Failed to save resume. Please try again.");
+  }
+};
 
   return (
     <div>
@@ -624,6 +625,7 @@ function ResumeForm({onSubmit}) {
           onChange={handleChange}
         />
       </div>
+      <div className="form-page-container">
       <form onSubmit={handleSubmit}>
         {/* ---------------- BASIC INFO ---------------- */}
         <div>
@@ -853,9 +855,8 @@ function ResumeForm({onSubmit}) {
         <button type="submit" className="submit-resume-btn">Submit Resume</button>
         
       </form>
+      </div>
     </div>
   );
 }
-
 export default ResumeForm;
-
