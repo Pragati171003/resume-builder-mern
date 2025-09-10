@@ -10,7 +10,6 @@
 
 .register-container::before {
   content: "";
-  filter : none;
   position: fixed;
   top: 0;
   left: 0;
@@ -32,7 +31,7 @@
   z-index: -1;
 }
 
-
+/* Form Card */
 .register-form {
   position: relative;
   background: #fff; 
@@ -44,32 +43,91 @@
   z-index: 1;
 }
 
-
 .form-title {
   text-align: center;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #1a1a1a;
 }
 
+.form-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Input box with icon */
+.input-icon {
+  position: relative;
+}
+
+.input-icon input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.input-icon input:focus {
+  border-color: #007bff;
+}
+
+/* Icon inside input */
+.input-icon i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 16px;
+  pointer-events: none;  /* ✅ prevents icon blocking clicks */
+}
+
+/* ✅ Date input (without font icon) */
+.date-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.date-input:focus {
+  border-color: #007bff;
+}
+
+/* Buttons */
 .btn-register {
   display: block;
-  margin: 10px auto 0;
-  padding: 10px 20px;
-  background: #0d0d0d;
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
   border: none;
-  border-radius: 6px; 
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
-  width: auto; 
 }
 
 .btn-register:hover {
-  background: #333;
+  background: #0056b3;
 }
 
 .login-link {
@@ -80,7 +138,7 @@
 }
 
 .login-link a {
-  color: #000;
+  color: #007bff;
   text-decoration: none;
   font-weight: 600;
 }
@@ -95,63 +153,49 @@
   margin-bottom: 12px;
   text-align: center;
 }
-@media (max-width: 480px) {
+
+.success {
+  color: green;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
   .register-form {
-    padding: 18px;
-    max-width: 100%;
+    max-width: 90%;  /* Tablets */
+    padding: 25px;
   }
 
   .form-title {
     font-size: 20px;
   }
 
-  .register-form input,
-  .btn-register {
-    font-size: 14px;
-    padding: 8px;
+  .input-icon input,
+  .date-input {
+    font-size: 13px;
+    padding: 10px;
   }
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 480px) {
   .register-form {
-    max-width: 360px;
+    max-width: 95%;  /* Mobiles */
     padding: 20px;
   }
 
   .form-title {
-    font-size: 22px;
+    font-size: 18px;
+  }
+
+  .btn-register {
+    font-size: 14px;
+    padding: 10px;
   }
 }
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .register-form {
-    max-width: 460px;
-    padding: 26px;
-  }
-
-  .form-title {
-    font-size: 24px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .register-form {
-    max-width: 500px;
-    padding: 28px;
-  }
-
-  .form-title {
-    font-size: 26px;
-  }
-}
-.form-group {
-  position: relative;
-  width: 80%;
-  max-width: 280px;
-  margin: 0 auto 20px auto;
-}
-
-.form-group input {
+.resume-title-group { margin-bottom: 30px; }
+.resume-title-input {
   width: 100%;
   padding: 12px 10px;
   font-size: 14px;
