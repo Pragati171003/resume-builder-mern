@@ -563,33 +563,11 @@ function ResumeForm({ onSubmit }) {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validate()) {
-      const fullMobile = formData.countryCode + formData.mobile;
-      const finalData = { ...formData, fullMobile };
-
-      try {
-        const token = localStorage.getItem("token");
-
-        const res = await axios.post(
-          "http://localhost:5000/api/resume",
-          finalData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        console.log("Resume saved in DB:", res.data);
-
-        // ✅ Redirect to preview page with saved resume
-        navigate("/templates-preview", { state: { resumeData: res.data.resume } });
-
-        if (onSubmit) onSubmit(res.data.resume);
-      } catch (err) {
-        console.error("Error saving resume:", err.response?.data || err.message);
-        alert("Failed to save resume. Please try again.");
-      const finalData = {
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  if (validate()) {
+    const fullMobile = formData.countryCode + formData.mobile;
+    const finalData = {
       ...formData,
       fullMobile,
       tenthCollege: formData.education.tenth.college,
@@ -604,18 +582,18 @@ function ResumeForm({ onSubmit }) {
       pgCollege: formData.education.pg.college,
       pgYear: formData.education.pg.year,
       pgMarks: formData.education.pg.marks,
-    }
-      
-      console.log("Resume Submitted:", finalData);
+    };
 
-      // ✅ send data back to App.jsx
-      if (onSubmit) {
-        onSubmit(finalData);
-      }
-     else {
-      alert("Please fill all mandatory fields");
+    console.log("Resume Submitted:", finalData);
+
+    if (onSubmit) {
+      onSubmit(finalData); // send data back to App.js
     }
-  };
+  } else {
+    alert("Please fill all mandatory fields");
+  }
+};
+
 
   return (
     <div>
@@ -851,6 +829,5 @@ function ResumeForm({ onSubmit }) {
     </div>
   );
 }
-
+  
 export default ResumeForm;
-

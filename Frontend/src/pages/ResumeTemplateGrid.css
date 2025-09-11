@@ -1,6 +1,6 @@
 body, html {
   height: 100%;
-  margin: 0;
+  margin-top: 200px;
   display: flex;
   justify-content: center;   
   align-items: center;      /* center vertically */
@@ -108,17 +108,33 @@ body, html {
 .choose-btn:hover {
   background: #3730a3;
 }
-/* .template-preview {
+
+
+
+.template-scale {
+  width: 800px;         /* fixed preview width */
+  min-height: 1000px;   /* fixed preview height */
+  background: white;    /* ensures visibility */
+  color: black;         /* default text color */
+  padding: 20px;        /* spacing inside */
+  box-sizing: border-box;
+
+}
+
+.template-preview {
+  flex: 1;
   width: 100%;
   height: 100%;
   overflow: hidden;
-
- 
-  transform: scale(0.25);
-  transform-origin: top left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.template-preview > * {
-  width: 800px;   
-  height: auto;
-} */
+.iframe-preview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  transform: scale(1);       /* scale down content */
+  transform-origin: top left;   /* scale from top-left corner */
+}
