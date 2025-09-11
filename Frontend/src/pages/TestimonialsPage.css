@@ -15,75 +15,148 @@
 .author-avatar { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #0d6efd; }
 .author-name { font-weight: 600; color: #212529; }
 .author-title { font-size: 14px; color: #6c757d; }
-
-.submission-section {
-  padding: 100px 20px;
-  background-color: #eef2f9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.testimonials-page {
+  /* This styles the main page background */
+  background-color: #f0f4f9; /* The soft, professional blue-gray */
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
+/* This is the white card that contains the title and form */
 .form-wrapper {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto; /* Center the card on the page */
+  background-color: #ffffff;
   padding: 40px;
   border-radius: 24px;
-  max-width: 600px;
-  width: 100%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
-.form-wrapper h2 { font-size: 36px; font-weight: 700; color: #1a202c; margin-bottom: 12px;text-align:center }
-.form-wrapper p { font-size: 18px; color: #718096; margin-bottom: 40px; }
-.testimonial-form { width: 100%; text-align: left; }
 
+.form-wrapper h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.form-wrapper p {
+  font-size: 16px;
+  color: #6c757d;
+  margin-bottom: 40px;
+}
+
+.testimonial-form {
+  width: 100%;
+  text-align: left;
+}
+
+/* --- THE DEFINITIVE FIX FOR THE FLOATING LABEL --- */
 .input-field-group {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
+
+/* Style for the input and textarea boxes */
 .input-field-group input,
 .input-field-group textarea {
   width: 100%;
-  padding: 22px 16px 8px 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  padding: 22px 16px 8px 16px; /* Padding to make space for the label */
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #f8f9fa; /* Subtle background color for inputs */
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
-.input-field-group textarea { resize: vertical; min-height: 120px; }
+
+.input-field-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* The label that "floats" */
 .input-field-group label {
   position: absolute;
   top: 15px;
   left: 16px;
   font-size: 16px;
-  color: #6b7280;
-  pointer-events: none;
+  color: #868e96; /* Color for the placeholder-like label */
+  pointer-events: none; /* Allows clicks to go through to the input */
   transition: all 0.2s ease-out;
 }
+
+/* This is the magic: when the input is focused OR has content, the label moves up */
 .input-field-group input:focus + label,
 .input-field-group input:not(:placeholder-shown) + label,
 .input-field-group textarea:focus + label,
 .input-field-group textarea:not(:placeholder-shown) + label {
   top: 6px;
   font-size: 12px;
-  color: #007bff;
+  color: #0d6efd; /* Your brand blue when active */
 }
-.input-field-group input:focus,
-.input-field-group textarea:focus { outline: none; border-color: #007bff; }
 
-.rating-group { text-align: center; margin-bottom: 30px; }
-.rating-label { display: block; font-size: 16px; font-weight: 600; color: #333; margin-bottom: 15px; }
-.star-rating-input .star { cursor: pointer; transition: color 0.2s ease, transform 0.2s ease; margin: 0 5px; }
-.star-rating-input .star:hover { transform: scale(1.2); }
-.submit-button { background: #0d6efd; 
-  color: white;
+/* Focus styles for the input box itself */
+.input-field-group input:focus,
+.input-field-group textarea:focus {
+  outline: none;
+  border-color: #0d6efd;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+}
+
+
+/* --- The rest of the form styles --- */
+.rating-group {
+  text-align: center;
+  margin: 30px 0;
+}
+.rating-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 15px;
+}
+.star-rating-input .star {
+  cursor: pointer;
+  margin: 0 5px;
+  color: #cbd5e0; /* Default star color is now a soft gray */
+  transition: all 0.2s ease;
+}
+.star-rating-input .star:hover {
+  transform: scale(1.2);
+}
+
+.submit-button {
+  width: 100%;
   padding: 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 18px;
   font-weight: 600;
+  color: white;
   cursor: pointer;
-  transition: all 0.3s ease; }
-.submit-button:hover { background: #0b5ed7; 
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3); }
-.thank-you-message { text-align: left; padding: 30px; border: 1px solid #28a745; background-color: #e9f7ec; border-radius: 8px; color: #155724; }
+  /* Solid professional blue as per the image */
+  background-color: #0d6efd; 
+  transition: all 0.3s ease;
+}
+.submit-button:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
+}
+
+.thank-you-message {
+  text-align: center;
+  padding: 30px;
+  border: 1px solid #28a745;
+  background-color: #e9f7ec;
+  border-radius: 8px;
+  color: #155724;
+}

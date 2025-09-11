@@ -6,7 +6,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './Toolbar.css';
 
-const templates = [ { id: 'onyx', name: 'Onyx' }, { id: 'quartz', name: 'Quartz' } ];
+const templates = [ { id: 'onyx', name: 'Onyx' }, { id: 'quartz', name: 'Quartz' }, ];
 const colors = ['#0d6efd', '#dc3545', '#198754', '#6f42c1', '#212529'];
 const fonts = ["'Inter', sans-serif", "'Georgia', serif", "'Garamond', serif"];
 const fontSizes = [
