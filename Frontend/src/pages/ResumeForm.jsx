@@ -612,6 +612,15 @@ const handleSubmit = async (e) => {
     alert("Failed to save resume. Please try again.");
   }
 };
+  const handleSave = (e) => {
+    e.preventDefault();
+      const newId = saveResume(resumeId, formData);
+      alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
+      if (resumeId === 'new') {
+        navigate(`/editor/${newId}`, { replace: true });
+      }
+    // }
+  };
 
   return (
     <div>
@@ -626,7 +635,7 @@ const handleSubmit = async (e) => {
         />
       </div>
       <div className="form-page-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSave}>
         {/* ---------------- BASIC INFO ---------------- */}
         <div>
           <h3>
