@@ -30,17 +30,23 @@ const initialData = {
 };
 
 export default function ResumeProvider({ children,resumeId  }) {
+  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const templateFromUrl = queryParams.get('template');
   const [formData, setFormData] = useState(initialData);
   const [isPreviewVisible, setIsPreviewVisible] = useState(false); 
   const [isToolbarVisible, setIsToolbarVisible] = useState(false);
-  useEffect(() => {
+    useEffect(() => {
     if (resumeId === 'new') {
       setFormData(initialData);
     } else if (resumeId) {
       const savedData = getResumeById(resumeId);
-      if (savedData) setFormData(savedData);
+      if (savedData) {
+        setFormData(savedData); // Load the correct data
+      } else {
+        console.error(`No resume found for ID: ${resumeId}. Starting a new one.`);
+        setFormData(initialData);
+      }
     }
   }, [resumeId]);
 

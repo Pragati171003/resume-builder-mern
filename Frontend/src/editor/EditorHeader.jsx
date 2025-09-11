@@ -15,10 +15,10 @@ function EditorHeader() {
   const navigate = useNavigate();
 
   const handleSave = () => {
-    const newId = saveResume(resumeId, formData);
-    alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'}!`);
+    const savedId = saveResume(resumeId, formData);
+    alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
     if (resumeId === 'new') {
-      navigate(`/editor/${newId}`, { replace: true });
+      navigate(`/editor/${savedId}`, { replace: true });
     }
   };
 
