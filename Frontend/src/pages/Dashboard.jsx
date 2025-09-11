@@ -49,7 +49,7 @@ function DashboardPage() {
           <div className="resume-card-list">
             {savedResumes.map((resume) => (
               <div key={resume.id} className="resume-card">
-                <h3>{resume.name || 'Untitled Resume'}</h3>
+                <h3>{resume.resumeTitle || resume.name || 'Untitled Resume'}</h3>
                 <div className="card-actions">
                   <button onClick={() => handleEdit(resume.id)} className="btn-edit">Edit</button>
                   <button onClick={() => handleDelete(resume.id)} className="btn-delete">Delete</button>

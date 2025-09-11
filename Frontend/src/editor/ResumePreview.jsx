@@ -58,7 +58,6 @@ function ResumePreview() {
     const observer = new ResizeObserver(entries => {
       if (entries[0]) {
         const newWidth = entries[0].contentRect.width;
-        // This formula creates smooth, fluid scaling
         const newSize = Math.max(10, (newWidth / 800) * 16);
         setBaseFontSize(newSize);
       }
@@ -79,7 +78,6 @@ function ResumePreview() {
   };
 
   return (
-    // The ref is attached to the parent container
     <div className="resume-preview-container" ref={previewContainerRef}>
       <div 
         id="resume-preview-paper" 
