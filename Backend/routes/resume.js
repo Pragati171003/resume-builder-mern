@@ -1,38 +1,21 @@
-const express = require("express");
+import express from "express";
+import Resume from "../model/resume.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+
 const router = express.Router();
-const Resume = require("../models/Resume");
-const authMiddleware = require("../middleware/authMiddleware");
 
-// Get resume for logged-in user
-router.get("/", authMiddleware, async (req,res) => {
+// Save Resume
+router.post("/", authMiddleware, async (req, res) => {
   try {
-    const resume = await Resume.findOne({ userId: req.user.id });
-    if(!resume) return res.json({}); // no resume yet
-    res.json(resume);
-  } catch(err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Save or update resume
-router.post("/", authMiddleware, async (req,res) => {
-  try {
-    const { template, data } = req.body;
-
-    let resume = await Resume.findOne({ userId: req.user.id });
-    if(resume) {
-      resume.template = template;
-      resume.data = data;
-      await resume.save();
-      return res.json({ message: "Resume updated" });
-    }
-
-    resume = new Resume({ userId: req.user.id, template, data });
+    const resume = new Resume({
+      userId: req.user.id, // comes from JWT
+      ...req.body
+    });
     await resume.save();
-    res.json({ message: "Resume saved" });
-  } catch(err) {
-    res.status(500).json({ message: err.message });
+    res.status(201).json({ msg: "Resume saved successfully", resume });
+  } catch (err) {
+    res.status(500).json({ msg: "Error saving resume", error: err.message });
   }
 });
 
-module.exports = router;
+export default router;

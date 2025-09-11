@@ -1,0 +1,14 @@
+.editor-header {
+  display: flex; justify-content: space-between; align-items: center;
+  background-color: #ffffff; padding: 12px 30px;
+  border-bottom: 1px solid #dee2e6; flex-shrink: 0;
+}
+.header-left, .header-right { display: flex; align-items: center; gap: 12px; }
+.header-btn {
+  display: flex; align-items: center; gap: 8px; padding: 8px 16px;
+  border: 1px solid #ced4da; border-radius: 8px; background-color: #f8f9fa;
+  font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;
+}
+.header-btn:hover { border-color: #0d6efd; color: #0d6efd; }
+.preview-toggle { background-color: #0d6efd; border-color: #0d6efd; color: white; }
+.preview-toggle:hover { background-color: #0b5ed7; color: white; }

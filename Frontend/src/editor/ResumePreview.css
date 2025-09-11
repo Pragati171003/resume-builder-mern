@@ -1,0 +1,89 @@
+/* --- src/components/editor/ResumePreview.css --- */
+.resume-preview-container {
+  width: 100%;
+  height: 100%;
+}
+.resume-preview-paper {
+  background: white;
+  width: 210mm; /* A4 paper width */
+  height: 297mm; /* A4 paper height */
+  padding: 40px;
+  box-sizing: border-box;
+  color: #333;
+  line-height: 1.6;
+  transform-origin: top left; /* Scale from the top-left corner */
+}
+.resume-header {
+  text-align: center;
+  border-bottom: 1.5px solid #e0e0e0;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+.resume-header h1 {
+  margin: 0 0 5px 0;
+  font-size: 2.5em; /* Scales with the base font size from context */
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.resume-header p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+  word-break: break-all;
+}
+.resume-section {
+  margin-bottom: 25px;
+}
+.resume-section h2 {
+  font-size: 1.1em; /* Scales with base font size */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+.section-content {
+  font-size: 1em; /* Scales with base font size */
+  color: #444;
+}
+.section-content p {
+  margin: 0 0 5px 0;
+}
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skill-tag {
+  background-color: #f0f4f8;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.experience-content p {
+  margin: 0 0 10px 0;
+}
+.experience-content p:before {
+  content: '• ';
+  margin-right: 8px;
+  color: #555;
+}
+.project-item {
+  margin-bottom: 10px;
+}
+.project-item p {
+  padding-left: 15px;
+}
+.resume-preview-container { width: 100%; height: fit-content; }
+.resume-preview-paper {
+  background: white;
+  aspect-ratio: 210 / 297; /* A4 aspect ratio */
+  width: 100%; /* Fit the container */
+  padding: 2.5em; /* Use em for scalable padding */
+  box-sizing: border-box;
+}
+/* All font sizes inside must now be in 'em' to scale properly */
+.resume-header h1 { font-size: 2.5em; /* ... */ }
+.resume-section h2 { font-size: 1.1em; /* ... */ }

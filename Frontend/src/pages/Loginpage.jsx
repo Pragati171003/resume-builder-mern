@@ -1,42 +1,70 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import './Loginpage.css';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from "axios"; // From File 1
+import { useAuth } from '../context/AuthContext'; // From File 2
+import './Loginpage.css'; // We will use the modern CSS
 
 export function Loginpage() {
+  // --- Merging Hooks and State from Both Files ---
   const { login } = useAuth();
   const navigate = useNavigate();
-
-  // State for the form fields
+  const location = useLocation();
+  
+  // State for the form fields (using 'formData' for consistency)
   const [formData, setFormData] = useState({ email: '', password: '' });
   
-  // --- THIS STATE IS NOW RESTORED ---
-  // State to manage showing/hiding the password
+  // Error handling state from File 1
+  const [error, setError] = useState("");
+  
+  // Password visibility state from both files
   const [showPassword, setShowPassword] = useState(false);
 
+  // Intelligent redirection logic from File 2
+  const from = location.state?.from?.pathname || "/dashboard";
+
+  // --- Merging Handler Functions ---
+
+  // A single, robust handleChange function
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setError(""); // Clear error when user starts typing
   };
-  
-  // --- THIS FUNCTION IS NOW RESTORED ---
-  // Function to toggle the password visibility
+
+  // The password toggle from File 2
   const togglePassword = () => {
-    setShowPassword(!showPassword); // Toggles the state between true and false
+    setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  // The main handleSubmit, combining backend logic with frontend context
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login({ email: formData.email, name: "Logged In User" });
-    navigate('/'); 
+    try {
+      // 1. Make the API call to the backend (from File 1)
+      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
+
+      // 2. Save the real token to localStorage (from File 1)
+      localStorage.setItem("token", res.data.token);
+
+      // 3. Update the frontend state using the AuthContext (from File 2)
+      // In a real app, the backend might return user data. Here we'll pass what we have.
+      const userData = res.data.user || { email: formData.email, name: "Valued User" };
+      login(userData);
+
+      // 4. Navigate to the correct page after login (from File 2)
+      navigate(from, { replace: true });
+
+    } catch (err) {
+      // 5. Handle errors from the backend (from File 1)
+      setError(err.response?.data?.msg || "Login failed. Please check your credentials.");
+    }
   };
 
+  // --- Merging the JSX for the final, magnificent layout ---
   return (
-    <div className="login-page-wrapper">
+    <div className="login-page-wrapper"> 
       <div className="login-container">
         <h2>Login</h2>
-        
-        {/* --- THE SUBTITLE IS NOW RESTORED --- */}
         <p className="subtitle">Welcome back! Please enter your details.</p>
         
         <form onSubmit={handleSubmit}> 
@@ -51,12 +79,10 @@ export function Loginpage() {
               required 
             />
           </div>
-          
-          {/* --- THE PASSWORD TOGGLE FUNCTIONALITY IS NOW RESTORED --- */}
+
           <div className="input-group password-group">
             <label htmlFor="password">Password:</label>
             <input 
-              // The input type changes based on the `showPassword` state
               type={showPassword ? "text" : "password"} 
               id="password" 
               name="password"
@@ -64,18 +90,25 @@ export function Loginpage() {
               onChange={handleChange}
               required 
             />
-            {/* The span for the eye/monkey icon is back */}
             <span className="toggle-password" onClick={togglePassword}>
               {showPassword ? "🙈" : "👁️"}
             </span>
           </div>
-         
+          
+          {/* Displaying the error message from File 1 */}
+          {error && <p className="error-message">{error}</p>}
+
           <button type="submit">Login</button>
         </form>
-        <p className="bottom-text">
-          Don’t have an account?{' '}
-          <Link to="/signup">Register here</Link>
-        </p>
+
+        {/* Combining the links from both files */}
+        <div className="bottom-links">
+            <Link to="/forgot-password">Forgot Password?</Link>
+            <p>
+                Don’t have an account?{' '}
+                <Link to="/signup">Register here</Link>
+            </p>
+        </div>
       </div>
     </div>
   );

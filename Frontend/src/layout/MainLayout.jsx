@@ -7,8 +7,6 @@ function MainLayout() {
     <>
       <Header />
       <main>
-        {/* The <Outlet /> component is a placeholder that renders the */}
-        {/* active page component (e.g., HomePage, FeaturesPage) */}
         <Outlet />
       </main>
       <Footer />
