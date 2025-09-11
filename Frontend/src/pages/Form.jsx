@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // if using react-router
+import { useNavigate } from "react-router-dom"; 
 
 export default function Form() {
   const navigate = useNavigate();
@@ -13,17 +13,14 @@ export default function Form() {
     template: ""
   });
 
-  // handle form input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // handle template selection
   const selectTemplate = (template) => {
     setForm({ ...form, template });
   };
 
-  // handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.template) {
@@ -31,8 +28,6 @@ export default function Form() {
       return;
     }
     localStorage.setItem("resumeData", JSON.stringify(form));
-
-    // redirect to chosen template page
     navigate(`/${form.template}`);
   };
 

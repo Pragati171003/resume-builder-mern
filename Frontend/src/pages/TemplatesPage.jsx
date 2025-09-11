@@ -1,73 +1,56 @@
-import React, { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import './TemplatesPage.css'; // We'll create this CSS file next
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './TemplatesPage.css'; // We will create this CSS file next
 
-// Import your template components
-import ResumeTemplate2 from '../components/resumetemplates/ResumeTemplate2';
-// You can import more templates here in the future
-// import ResumeTemplate1 from '../components/ResumeTemplate1';
+// Import your thumbnail images
+import onyxThumbnail from '../assets/images/Screenshot 2025-09-08 235043.png';
+import quartzThumbnail from '../assets/images/Screenshot 2025-09-08 235043.png';
+
+// An array to manage your templates. This makes it easy to add more later.
+const templates = [
+  {
+    id: 'onyx',
+    name: 'Onyx',
+    thumbnail: onyxThumbnail,
+    description: 'A clean, modern, single-column design perfect for tech and corporate roles.',
+  },
+  {
+    id: 'quartz',
+    name: 'Quartz',
+    thumbnail: quartzThumbnail,
+    description: 'A professional two-column layout that highlights skills and experience.',
+  },
+  // Add more template objects here as you create them
+];
 
 function TemplatesPage() {
-  const location = useLocation();
-  
-  // 1. Get the resume data passed from the form page
-  const resumeData = location.state?.resumeData;
-
-  // 2. State to manage which template is currently being viewed
-  const [selectedTemplate, setSelectedTemplate] = useState('template2');
-
-  // 3. Handle the case where someone lands on this page without data
-  if (!resumeData) {
-    return (
-      <div className="template-page-error">
-        <h2>No resume data found!</h2>
-        <p>Please fill out the form first to see a preview.</p>
-        <Link to="/build-resume">Go to Form</Link>
-      </div>
-    );
-  }
-
-  // 4. Function to render the selected template
-  const renderTemplate = () => {
-    switch (selectedTemplate) {
-      case 'template2':
-        return <ResumeTemplate2 data={resumeData} />;
-      // case 'template1':
-      //   return <ResumeTemplate1 data={resumeData} />;
-      default:
-        return <ResumeTemplate2 data={resumeData} />;
-    }
-  };
-
   return (
-    <div className="template-page-container">
-      <aside className="template-sidebar">
-        <h2>Templates</h2>
-        <p>Choose a template to preview your resume.</p>
-        
-        {/* Buttons to switch between different templates */}
-        <div className="template-selector">
-          <button 
-            onClick={() => setSelectedTemplate('template2')}
-            className={selectedTemplate === 'template2' ? 'active' : ''}
-          >
-            Modern Professional
-          </button>
-          {/* Add more buttons here for other templates */}
-          {/* <button 
-            onClick={() => setSelectedTemplate('template1')}
-            className={selectedTemplate === 'template1' ? 'active' : ''}
-          >
-            Classic Minimal
-          </button> */}
-        </div>
-        <div className="action-buttons">
-            <button className="download-btn">Download PDF</button>
-        </div>
-      </aside>
+    <div className="templates-page">
+      <header className="templates-hero">
+        <h1>Choose Your Template</h1>
+        <p>Select a professionally designed, ATS-friendly template to start building your resume.</p>
+      </header>
 
-      <main className="template-preview-area">
-        {renderTemplate()}
+      <main className="templates-grid">
+        {templates.map((template) => (
+          // Each card is a Link to the editor
+          <Link 
+            key={template.id} 
+            to={`/editor/new?template=${template.id}`} // Pass template ID as a query parameter
+            className="template-card"
+          >
+            <div className="thumbnail-container">
+              <img src={template.thumbnail} alt={`${template.name} resume template`} />
+              <div className="overlay">
+                <span>Use This Template</span>
+              </div>
+            </div>
+            <div className="template-info">
+              <h3>{template.name}</h3>
+              <p>{template.description}</p>
+            </div>
+          </Link>
+        ))}
       </main>
     </div>
   );

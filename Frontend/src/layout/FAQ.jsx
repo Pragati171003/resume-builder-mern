@@ -30,15 +30,12 @@ export default function FAQ() {
       <div className="faq-left">
         <span className="faq-badge">FAQs</span>
         <h2>Answers to Your Most Common Resume Questions</h2>
-        <p>Get clarity on how our AI resume builder works.</p>
-        
-        {/* 2. CHANGE THE BUTTON TO A LINK that goes to the new page */}
+        <p id="clarity">Get clarity on how our resume builder works.</p>
         <Link to="/all-faqs" className="faq-btn">
           View all FAQs
         </Link>
       </div>
       <div className="faq-right">
-        {/* The rest of this component stays exactly the same */}
         {faqs.map((faq, index) => (
           <div
             key={index}

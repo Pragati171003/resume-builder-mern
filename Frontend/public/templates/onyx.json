@@ -1,0 +1,11 @@
+{
+  "templateName": "Onyx",
+  "fontFamily": "'Georgia', serif",
+  "styles": {
+    "name": { "fontSize": "32px", "fontWeight": "bold", "color": "THEME_COLOR", "textAlign": "center", "marginBottom": "5px" },
+    "contact": { "fontSize": "12px", "color": "THEME_COLOR", "textAlign": "center", "borderBottom": "2px solid #333", "paddingBottom": "10px", "marginBottom": "20px" },
+    "sectionTitle": { "fontSize": "18px", "fontWeight": "bold", "textTransform": "uppercase", "color": "THEME_COLOR", "borderBottom": "1px solid #ccc", "paddingBottom": "5px", "marginTop": "20px", "marginBottom": "10px" },
+    "skillTag": { "display": "inline-block", "backgroundColor": "#f0f0f0", "padding": "5px 10px", "borderRadius": "4px", "margin": "2px" }
+  },
+  "layout": [ "header", "education", "skills", "experience", "projects", "achievements" ]
+}
