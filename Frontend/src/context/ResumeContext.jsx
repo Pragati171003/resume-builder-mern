@@ -15,15 +15,19 @@ const initialData = {
   countryCode: "+91",
   linkedin: "linkedin.com/in/janedoe",
   gitlab: "gitlab.com/janedoe",
+  careerObjective: "Seeking a challenging role where I can utilize my proven expertise in [your field] to deliver results, mentor team members, and contribute to the strategic growth of the organization.",
   education: {
-    tenth: { marks: "98%", college: "Oakridge International", year: "2018" },
+    tenth: { marks: "98%", school: "Oakridge International", year: "2018" },
     twelth: { marks: "96%", college: "Oakridge International", year: "2020" },
     ug: { marks: "9.1 CGPA", college: "National Institute of Technology", year: "2024" },
     pg: { marks: "", college: "", year: "" },
   },
   skills: ["React", "TypeScript", "GraphQL", "Figma", "Next.js"],
   skillInput: "",
-  experience: "Frontend Developer Intern at Google (Summer 2023)\n- Collaborated on the Google Photos interface, improving component load times by 15%.",
+  experience: [
+    { role: "Frontend Developer", company: "Google", years: "2", description: "Collaborated on the Google Photos interface, improving component load times by 15%."  }
+  ],
+
   projects: [{ title: "AI Resume Builder", description: "Developed a web application using React to help users create professional resumes." }],
   achievements: "Winner, Smart India Hackathon 2022",
   certifications: "AWS Certified Cloud Practitioner",

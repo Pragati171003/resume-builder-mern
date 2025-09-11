@@ -19,6 +19,13 @@ body {
   animation: formFadeIn 0.8s ease-out forwards;
   transition: all 0.3s ease-in-out;
 }
+/* .h3-heading {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;  
+  margin-bottom: 20px;
+  color: #333;
+} */
 
 /* Form animation */
 @keyframes formFadeIn {
@@ -32,8 +39,8 @@ body {
   }
 }
 
-.form-container h2,
-.form-container h3 {
+.form-page-container h2,
+.form-page-container h3 {
   text-align: left;
   color: #222;
   margin-bottom: 15px;

@@ -7,12 +7,18 @@ import './ResumePreview.css';
 const SectionContent = ({ section, data }) => {
   const { formData } = data;
   switch (section) {
+    // case 'careerObjective':   // ✅ NEW
+    //   return (
+    //     <div className="section-content">
+    //       <p>{formData.careerObjective}</p>
+    //     </div>
+    //   );
     case 'education':
       return (
         <div className="section-content">
           <p><strong>{formData.education.ug.college}</strong>, {formData.education.ug.marks}</p>
           {formData.education.twelth.college && <p><strong>{formData.education.twelth.college}</strong>, {formData.education.twelth.marks}</p>}
-          {formData.education.tenth.college && <p><strong>{formData.education.tenth.college}</strong>, {formData.education.tenth.marks}</p>}
+          {formData.education.tenth.school && <p><strong>{formData.education.tenth.school}</strong>, {formData.education.tenth.marks}</p>}
         </div>
       );
     case 'skills':
