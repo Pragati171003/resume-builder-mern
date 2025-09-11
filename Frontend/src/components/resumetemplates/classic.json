@@ -1,0 +1,36 @@
+{
+  "basics": {
+    "name": "Jane Doe",
+    "label": "Frontend Developer",
+    "email": "jane@example.com",
+    "phone": "(123) 456-7890",
+    "summary": "Passionate frontend developer specializing in React and UI design."
+  },
+  "education": [
+    {
+      "institution": "JNTU Hyderabad",
+      "area": "Computer Science",
+      "studyType": "B.Tech",
+      "startDate": "2017-06",
+      "endDate": "2021-06"
+    }
+  ],
+  "work": [
+    {
+      "company": "Tech Solutions",
+      "position": "Frontend Intern",
+      "startDate": "2022-01",
+      "endDate": "2022-12",
+      "summary": "Built reusable UI components in React."
+    }
+  ],
+  "skills": [
+    { "name": "Programming", "keywords": ["React", "JavaScript", "TailwindCSS"] }
+  ],
+  "projects": [
+    {
+      "name": "Portfolio Website",
+      "description": "Developed a personal portfolio with React and Tailwind."
+    }
+  ]
+}
