@@ -1,40 +1,88 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const SECRET_KEY = process.env.SECRET_KEY || "secret";
+import express from "express";
+import User from "../model/user.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
-// Register new user
-router.post("/register", async (req,res) => {
-  const { username, email, password } = req.body;
+const router = express.Router();
+
+// Register
+router.post("/register", async (req, res) => {
   try {
-    const exists = await User.findOne({ email });
-    if(exists) return res.status(400).json({ message: "User already exists" });
-    
-    const user = new User({ username, email, password });
+    const { firstName, lastName, email, password, dob, mobile } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ msg: "User already exists" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({ firstName, lastName, email, password: hashedPassword, dob, mobile });
     await user.save();
-    res.json({ message: "User registered" });
-  } catch(err) {
-    res.status(500).json({ message: err.message });
+
+    res.status(201).json({ msg: "User registered successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
   }
 });
 
 // Login
-router.post("/login", async (req,res) => {
-  const { email, password } = req.body;
+router.post("/login", async (req, res) => {
   try {
+    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if(!user) return res.status(400).json({ message: "User not found" });
+    if (!user) return res.status(400).json({ msg: "Invalid email or password" });
 
-    const match = await bcrypt.compare(password, user.password);
-    if(!match) return res.status(400).json({ message: "Wrong password" });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Invalid email or password" });
 
-    const token = jwt.sign({ id: user._id, email: user.email }, SECRET_KEY, { expiresIn: "2h" });
-    res.json({ token, username: user.username });
-  } catch(err) {
-    res.status(500).json({ message: err.message });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    res.json({ token, msg: "Login successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
   }
 });
 
-module.exports = router;
+// Forgot Password
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ msg: "User not found" });
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
+    res.json({ msg: "Password reset link generated", resetUrl });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+// Reset Password
+router.post("/reset-password/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+    if (!user) return res.status(400).json({ msg: "Invalid or expired token" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.json({ msg: "Password reset successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+export default router;

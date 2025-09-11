@@ -1,0 +1,110 @@
+.dashboard-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 40px 80px;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+.welcome-message h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #212529;
+}
+.welcome-message p {
+  font-size: 16px;
+  color: #495057;
+}
+.btn-create-new {
+  background-color: #0d6efd;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-create-new:hover {
+  background-color: #0b5ed7;
+  color:#ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+.dashboard-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.resume-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.resume-card {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.resume-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #0d6efd;
+}
+.resume-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.resume-card p {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+.card-actions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.no-resumes-message {
+  text-align: center;
+  margin-top: 60px;
+  padding: 40px;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.no-resumes-message p {
+  font-size: 18px;
+  color: #495057;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.no-resumes-message .btn-create-new {
+    display: inline-block; 
+}
+
+.btn-delete { color: #dc3545; }
+.btn-delete:hover { background: #dc3545; color: white; }
+.btn-edit {color:#6c757d};
+.btn-edit:hover { background: #6c757d; color: white; }

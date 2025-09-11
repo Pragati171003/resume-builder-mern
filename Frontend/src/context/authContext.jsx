@@ -15,19 +15,16 @@ export function AuthProvider({ children }) {
     setUser(userData);
   };
 
-  // --- THIS IS THE CORRECTED LOGOUT FUNCTION ---
   const logout = () => {
-    // It now correctly sets the state back to its initial values
     setIsLoggedIn(false);
     setUser(null);
   };
-  // ---------------------------------------------
 
   const value = {
     isLoggedIn,
     user,
     login,
-    logout, // Now this is the corrected function
+    logout, 
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

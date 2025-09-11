@@ -1,96 +1,106 @@
 import React from "react";
+import "./ResumeTemplate2.css"; // optional: move the <style> here
 
 function ResumeTemplate2({ data }) {
-  if (!data) return null;
-
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
-      {/* Header (Mandatory) */}
-      <h1 style={{ color: "#2E86C1", marginBottom: "5px" }}>{data.name}</h1>
-      <p>
-        {data.email} | {data.countryCode} {data.mobile}
-      </p>
-
-      {/* Optional Links */}
-      {data.linkedin && <p>🔗 LinkedIn: {data.linkedin}</p>}
-      {data.gitlab && <p>💻 GitLab: {data.gitlab}</p>}
-
-      <hr />
-
-      {/* Education (Tenth, Twelth, UG always shown) */}
-      <h2>🎓 Education</h2>
-      {["tenth", "twelth", "ug"].map((level) => {
-        const edu = data.education[level];
-        if (!edu) return null;
-        return (
-          <div key={level}>
-            <strong>{level.toUpperCase()}</strong> - {edu.college}, {edu.year}
-            <br />
-            Marks/CGPA: {edu.marks}
+    <div className="resume-container">
+      {/* Header */}
+      {(data.name || data.email || data.mobile || data.linkedin || data.gitlab) && (
+        <div className="header">
+          {data.name && <h1>{data.name}</h1>}
+          <div className="contact">
+            {data.email && <p>Email: {data.email}</p>}
+            {data.mobile && <p>Phone: {data.mobile}</p>}
+            {data.linkedin && <p>LinkedIn: {data.linkedin}</p>}
+            {data.gitlab && <p>GitHub: {data.gitlab}</p>}
           </div>
-        );
-      })}
+        </div>
+      )}
 
-      {/* PG is Optional */}
-      {data.education.pg &&
-        (data.education.pg.college || data.education.pg.marks) && (
-          <div>
-            <strong>PG</strong> - {data.education.pg.college},{" "}
-            {data.education.pg.year}
-            <br />
-            Marks/CGPA: {data.education.pg.marks}
-          </div>
-        )}
+      {/* Education */}
+      {(data.tenthCollege || data.twelthCollege || data.ugCollege || data.pgCollege) && (
+        <section>
+          <h2 className="section-title">Education</h2>
+          {data.tenthCollege && (
+            <p>
+              <b>SSC (10th)</b> - {data.tenthCollege}{" "}
+              {data.tenthYear && `(Year: ${data.tenthYear})`}{" "}
+              {data.tenthMarks && `(Marks: ${data.tenthMarks})`}
+            </p>
+          )}
+          {data.twelthCollege && (
+            <p>
+              <b>Intermediate (12th)</b> - {data.twelthCollege}{" "}
+              {data.twelthYear && `(Year: ${data.twelthYear})`}{" "}
+              {data.twelthMarks && `(Marks: ${data.twelthMarks})`}
+            </p>
+          )}
+          {data.ugCollege && (
+            <p>
+              <b>UG</b> - {data.ugCollege}{" "}
+              {data.ugYear && `(Year: ${data.ugYear})`}{" "}
+              {data.ugMarks && `(Marks: ${data.ugMarks})`}
+            </p>
+          )}
+{data.pgCollege && (
+  <p>
+    <b>PG</b> - {data.pgCollege} (Year: {data.pgYear}, Marks: {data.pgMarks})
+  </p>
+)}
+        </section>
+      )}
 
-      <hr />
-
-      {/* Optional Sections */}
+      {/* Skills */}
       {data.skills && data.skills.length > 0 && (
-        <>
-          <h2>🛠 Skills</h2>
-          <p>{data.skills.join(", ")}</p>
-          <hr />
-        </>
+        <section>
+          <h2 className="section-title">Skills</h2>
+          <div className="skills">
+            {data.skills.map((skill, index) => (
+              <span key={index}>{skill}</span>
+            ))}
+          </div>
+        </section>
       )}
 
-      {data.experience && data.experience.trim() !== "" && (
-        <>
-          <h2>💼 Experience</h2>
+      {/* Experience */}
+      {data.experience && (
+        <section>
+          <h2 className="section-title">Experience</h2>
           <p>{data.experience}</p>
-          <hr />
-        </>
+        </section>
       )}
 
-      {data.projects &&
-        data.projects.some((p) => p.title || p.description) && (
-          <>
-            <h2>📂 Projects</h2>
-            {data.projects.map((proj, idx) => {
-              if (!proj.title && !proj.description) return null;
-              return (
-                <div key={idx}>
-                  <strong>{proj.title}</strong>
-                  <p>{proj.description}</p>
-                </div>
-              );
-            })}
-            <hr />
-          </>
-        )}
+      {/* Projects */}
+{data.projects && data.projects.length > 0 && data.projects.some(p => p.title || p.description) && (
+  <section>
+    <h2 className="section-title">Projects</h2>
+    <div>
+      {data.projects.map((proj, index) => (
+        (proj.title || proj.description) && (
+          <div key={index}>
+            {proj.title && <p><b>{proj.title}</b></p>}
+            {proj.description && <p>{proj.description}</p>}
+          </div>
+        )
+      ))}
+    </div>
+  </section>
+)}
 
-      {data.achievements && data.achievements.trim() !== "" && (
-        <>
-          <h2>🏆 Achievements</h2>
+      {/* Achievements */}
+      {data.achievements && (
+        <section>
+          <h2 className="section-title">Achievements</h2>
           <p>{data.achievements}</p>
-          <hr />
-        </>
+        </section>
       )}
 
-      {data.certifications && data.certifications.trim() !== "" && (
-        <>
-          <h2>📜 Certifications</h2>
+      {/* Certifications */}
+      {data.certifications && (
+        <section>
+          <h2 className="section-title">Certifications</h2>
           <p>{data.certifications}</p>
-        </>
+        </section>
       )}
     </div>
   );
