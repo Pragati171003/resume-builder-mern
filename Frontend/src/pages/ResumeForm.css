@@ -6,7 +6,7 @@ body {
 }
 
 /* Form container */
-form {
+.form-page-container {
   background-color: #fff;
   padding: 60px;
   border-radius: 12px;
@@ -32,7 +32,8 @@ form {
   }
 }
 
-h2, h3 {
+.form-container h2,
+.form-container h3 {
   text-align: left;
   color: #222;
   margin-bottom: 15px;
@@ -40,11 +41,12 @@ h2, h3 {
   transition: color 0.3s ease;
 }
 
-h2:hover, h3:hover {
+.form-container h2:hover,
+.form-container h3:hover {
   color: #0077b6;
 }
 
-label {
+.form-page-container label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
@@ -54,22 +56,22 @@ label {
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
-label:hover {
+.form-page-container label:hover {
   color: #0077b6;
   transform: translateX(3px);
 }
 
-.education label {
+.form-page-container .education label {
   font-size: 14px;
   font-weight: 600;
 }
 
 /* Input, select, textarea */
-input[type="text"],
-input[type="email"],
-input[type="url"],
-select,
-textarea {
+.form-page-container input[type="text"],
+.form-page-container input[type="email"],
+.form-page-container input[type="url"],
+.form-page-container select,
+.form-page-container textarea {
   width: 100%;
   padding: 12px 20px;  /* Increased padding */
   margin-bottom: 5px;
@@ -81,9 +83,9 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.form-page-container input:focus,
+.form-page-container select:focus,
+.form-page-container textarea:focus {
   border-color: #0096c7;
   outline: none;
   box-shadow: 0 0 10px rgba(0, 150, 199, 0.4);
@@ -92,7 +94,7 @@ textarea:focus {
 }
 
 /* Button */
-button {
+.form-page-container button {
   background: linear-gradient(135deg, #00b4d8, #0077b6);
   color: white;
   padding: 10px 22px; /* Slightly bigger */
@@ -110,14 +112,14 @@ button {
   width: fit-content;
 }
 
-button:hover {
+.form-page-container button:hover {
   background: linear-gradient(135deg, #0096c7, #023e8a);
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0px 6px 14px rgba(0, 119, 182, 0.4);
 }
 
 /* Skills styling */
-div.skills span {
+.form-page-container div.skills span {
   display: inline-block;
   background-color: #edf6f9;
   padding: 8px 12px; /* Slightly bigger */
@@ -129,12 +131,12 @@ div.skills span {
   transition: all 0.3s ease, transform 0.3s ease;
 }
 
-div.skills span:hover {
+.form-page-container div.skills span:hover {
   background-color: #d7f3fa;
   transform: scale(1.1);
 }
 
-div.skills span button {
+.form-page-container div.skills span button {
   margin-left: 6px;
   background-color: transparent;
   border: none;
@@ -144,12 +146,12 @@ div.skills span button {
   transition: transform 0.3s ease;
 }
 
-div.skills span button:hover {
+.form-page-container div.skills span button:hover {
   transform: rotate(90deg) scale(1.2);
 }
 
 /* Error */
-div.error {
+.form-page-container div.error {
   color: #e63946;
   font-size: 14px; /* slightly bigger */
   margin-top: -5px;
@@ -170,14 +172,14 @@ input, select, textarea, button {
 
 
 /* Education section degree labels bold only */
-.education label.degree-label {
+.form-page-container .education label.degree-label {
   font-weight: 700;  /* bold */
   font-size: 16px;
   margin-bottom: 4px;
 }
 
 /* Other education inputs labels normal weight */
-.education label:not(.degree-label) {
+.form-page-container .education label:not(.degree-label) {
   font-weight: 400;  /* normal */
   font-size: 16px;
   margin-top: 4px;

@@ -435,11 +435,16 @@ import "./ResumeForm.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import {useEffect} from 'react'
+import { useResume } from '../context/ResumeContext';
+
+
 const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 
-function ResumeForm({ onSubmit }) {
+function ResumeForm({onSubmit}) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const { formData, setFormData } = useResume();
+  {/*const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
@@ -458,7 +463,7 @@ function ResumeForm({ onSubmit }) {
     projects: [{ title: "", description: "" }],
     achievements: "",
     certifications: "",
-  });
+  });*/}
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -563,42 +568,74 @@ function ResumeForm({ onSubmit }) {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
-  if (validate()) {
-    const fullMobile = formData.countryCode + formData.mobile;
-    const finalData = {
-      ...formData,
-      fullMobile,
-      tenthCollege: formData.education.tenth.college,
-      tenthYear: formData.education.tenth.year,
-      tenthMarks: formData.education.tenth.marks,
-      twelthCollege: formData.education.twelth.college,
-      twelthYear: formData.education.twelth.year,
-      twelthMarks: formData.education.twelth.marks,
-      ugCollege: formData.education.ug.college,
-      ugYear: formData.education.ug.year,
-      ugMarks: formData.education.ug.marks,
-      pgCollege: formData.education.pg.college,
-      pgYear: formData.education.pg.year,
-      pgMarks: formData.education.pg.marks,
-    };
 
-    console.log("Resume Submitted:", finalData);
-
-    if (onSubmit) {
-      onSubmit(finalData); // send data back to App.js
-    }
-  } else {
+  // ✅ First validate the form
+  if (!validate()) {
     alert("Please fill all mandatory fields");
+    return;
+  }
+
+  console.log("Form data sent to preview:", formData);
+  const fullMobile = `${formData.countryCode}${formData.mobile}`;
+  const finalData = {
+    ...formData,
+    fullMobile,
+    tenthCollege: formData.education.tenth.college,
+    tenthYear: formData.education.tenth.year,
+    tenthMarks: formData.education.tenth.marks,
+    twelthCollege: formData.education.twelth.college,
+    twelthYear: formData.education.twelth.year,
+    twelthMarks: formData.education.twelth.marks,
+    ugCollege: formData.education.ug.college,
+    ugYear: formData.education.ug.year,
+    ugMarks: formData.education.ug.marks,
+    pgCollege: formData.education.pg.college,
+    pgYear: formData.education.pg.year,
+    pgMarks: formData.education.pg.marks,
+  };
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.post(
+      "http://localhost:5000/api/resume",
+      finalData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log("Resume saved in DB:", res.data);
+    navigate("/templates-preview", { state: { resumeData: res.data.resume } });
+    if (onSubmit) onSubmit(res.data.resume);
+  } catch (err) {
+    console.error("Error saving resume:", err.response?.data || err.message);
+    alert("Failed to save resume. Please try again.");
   }
 };
-
+  const handleSave = (e) => {
+    e.preventDefault();
+      const newId = saveResume(resumeId, formData);
+      alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
+      if (resumeId === 'new') {
+        navigate(`/editor/${newId}`, { replace: true });
+      }
+    // }
+  };
 
   return (
     <div>
-      <h1>Resume Form</h1>
-      <form onSubmit={handleSubmit}>
+      <h2>Resume Form</h2>
+      <div className="resume-title-group">
+        <input 
+          type="text" 
+          name="resumeTitle"
+          className="resume-title-input"
+          value={formData.resumeTitle} 
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-page-container">
+      <form onSubmit={handleSave}>
         {/* ---------------- BASIC INFO ---------------- */}
         <div>
           <h3>
@@ -824,8 +861,10 @@ function ResumeForm({ onSubmit }) {
           <div style={{ color: "red" }}>{errors.certifications}</div>
         </div>
 
-        <button type="submit">Submit Resume</button>
+        <button type="submit" className="submit-resume-btn">Submit Resume</button>
+        
       </form>
+      </div>
     </div>
   );
 }
