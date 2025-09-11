@@ -11,54 +11,17 @@ import ResetPassword from "./pages/ResetPassword.jsx";
 
 import { AuthProvider } from "./context/authContext.jsx";
 
-function PrivateRoute({ children }) {
-  const token = localStorage.getItem("token");
-  return token ? children : <Navigate to="/login" replace />;
-}
+
 
 function App() {
   const [submittedData, setSubmittedData] = useState(null);
 
   return (
-    <AuthProvider>
-      <ResumeTemplateGrid/>
-      <Routes>
-        <Route path="/" element={<SignUppage />} />
-        <Route path="/login" element={<Loginpage />} />
-        <Route path="/signup" element={<SignUppage />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-
-        <Route
-          path="/resume-form"
-          element={
-            <PrivateRoute>
-              <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/resume-template"
-          element={
-            <PrivateRoute>
-              <ResumeTemplate2 data={submittedData} />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </AuthProvider>
+   <ResumeForm/>
   );
 }
 
-// import {Header} from './layout/Header'
 
-// // import {Footer} from './layout/Footer'
-// import './App.css'
-
-// import React, { useState } from "react";
-// import ResumeForm from './pages/ResumeForm'
-// import ResumeTemplate2 from './components/resumetemplates/ResumeTemplate2'
-// import ResumeTemplate from './components/resumetemplates/ResumeTemplate2';
 
 // function App() {
 //   const [submittedData, setSubmittedData] = useState(null);
@@ -75,84 +38,29 @@ function App() {
 //     </div>
 //   );
 // }
-// export default App;
 
-
-// // import React, { useState } from "react";
-// import ResumeForm from './pages/ResumeForm';
-
-// import ResumeTemplate1 from './components/resumetemplates/ResumeTemplate1';
-// import ResumeTemplate2 from './components/resumetemplates/ResumeTemplate2';
-// import ResumeTemplate3 from './components/resumetemplates/ResumeTemplate3';
-// import ResumeTemplate4 from './components/resumetemplates/ResumeTemplate4';
-// import ResumeTemplate5 from './components/resumetemplates/ResumeTemplate5';
-// import ResumeTemplate6 from './components/resumetemplates/ResumeTemplate6';
-// import ResumeTemplate7 from './components/resumetemplates/ResumeTemplate7';
 
 // function App() {
-//   const [submittedData, setSubmittedData] = useState(null);
-//   const [currentTemplate, setCurrentTemplate] = useState("ResumeTemplate1");
-
-//   const templatesMap = {
-//     ResumeTemplate1,
-//     ResumeTemplate2,
-//     ResumeTemplate3,
-//     ResumeTemplate4,
-//     ResumeTemplate5,
-//     ResumeTemplate6,
-//     ResumeTemplate7,
-//   };
-
-//   const SelectedTemplateComponent = templatesMap[currentTemplate] || ResumeTemplate1;
+//   const [page, setPage] = useState("form"); // first show form
+//   const [resumeData, setResumeData] = useState(null); // store form data
 
 //   return (
-//     <div style={{ padding: "20px" }}>
-//       {!submittedData ? (
-//         <ResumeForm onSubmit={(data) => setSubmittedData(data)} />
-//       ) : (
-//         <>
-//           {/* Dropdown to switch templates */}
-//           <div style={{ marginBottom: "20px" }}>
-//             <label htmlFor="templateSelect" style={{ marginRight: "10px" }}>
-//               Select Template:
-//             </label>
-//             <select
-//               id="templateSelect"
-//               value={currentTemplate}
-//               onChange={(e) => setCurrentTemplate(e.target.value)}
-//               style={{ padding: "6px", fontSize: "16px" }}
-//             >
-//               {Object.keys(templatesMap).map((temp) => (
-//                 <option key={temp} value={temp}>
-//                   {temp.replace("ResumeTemplate", "Template ")}
-//                 </option>
-//               ))}
-//             </select>
-//           </div>
-
-//           {/* Display selected template */}
-//           <SelectedTemplateComponent data={submittedData} />
-//         </>
+//     <div>
+//       {page === "form" && (
+//         <ResumeForm
+//           onSubmit={(data) => {
+//             setResumeData(data);   // save submitted form data
+//             setPage("grid");       // switch to grid page
+//           }}
+//         />
 //       )}
+//       {page === "grid" && <ResumeTemplateGrid data={resumeData} />}
 //     </div>
 //   );
 // }
 
-// export default App;
-
-// App.jsx
 
 
-
-// Import templates (from your earlier ResumeTemplateGrid)
-
-
-
-// ResumeTemplateGrid.jsx
-// Displays multiple resume templates directly as small sample components in a grid.
-// Includes 10 sample templates. Clicking a card selects it.
-// One global "Choose Template" button for the selected template.
-// ResumeTemplateGrid.jsx
 
 
 export default App;
