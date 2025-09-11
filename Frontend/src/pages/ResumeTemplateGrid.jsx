@@ -6,6 +6,8 @@ import ResumeTemplate5 from "../components/resumetemplates/ResumeTemplate5";
 import ResumeTemplate6 from "../components/resumetemplates/ResumeTemplate6";
 import ResumeTemplate7 from "../components/resumetemplates/ResumeTemplate7";
 import "./ResumeTemplateGrid.css";
+import classicJSON from "../components/resumetemplates/classic.json";
+import ReactDOMServer from "react-dom/server";
 import { useState } from "react";
 const defaultResumeData = {
   name: "Jhon Deo",
@@ -95,7 +97,7 @@ const TemplateTwo = ({ data }) => (
 // );
 
 const TEMPLATE_COMPONENTS = [
-  { id: "template-1", title: "Classic", Component: TemplateOne },
+  { id: "template-json", title: "Classic Json",type: "json", data: classicJSON },
   { id: "template-2", title: "Modern", Component: TemplateTwo },
   { id: "template-3", title: "Minimal", Component: ResumeTemplate7 },
   { id: "template-4", title: "Creative", Component: ResumeTemplate6 },
@@ -106,6 +108,7 @@ const TEMPLATE_COMPONENTS = [
   { id: "template-9", title: "Corporate", Component: ResumeTemplate3 },
   { id: "template-10", title: "Tech", Component: ResumeTemplate2 },
   { id: "template-11", title: "Tech", Component: ResumeTemplate1 },
+  { id: "template-json", title: "Classic Json",type: "json", data: classicJSON },
 ];
 
 export default function ResumeTemplateGrid() {
@@ -131,8 +134,48 @@ export default function ResumeTemplateGrid() {
             >
               <h3 className="card-title">{t.title}</h3>
               <div className="template-preview">
-                  <Component data={defaultResumeData} />
-              </div>
+  {t.type === "json" ? (
+    <iframe
+      className="iframe-preview"
+      srcDoc={`
+        <html>
+          <head>
+            <style>
+              body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 10px; }
+              h2 { margin: 0 0 4px 0; }
+              p { margin: 0 0 6px 0; }
+            </style>
+          </head>
+          <body>
+            <h2>${t.data.basics.name}</h2>
+            <p>${t.data.basics.label}</p>
+            <p>${t.data.basics.email}</p>
+            <h3>Education</h3>
+            <p>${t.data.education[0].studyType} in ${t.data.education[0].area} - ${t.data.education[0].institution}</p>
+            <h3>Skills</h3>
+            <p>${t.data.skills[0].keywords.join(", ")}</p>
+          </body>
+        </html>
+      `}
+      title={t.title}
+    />
+  ) : (
+    <iframe
+      className="iframe-preview"
+      srcDoc={`
+        <html>
+          <body>
+            ${ReactDOMServer.renderToString(<t.Component data={defaultResumeData} />)}
+          </body>
+        </html>
+      `}
+      title={t.title}
+    />
+  )}
+</div>
+
+
+
             </div>
           );
         })}
