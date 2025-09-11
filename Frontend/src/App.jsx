@@ -1,6 +1,6 @@
 // import { Header } from './layout/Header';
 // import { Footer } from './layout/Footer';
-import { useState } from 'react';
+
 import './App.css';
 // import SignUppage from "./pages/SignUppage";
 import ResumeForm from './pages/ResumeForm.jsx';
