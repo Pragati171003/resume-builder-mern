@@ -1,6 +1,6 @@
 .editor-page-container {
   display: flex;
-  flex-direction: column; /* Stacks header on top of content */
+  flex-direction: column; 
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -10,13 +10,10 @@
 
 .editor-main-content {
   display: flex;
-  flex-grow: 1; /* Takes up all remaining vertical space */
+  flex-grow: 1;
   overflow: hidden;
 }
 
-/* --- The 3 Dynamic Columns --- */
-
-/* Toolbar (Styles) Panel - Hidden by default */
 .toolbar-panel {
   width: 0;
   padding: 0;
@@ -26,20 +23,18 @@
   transition: width 0.4s ease, padding 0.4s ease;
 }
 .toolbar-panel.visible {
-  width: 300px; /* The smallest panel */
+  width: 300px; 
   padding: 20px;
 }
 
-/* Form Panel - The flexible center */
 .form-panel {
-  flex-grow: 1; /* This is the key: it takes all available space */
+  flex-grow: 1; 
   height: 100%;
   overflow-y: auto;
   background-color: #f8f9fa;
   padding: 30px;
 }
 
-/* Preview Panel - Hidden by default */
 .preview-panel {
   width: 0;
   padding: 0;
@@ -50,12 +45,11 @@
   justify-content: center;
 }
 .preview-panel.visible {
-  width: 45%; /* The second largest panel */
+  width: 45%; 
   padding: 30px;
 }
 
-/* Ensure the resume paper inside the preview is visible */
-.preview-panel .resume-preview-container { /* Assuming this class on your preview component */
+.preview-panel .resume-preview-container { 
   background: white;
   width: 210mm;
   min-height: 297mm;

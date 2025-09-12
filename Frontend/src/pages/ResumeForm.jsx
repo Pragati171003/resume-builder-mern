@@ -279,16 +279,36 @@ const handleSubmit = async (e) => {
 
   return (
     <div>
-      <h2>Resume Form</h2>
-      <div className="resume-title-group">
-        <input 
-          type="text" 
-          name="resumeTitle"
-          className="resume-title-input"
-          value={formData.resumeTitle} 
-          onChange={handleChange}
-        />
-      </div>
+      <div className="form-panel-header"><h2>Resume Form</h2></div>
+      <div className="form-scrollable-area">
+        {/* The editable title now lives inside the scrollable area */}
+        <div className="editable-title-wrapper">
+          <div className="editable-title-container" title="Click to rename your resume">
+            <input
+              type="text"
+              name="resumeTitle"
+              className="editable-title-input"
+              value={formData.resumeTitle || ''}
+              onChange={handleChange}
+              aria-label="Resume Title"
+              size="1" /* This helps the input auto-size initially */
+            />
+            <svg
+              className="edit-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16" /* Smaller icon */
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+            </svg>
+          </div>
+        </div>
       <div className="form-page-container">
       <form onSubmit={handleSave}>
         {/* ---------------- BASIC INFO ---------------- */}
@@ -393,52 +413,49 @@ const handleSubmit = async (e) => {
 </div>
 
 
-        {/* ---------------- EDUCATION ---------------- */}
-        <h3 className="h3-heading">Education
-          <span style={{ color: "red" }}>*</span>
-        </h3>
-        <div className="education">
-          {["tenth", "twelth", "ug", "pg"].map((level) => (
-            <div key={level}>
-              <label style={{ fontWeight: "bold" }} className="degree-label">
-                {level.toUpperCase()}
-                {level !== "pg" ? (
-                  <span style={{ color: "red" }}>*</span>
-                ) : (
-                  " (Optional)"
-                )}
-              </label>
-              <label>Marks/CGPA:</label>
-              <input
-                type="text"
-                name={`education.${level}.marks`}
-                value={formData.education[level].marks}
-                onChange={handleChange}
-              />
-              <label>{level === "tenth" ? "School:" : "College:"}</label>
-              <input
-                type="text"
-                name={`education.${level}.${level === "tenth" ? "school" : "college"}`}
-                value={formData.education[level][level === "tenth" ? "school" : "college"]}
-                onChange={handleChange}
-              />
-              <div style={{ color: "red" }}>{errors[level]}</div>
-              <label>Year of Passing:</label>
-              <select
-                name={`education.${level}.year`}
-                value={formData.education[level].year}
-                onChange={handleChange}
-              >
-                {years.map((yr) => (
-                  <option key={yr} value={yr}>
-                    {yr}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
-
+        {/* --- EDUCATION (with magnificent crash-proof safeguard) --- */}
+<h3 className="h3-heading">Education <span style={{ color: "red" }}>*</span></h3>
+<div className="education">
+  {["tenth", "twelth", "ug", "pg"].map((level) => (
+    <div key={level}>
+      <label style={{ fontWeight: "bold" }} className="degree-label">
+        {level.toUpperCase()}
+        {level !== "pg" ? <span style={{ color: "red" }}>*</span> : " (Optional)"}
+      </label>
+      
+      <label>Marks/CGPA:</label>
+      <input
+        type="text"
+        name={`education.${level}.marks`}
+        // This is the safeguard: `?.` before accessing 'marks'
+        value={formData.education?.[level]?.marks || ''} 
+        onChange={handleChange}
+      />
+      
+      <label>{level === "tenth" ? "School:" : "College:"}</label>
+      <input
+        type="text"
+        name={`education.${level}.${level === "tenth" ? "school" : "college"}`}
+        value={formData.education?.[level]?.[level === "tenth" ? "school" : "college"] || ''}
+        onChange={handleChange}
+      />
+      
+      <div style={{ color: "red" }}>{errors[level]}</div>
+      
+      <label>Year of Passing:</label>
+      <select
+        name={`education.${level}.year`}
+        value={formData.education?.[level]?.year || ''}
+        onChange={handleChange}
+      >
+        <option value="">Select Year</option> {/* Added a default empty option */}
+        {years.map((yr) => (
+          <option key={yr} value={yr}>{yr}</option>
+        ))}
+      </select>
+    </div>
+  ))}
+</div>
         {/* ---------------- SKILLS ---------------- */}
         <div>
           <h3 className="h3-heading">
@@ -467,81 +484,76 @@ const handleSubmit = async (e) => {
           <div style={{ color: "red" }}>{errors.skills}</div>
         </div>
 
-        {/* ---------------- EXPERIENCE ---------------- */}
-        <div>
-          <h3>Experience</h3>
-          {formData.experience.map((exp, idx) => (
-            <div key={idx} style={{ marginBottom: "10px" }}>
-              <label>Job Role</label>
-              <input
-                type="text"
-                value={exp.role}
-                onChange={(e) =>
-                  handleExperienceChange(idx, "role", e.target.value)
-                }
-              />
-              <label>Company/Organization</label>
-              <input
-                type="text"
-                value={exp.company}
-                onChange={(e) =>
-                  handleExperienceChange(idx, "company", e.target.value)
-                }
-              />
-              <label>Years of Experience</label>
-              <input
-                type="text"
-                value={exp.years}
-                onChange={(e) =>
-                  handleExperienceChange(idx, "years", e.target.value)
-                }
-              />
-              <label>Job Description</label>
-              <textarea
-                value={exp.description}
-                onChange={(e) =>
-                  handleExperienceChange(idx, "description", e.target.value)
-                }
-              />
-              <button type="button" onClick={() => removeExperience(idx)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addExperience}>
-            Add Experience
-          </button>
-        </div>
+        {/* --- EXPERIENCE (with magnificent crash-proof safeguard) --- */}
+<div>
+  <h3>Experience</h3>
+  {/* The (formData.experience || []) ensures we always map over an array */}
+  {(formData.experience || []).map((exp, idx) => (
+    <div key={idx} style={{ marginBottom: "10px" }}>
+      <label>Job Role</label>
+      <input
+        type="text"
+        // This is the safeguard: `exp?.role || ''`
+        value={exp?.role || ''} 
+        onChange={(e) => handleExperienceChange(idx, "role", e.target.value)}
+      />
+      
+      <label>Company/Organization</label>
+      <input
+        type="text"
+        value={exp?.company || ''}
+        onChange={(e) => handleExperienceChange(idx, "company", e.target.value)}
+      />
+      
+      <label>Years of Experience</label>
+      <input
+        type="text"
+        value={exp?.years || ''}
+        onChange={(e) => handleExperienceChange(idx, "years", e.target.value)}
+      />
+      
+      <label>Job Description</label>
+      <textarea
+        value={exp?.description || ''}
+        onChange={(e) => handleExperienceChange(idx, "description", e.target.value)}
+      />
+      
+      <button type="button" onClick={() => removeExperience(idx)}>
+        Remove
+      </button>
+    </div>
+  ))}
+  <button type="button" onClick={addExperience}>
+    Add Experience
+  </button>
+</div>
 
-        {/* ---------------- PROJECTS ---------------- */}
-        <div>
-          <h3 className="h3-heading">Projects (Optional)</h3>
-          {formData.projects.map((proj, idx) => (
-            <div key={idx} style={{ marginBottom: "10px" }}>
-              <label>Project Title</label>
-              <input
-                type="text"
-                value={proj.title}
-                onChange={(e) =>
-                  handleProjectChange(idx, "title", e.target.value)
-                }
-              />
-              <label>Project Description</label>
-              <textarea
-                value={proj.description}
-                onChange={(e) =>
-                  handleProjectChange(idx, "description", e.target.value)
-                }
-              />
-              <button type="button" onClick={() => removeProject(idx)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addProject}>
-            Add Project
-          </button>
-        </div>
+        {/* --- PROJECTS (with magnificent crash-proof safeguard) --- */}
+<div>
+  <h3 className="h3-heading">Projects (Optional)</h3>
+  {/* The (formData.projects || []) ensures we always map over an array */}
+  {(formData.projects || []).map((proj, idx) => (
+    <div key={idx} style={{ marginBottom: "10px" }}>
+      <label>Project Title</label>
+      <input
+        type="text"
+        value={proj?.title || ''}
+        onChange={(e) => handleProjectChange(idx, "title", e.target.value)}
+      />
+      <label>Project Description</label>
+      <textarea
+        value={proj?.description || ''}
+        onChange={(e) => handleProjectChange(idx, "description", e.target.value)}
+      />
+      <button type="button" onClick={() => removeProject(idx)}>
+        Remove
+      </button>
+    </div>
+  ))}
+  <button type="button" onClick={addProject}>
+    Add Project
+  </button>
+</div>
 
         {/* ---------------- ACHIEVEMENTS ---------------- */}
         <div>
@@ -573,6 +585,7 @@ const handleSubmit = async (e) => {
         
       </form>
       </div>
+    </div>
     </div>
   );
 }
