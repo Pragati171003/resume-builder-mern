@@ -19,15 +19,17 @@
 }
 
 .logo {
-  height: 48px; 
+  height: 40px; 
   width: auto;
-  margin-right: 8px; 
+  margin-right: 4px; 
 }
 
 .logo-text {
-  font-weight: 700;
+  font-family: "Madurai W01 Ext Black";
+  font-weight: 400;
   font-size: 32px; 
-  background: linear-gradient(90deg, #1E3A8A, #0d6efd, #06B6D4);
+   line-height: 0.8; 
+  background: linear-gradient(90deg, #1c3d78 15%, #1d68e2 65%, #27a4f2 100%);
   -webkit-background-clip: text; 
   background-clip: text;
   color: transparent;
