@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./ResumeForm.css";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,7 @@ function ResumeForm({onSubmit}) {
     name: "",
     email: "",
     mobile: "",
-    countryCode: "+91", // ✅ Default India
+    countryCode: "+91", 
     linkedin: "",
     gitlab: "",
     education: {
@@ -43,14 +42,12 @@ function ResumeForm({onSubmit}) {
       return;
     }
      if (name === "mobile") {
-  let digits = value.replace(/\D/g, ""); // allow only digits
+  let digits = value.replace(/\D/g, "");
 
-  // Restrict to 10 digits max
   if (digits.length > 10) return;
 
   setFormData((prev) => ({ ...prev, mobile: digits }));
 
-  // Validation
   if (formData.countryCode === "+91") {
     if (!/^[6-9]/.test(digits) && digits.length > 0) {
       setErrors((prev) => ({
@@ -89,11 +86,10 @@ function ResumeForm({onSubmit}) {
      if (name.startsWith("education.")) {
   const [, level, field] = name.split(".");
 
-  // ✅ Special case: marks/CGPA should only allow numbers + decimal
   if (field === "marks") {
-    const numericValue = value.replace(/[^0-9.%]/g, ""); // remove everything except digits and "."
+    const numericValue = value.replace(/[^0-9.%]/g, ""); 
     const parts = numericValue.split(".");
-    if (parts.length > 2) return; // prevent multiple decimals
+    if (parts.length > 2) return; 
 
     setFormData((prev) => ({
       ...prev,
@@ -108,7 +104,6 @@ function ResumeForm({onSubmit}) {
     return;
   }
 
-  // ✅ Normal case for other education fields
   setFormData((prev) => ({
     ...prev,
     education: {
@@ -121,8 +116,6 @@ function ResumeForm({onSubmit}) {
   }));
   return;
 }
-
-    
 
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -226,7 +219,7 @@ function ResumeForm({onSubmit}) {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // ✅ First validate the form
+  // validating the form
   if (!validate()) {
     alert("Please fill all mandatory fields");
     return;
@@ -281,7 +274,6 @@ const handleSubmit = async (e) => {
     <div>
       <div className="form-panel-header"><h2>Resume Form</h2></div>
       <div className="form-scrollable-area">
-        {/* The editable title now lives inside the scrollable area */}
         <div className="editable-title-wrapper">
           <div className="editable-title-container" title="Click to rename your resume">
             <input
@@ -291,7 +283,7 @@ const handleSubmit = async (e) => {
               value={formData.resumeTitle || ''}
               onChange={handleChange}
               aria-label="Resume Title"
-              size="1" /* This helps the input auto-size initially */
+              size="1" 
             />
             <svg
               className="edit-icon"
@@ -411,9 +403,6 @@ const handleSubmit = async (e) => {
   />
   <div style={{ color: "red" }}>{errors.careerObjective}</div>
 </div>
-
-
-        {/* --- EDUCATION (with magnificent crash-proof safeguard) --- */}
 <h3 className="h3-heading">Education <span style={{ color: "red" }}>*</span></h3>
 <div className="education">
   {["tenth", "twelth", "ug", "pg"].map((level) => (
@@ -427,7 +416,6 @@ const handleSubmit = async (e) => {
       <input
         type="text"
         name={`education.${level}.marks`}
-        // This is the safeguard: `?.` before accessing 'marks'
         value={formData.education?.[level]?.marks || ''} 
         onChange={handleChange}
       />
@@ -448,7 +436,7 @@ const handleSubmit = async (e) => {
         value={formData.education?.[level]?.year || ''}
         onChange={handleChange}
       >
-        <option value="">Select Year</option> {/* Added a default empty option */}
+        <option value="">Select Year</option> 
         {years.map((yr) => (
           <option key={yr} value={yr}>{yr}</option>
         ))}
@@ -483,17 +471,13 @@ const handleSubmit = async (e) => {
           </div>
           <div style={{ color: "red" }}>{errors.skills}</div>
         </div>
-
-        {/* --- EXPERIENCE (with magnificent crash-proof safeguard) --- */}
 <div>
   <h3>Experience</h3>
-  {/* The (formData.experience || []) ensures we always map over an array */}
   {(formData.experience || []).map((exp, idx) => (
     <div key={idx} style={{ marginBottom: "10px" }}>
       <label>Job Role</label>
       <input
         type="text"
-        // This is the safeguard: `exp?.role || ''`
         value={exp?.role || ''} 
         onChange={(e) => handleExperienceChange(idx, "role", e.target.value)}
       />
@@ -531,7 +515,6 @@ const handleSubmit = async (e) => {
         {/* --- PROJECTS (with magnificent crash-proof safeguard) --- */}
 <div>
   <h3 className="h3-heading">Projects (Optional)</h3>
-  {/* The (formData.projects || []) ensures we always map over an array */}
   {(formData.projects || []).map((proj, idx) => (
     <div key={idx} style={{ marginBottom: "10px" }}>
       <label>Project Title</label>
