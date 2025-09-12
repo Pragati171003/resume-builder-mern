@@ -15,6 +15,7 @@ import PrivateRoute from './layout/PrivateRoute';
 import EditorPage from './pages/EditorPage'
 import PreviewPage from './pages/PreviewPage';
 import EditorLayout from './layout/EditorLayout';
+import ResumeTemplateGrid from './pages/ResumeTemplateGrid.jsx';
 
 function AppRoutes() {
   return (
@@ -23,13 +24,13 @@ function AppRoutes() {
         <Route index element={<HomePage />} />
         <Route path="features" element={<FeaturesPage />} />
         <Route path="testimonials" element={<TestimonialsPage />} />
-        <Route path="templates" element={<TemplatesPage />} />
+        <Route path="templates" element={<ResumeTemplateGrid />} />
         <Route path="faq-page" element={<FAQ />} />
         <Route path="all-faqs" element={<AllFAQsPage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/signup" element={<SignUpPage />} />
         {/*<Route path="/build-resume" element={<ResumeForm />} />*/}
-        <Route path="/templates-preview" element={<TemplatesPage />} />
+        <Route path="/templates-preview" element={<ResumeTemplateGrid />} />
       </Route>
       
       <Route path="/" element={<EditorLayout />}>
