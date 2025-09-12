@@ -1,13 +1,9 @@
-import ResumeTemplate1 from "../components/resumetemplates/ResumeTemplate1";
-import ResumeTemplate2 from "../components/resumetemplates/ResumeTemplate2";
-import ResumeTemplate3 from "../components/resumetemplates/ResumeTemplate3";
-import ResumeTemplate4 from "../components/resumetemplates/ResumeTemplate4";
-import ResumeTemplate5 from "../components/resumetemplates/ResumeTemplate5";
-import ResumeTemplate6 from "../components/resumetemplates/ResumeTemplate6";
-import ResumeTemplate7 from "../components/resumetemplates/ResumeTemplate7";
+
 import "./ResumeTemplateGrid.css";
-import classicJSON from "../components/resumetemplates/classic.json";
+
+
 import ReactDOMServer from "react-dom/server";
+
 import { useState } from "react";
 const defaultResumeData = {
   name: "Jhon Deo",
@@ -26,98 +22,32 @@ const defaultResumeData = {
   ],
 };
 
-const TemplateOne = ({ data }) => (
-  <div className="template-box">
-    <h2>{data.name || "John Doe"}</h2>
-    <p>{data.title || "Software Engineer"}</p>
-  </div>
-);
 
-const TemplateTwo = ({ data }) => (
-  <div className="template-box">
-    <h2>{data.name || "Jane Smith"}</h2>
-    <i>{data.title || "UI/UX Designer"}</i>
-  </div>
-);
 
-// const TemplateThree = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Alex Johnson"}</h2>
-//     <p>{data.title || "Data Analyst"}</p>
-//   </div>
-// );
-
-// const TemplateFour = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Emily Clark"}</h2>
-//     <p>{data.title || "Marketing Specialist"}</p>
-//   </div>
-// );
-
-// const TemplateFive = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Michael Lee"}</h2>
-//     <p>{data.title || "Project Manager"}</p>
-//   </div>
-// );
-
-// const TemplateSix = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Sophia Patel"}</h2>
-//     <p>{data.title || "HR Executive"}</p>
-//   </div>
-// );
-
-// const TemplateSeven = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Chris Brown"}</h2>
-//     <p>{data.title || "Graphic Designer"}</p>
-//   </div>
-// );
-
-// const TemplateEight = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Olivia Green"}</h2>
-//     <p>{data.title || "Content Writer"}</p>
-//   </div>
-// );
-
-// const TemplateNine = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "David Wilson"}</h2>
-//     <p>{data.title || "Finance Analyst"}</p>
-//   </div>
-// );
-
-// const TemplateTen = ({ data }) => (
-//   <div className="template-box">
-//     <h2>{data.name || "Emma Johnson"}</h2>
-//     <p>{data.title || "Cybersecurity Specialist"}</p>
-//   </div>
-// );
 
 const TEMPLATE_COMPONENTS = [
-  { id: "template-json", title: "Classic Json",type: "json", data: classicJSON },
-  { id: "template-2", title: "Modern", Component: TemplateTwo },
-  { id: "template-3", title: "Minimal", Component: ResumeTemplate7 },
-  { id: "template-4", title: "Creative", Component: ResumeTemplate6 },
-  { id: "template-5", title: "Professional", Component: ResumeTemplate5 },
-  { id: "template-6", title: "Simple", Component: ResumeTemplate4 },
-  { id: "template-7", title: "Elegant", Component: ResumeTemplate4 },
-  { id: "template-8", title: "Stylish", Component: ResumeTemplate3 },
-  { id: "template-9", title: "Corporate", Component: ResumeTemplate3 },
-  { id: "template-10", title: "Tech", Component: ResumeTemplate2 },
-  { id: "template-11", title: "Tech", Component: ResumeTemplate1 },
-  { id: "template-json", title: "Classic Json",type: "json", data: classicJSON },
+  
+  { id: "template-html3", title: "Flat", type: "html", url: "/templates/flat.html" },
+  { id: "template-html1", title: "elegant",type: "html", url: "/templates/elegant.html" },
+  { id: "template-html2", title: "caffeine Html",type: "html", url: "/templates/caffeine.html" },
+  { id: "template-html3", title: "spartan Html",type: "html", url: "/templates/spartan.html" },
+  { id: "template-html4", title: "kendall Html",type: "html", url: "/templates/kendall.html" },
+  { id: "template-html5", title: "onepage Html",type: "html", url: "/templates/onepage.html" },
+  { id: "template-html6", title: "microdata",type: "html", url: "/templates/microdata.html" },
+  { id: "template-html7", title: "modern Html",type: "html", url: "/templates/modern.html" },
+  { id: "template-html8", title: "onepage Html",type: "html", url: "/templates/onepage.html" },
+  { id: "template-html9", title: "short Html",type: "html", url: "/templates/resume_short.html" },
+  { id: "template-html10", title: "resume_microdata Html",type: "html", url: "/templates/resume_microdata.html" },
+  { id: "template-html11", title: "slick Html",type: "html", url: "/templates/resume_slick.html" },
+  { id: "template-html12", title: "stackoverflow Html",type: "html", url: "/templates/stackoverflow.html" },
+  { id: "template-html14", title: "Class",type: "html", url: "/templates/resume_class.html" },
+  
+   
 ];
 
 export default function ResumeTemplateGrid() {
   const [selected, setSelected] = useState(TEMPLATE_COMPONENTS[0].id);
-//   const resumeData = {
-//     name: "Anoohya Bachu",
-//     title: "ECE Graduate | Aspiring Software Developer",
-//     mail: "xyz@gmail.com",
-//   };
+
 
   return (
     <div className="container">
@@ -133,7 +63,7 @@ export default function ResumeTemplateGrid() {
               onClick={() => setSelected(t.id)}
             >
               <h3 className="card-title">{t.title}</h3>
-              <div className="template-preview">
+                 <div className="template-preview">
   {t.type === "json" ? (
     <iframe
       className="iframe-preview"
@@ -150,13 +80,15 @@ export default function ResumeTemplateGrid() {
             <h2>${t.data.basics.name}</h2>
             <p>${t.data.basics.label}</p>
             <p>${t.data.basics.email}</p>
-            <h3>Education</h3>
-            <p>${t.data.education[0].studyType} in ${t.data.education[0].area} - ${t.data.education[0].institution}</p>
-            <h3>Skills</h3>
-            <p>${t.data.skills[0].keywords.join(", ")}</p>
           </body>
         </html>
       `}
+      title={t.title}
+    />
+  ) : t.type === "html" ? (
+    <iframe
+      className="iframe-preview"
+      src={t.url}   // ✅ loads raw HTML file
       title={t.title}
     />
   ) : (
@@ -176,19 +108,31 @@ export default function ResumeTemplateGrid() {
 
 
 
+
             </div>
           );
         })}
       </div>
 
-      <div className="button-container">
-        <button
-          onClick={() => alert(`You chose: ${selected}`)}
-          className="choose-btn"
-        >
-          Choose Template
-        </button>
-      </div>
+<div className="button-container">
+  <button
+    onClick={() => {
+      const selectedTemplate = TEMPLATE_COMPONENTS.find(t => t.id === selected);
+
+      if (selectedTemplate.type === "html") {
+        // Open the full HTML resume in a new tab
+        window.open(selectedTemplate.url, "_blank");
+      } else {
+        // For React/JSON templates, just show alert (or you can render/export)
+        alert(`You chose: ${selectedTemplate.title}`);
+      }
+    }}
+    className="choose-btn"
+  >
+    Choose Template
+  </button>
+</div>
+
     </div>
   );
 }
