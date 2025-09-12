@@ -1,17 +1,16 @@
-/* --- src/components/editor/ResumePreview.css --- */
 .resume-preview-container {
   width: 100%;
   height: 100%;
 }
 .resume-preview-paper {
   background: white;
-  width: 210mm; /* A4 paper width */
-  height: 297mm; /* A4 paper height */
+  width: 210mm;
+  height: 297mm; 
   padding: 40px;
   box-sizing: border-box;
   color: #333;
   line-height: 1.6;
-  transform-origin: top left; /* Scale from the top-left corner */
+  transform-origin: top left; 
 }
 .resume-header {
   text-align: center;
@@ -21,7 +20,7 @@
 }
 .resume-header h1 {
   margin: 0 0 5px 0;
-  font-size: 2.5em; /* Scales with the base font size from context */
+  font-size: 2.5em; 
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -35,7 +34,7 @@
   margin-bottom: 25px;
 }
 .resume-section h2 {
-  font-size: 1.1em; /* Scales with base font size */
+  font-size: 1.1em; 
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -44,7 +43,7 @@
   margin-bottom: 15px;
 }
 .section-content {
-  font-size: 1em; /* Scales with base font size */
+  font-size: 1em; 
   color: #444;
 }
 .section-content p {
@@ -79,11 +78,10 @@
 .resume-preview-container { width: 100%; height: fit-content; }
 .resume-preview-paper {
   background: white;
-  aspect-ratio: 210 / 297; /* A4 aspect ratio */
-  width: 100%; /* Fit the container */
-  padding: 2.5em; /* Use em for scalable padding */
+  aspect-ratio: 210 / 297; 
+  width: 100%; 
+  padding: 2.5em; 
   box-sizing: border-box;
 }
-/* All font sizes inside must now be in 'em' to scale properly */
-.resume-header h1 { font-size: 2.5em; /* ... */ }
-.resume-section h2 { font-size: 1.1em; /* ... */ }
+.resume-header h1 { font-size: 2.5em;  }
+.resume-section h2 { font-size: 1.1em;}

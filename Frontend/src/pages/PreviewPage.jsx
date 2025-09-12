@@ -6,10 +6,8 @@ import Toolbar from '../editor/Toolbar';
 import ResumePreview from '../editor/ResumePreview';
 import './PreviewPage.css';
 
-// The main page component
 function PreviewPage() {
   const location = useLocation();
-  // Get the data passed from the form page
   const initialData = location.state?.resumeData;
 
   if (!initialData) {
@@ -17,7 +15,6 @@ function PreviewPage() {
   }
 
   return (
-    // The provider is initialized WITH the data from the form
     <ResumeProvider initialData={initialData}>
       <div className="preview-page-container">
         {/* Column 1: The Toolbar */}

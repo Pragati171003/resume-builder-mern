@@ -13,6 +13,7 @@
     "@jsonresume/jsonresume-theme-class": "^0.4.2",
     "@jsonresume/jsonresume-theme-professional": "^1.0.18",
     "axios": "^1.11.0",
+    "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "jsonresume-theme-caffeine": "^1.2.3",
     "jsonresume-theme-elegant": "^1.16.1",
