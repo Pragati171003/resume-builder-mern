@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import resumeRoutes from "./routes/resume.js";
-const faqRoutes = require('./routes/faqRoutes');
+import faqRoutes from './routes/faqRoutes.js';
+
 dotenv.config();
 const app = express();
 

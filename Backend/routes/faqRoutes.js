@@ -1,57 +1,50 @@
- const express = require('express');
- const nodemailer = require('nodemailer');
- const router = express.Router();
+// --- Backend/routes/faqRoutes.js (Final ESM Version) ---
+import express from 'express';
+import nodemailer from 'nodemailer';
 
- // POST route to handle the form submission
- router.post('/submit', async (req, res) => {
-   const { email, question } = req.body;
+const router = express.Router();
 
-   if (!email || !question) {
-     return res.status(400).json({ msg: 'Please provide both an email and a question.' });
-   }
+router.post('/submit', async (req, res) => {
+  const { email, question } = req.body;
 
-   try {
-     // 1. Set up the "transporter" (how you will send the email)
-     // MAGNIFICENT TIP: Use Gmail with an "App Password" for easy setup.
-     // Go here to create one: https://myaccount.google.com/apppasswords
-     const transporter = nodemailer.createTransport({
-       service: 'gmail',
-       auth: {
-         user: 'your-email@gmail.com', // Your Gmail address
-         pass: 'your-16-character-app-password', // The App Password you generated
-       },
-     });
+  if (!email || !question) {
+    return res.status(400).json({ msg: 'Please provide both an email and a question.' });
+  }
 
-     // 2. Prepare the email to send TO YOU (the admin)
-     const mailToAdmin = {
-       from: '"Your App Name" <your-email@gmail.com>',
-       to: 'your-admin-email@example.com', // The email where you receive questions
-       subject: 'New FAQ Submission!',
-       html: `<p>You received a new question from: <strong>${email}</strong></p>
-              <p><strong>Question:</strong></p>
-              <p>${question}</p>`,
-     };
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    });
 
-     // 3. Prepare the confirmation email to send TO THE USER
-     const mailToUser = {
-       from: '"Your App Name" <your-email@gmail.com>',
-       to: email, // The user's email address
-       subject: 'We Have Received Your Question!',
-       html: `<h3>Thank you for contacting us!</h3>
-              <p>We've received your question and our team will get back to you shortly.</p>
-              <p><strong>Your Question:</strong> ${question}</p>`,
-     };
+    const mailToAdmin = {
+      from: `"CVCRAFT Inquiry" <${process.env.GMAIL_USER}>`,
+      to: 'your-admin-email@example.com',
+      subject: `New Question from ${email}`,
+      html: `<p><strong>From:</strong> ${email}</p><p><strong>Question:</strong> ${question}</p>`,
+    };
 
-     // 4. Send both emails
-     await transporter.sendMail(mailToAdmin);
-     await transporter.sendMail(mailToUser);
+    const mailToUser = {
+      from: `"CVCRAFT Support" <${process.env.GMAIL_USER}>`,
+      to: email,
+      subject: 'We Have Received Your Question!',
+      html: `<h2>Hello we are from cvcraft.</h2><h3>Thank you for contacting us!</h3><p>We've received your question and will get back to you shortly.</p>`,
+    };
 
-     res.status(200).json({ msg: 'Question submitted successfully!' });
+    await transporter.sendMail(mailToAdmin);
+    await transporter.sendMail(mailToUser);
 
-   } catch (error) {
-     console.error('Error sending email:', error);
-     res.status(500).json({ msg: 'Server error: Could not send email.' });
-   }
- });
+    res.status(200).json({ msg: 'Question submitted successfully!' });
 
- module.exports = router
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ msg: 'Server error: Could not send email.' });
+  }
+});
+
+// --- THIS IS THE MAGNIFICENT FIX ---
+// Use 'export default' in ES Modules instead of 'module.exports'
+export default router;
