@@ -240,3 +240,13 @@
   border-radius: 8px;
   color: #155724;
 }
+.author-avatar-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: #ced4da; 
+}

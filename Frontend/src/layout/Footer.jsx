@@ -1,7 +1,7 @@
 import './Footer.css';
 import { FaArrowUp, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import logoImagec from '../assets/images/Screenshot 2025-09-09 172554.png'
+import logoImagec from '../assets/images/Screenshot 2025-09-09 172420.png'
 
 function CallToAction() {
   const handleClick = () => {

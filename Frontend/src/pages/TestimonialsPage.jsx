@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './TestimonialsPage.css';
-import { FaStar, FaQuoteLeft } from 'react-icons/fa';
+import { FaStar, FaQuoteLeft,FaUserCircle  } from 'react-icons/fa';
 
 const initialTestimonials = [
   { name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This AI-powered resume builder made the job application process so much easier! The suggestions were spot-on...', rating: 5, avatar: 'https://i.imgur.com/nJ2Wb4A.png' },
@@ -22,7 +22,7 @@ function TestimonialsPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.quote && formData.rating > 0) {
-      const newTestimonial = { ...formData, avatar: 'https://i.imgur.com/m5246RN.png' };
+      const newTestimonial = { ...formData,isIcon: true, avatar: 'https://i.imgur.com/m5246RN.png' };
       setTestimonials((prevTestimonials) => [...prevTestimonials, newTestimonial]);
       setIsSubmitted(true);
     } else {
@@ -47,7 +47,13 @@ function TestimonialsPage() {
                 {[...Array(5)].map((_, i) => ( <FaStar key={i} color={i < testimonial.rating ? '#ffc107' : '#e4e5e9'} /> ))}
               </div>
               <div className="author-info">
-                <img src={testimonial.avatar} alt={testimonial.name} className="author-avatar" />
+                {testimonial.isIcon ? (
+                  <div className="author-avatar-icon">
+                    <FaUserCircle />
+                  </div>
+                ) : (
+                  <img src={testimonial.avatar} alt={testimonial.name} className="author-avatar" />
+                )}
                 <div>
                   <p className="author-name">{testimonial.name}</p>
                   <p className="author-title">{testimonial.title}</p>
