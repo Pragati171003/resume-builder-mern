@@ -250,3 +250,39 @@
   font-size: 50px;
   color: #ced4da; 
 }
+@media (max-width: 480px) {
+
+  /* --- THIS IS THE MAGNIFICENT FIX --- */
+
+  /* 1. Make the main page background white and remove its padding */
+  .testimonials-page {
+    padding: 0; 
+    background-color: #ffffff; 
+  }
+
+  /* 2. Make the form wrapper take up the full screen */
+  .form-wrapper {
+    /* It will now stretch to the full width and height of the screen */
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh; /* Make sure it covers the full viewport height */
+    
+    /* Remove the card-like appearance for a seamless full-screen look */
+    box-shadow: none;
+    border-radius: 0;
+    
+    /* Adjust padding for the smaller screen */
+    padding: 40px 25px;
+    margin: 0; /* Reset the margin */
+    
+    box-sizing: border-box; /* Ensure padding is included in the height/width */
+  }
+
+  /* 3. Adjust heading sizes for the smaller screen */
+  .form-wrapper h2 {
+    font-size: 28px;
+  }
+  .form-wrapper p {
+    font-size: 15px;
+  }
+}

@@ -47,6 +47,7 @@ function TestimonialsPage() {
                 {[...Array(5)].map((_, i) => ( <FaStar key={i} color={i < testimonial.rating ? '#ffc107' : '#e4e5e9'} /> ))}
               </div>
               <div className="author-info">
+                
                 {testimonial.isIcon ? (
                   <div className="author-avatar-icon">
                     <FaUserCircle />
