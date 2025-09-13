@@ -28,29 +28,30 @@ const defaultResumeData = {
 const TEMPLATE_COMPONENTS = [
   
   { id: "template-html3", title: "Flat", type: "html", url: "/templates/flat.html" },
-  { id: "template-html1", title: "elegant",type: "html", url: "/templates/elegant.html" },
-  { id: "template-html2", title: "caffeine Html",type: "html", url: "/templates/caffeine.html" },
-  { id: "template-html3", title: "spartan Html",type: "html", url: "/templates/spartan.html" },
-  { id: "template-html4", title: "kendall Html",type: "html", url: "/templates/kendall.html" },
-  { id: "template-html5", title: "onepage Html",type: "html", url: "/templates/onepage.html" },
-  { id: "template-html6", title: "microdata",type: "html", url: "/templates/microdata.html" },
-  { id: "template-html7", title: "modern Html",type: "html", url: "/templates/modern.html" },
-  { id: "template-html8", title: "onepage Html",type: "html", url: "/templates/onepage.html" },
-  { id: "template-html9", title: "short Html",type: "html", url: "/templates/resume_short.html" },
-  { id: "template-html10", title: "resume_microdata Html",type: "html", url: "/templates/resume_microdata.html" },
-  { id: "template-html11", title: "slick Html",type: "html", url: "/templates/resume_slick.html" },
-  { id: "template-html12", title: "stackoverflow Html",type: "html", url: "/templates/stackoverflow.html" },
+  { id: "template-html1", title: "Elegant",type: "html", url: "/templates/elegant.html" },
+  { id: "template-html2", title: "Caffeine ",type: "html", url: "/templates/caffeine.html" },
+  { id: "template-html3", title: "Spartan ",type: "html", url: "/templates/spartan.html" },
+  { id: "template-html4", title: "Kendall ",type: "html", url: "/templates/kendall.html" },
+  { id: "template-html5", title: "Onepage ",type: "html", url: "/templates/onepage.html" },
+  { id: "template-html6", title: "Microdata",type: "html", url: "/templates/microdata.html" },
+  { id: "template-html7", title: "Modern ",type: "html", url: "/templates/modern.html" },
+  { id: "template-html8", title: "Onepage",type: "html", url: "/templates/onepage.html" },
+  { id: "template-html9", title: "Short",type: "html", url: "/templates/resume_short.html" },
+  { id: "template-html10", title: "Microdata",type: "html", url: "/templates/resume_microdata.html" },
+  { id: "template-html11", title: "Slick",type: "html", url: "/templates/resume_slick.html" },
+  { id: "template-html12", title: "Stackoverflow",type: "html", url: "/templates/stackoverflow.html" },
   { id: "template-html14", title: "Class",type: "html", url: "/templates/resume_class.html" },
   
    
 ];
 
 export default function ResumeTemplateGrid() {
-  const [selected, setSelected] = useState(TEMPLATE_COMPONENTS[0].id);
+  const [selected, setSelected] = useState(null);
 
 
   return (
-    <div className="container">
+    <div className="resume-builder">
+      <div className="container">
       <h2 className="heading">Choose a resume template</h2>
 
       <div className="grid">
@@ -64,31 +65,31 @@ export default function ResumeTemplateGrid() {
             >
               <h3 className="card-title">{t.title}</h3>
                  <div className="template-preview">
-  {t.type === "json" ? (
-    <iframe
-      className="iframe-preview"
-      srcDoc={`
-        <html>
-          <head>
-            <style>
-              body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 10px; }
-              h2 { margin: 0 0 4px 0; }
-              p { margin: 0 0 6px 0; }
-            </style>
-          </head>
-          <body>
-            <h2>${t.data.basics.name}</h2>
-            <p>${t.data.basics.label}</p>
-            <p>${t.data.basics.email}</p>
-          </body>
-        </html>
-      `}
+                   {t.type === "json" ? (
+                     <iframe
+                        className="iframe-preview"
+               srcDoc={`
+                <html>
+                    <head>
+                      <style>
+                         body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 10px; }
+                            h2 { margin: 0 0 4px 0; }
+                              p { margin: 0 0 6px 0; }
+                              </style>
+                    </head>
+                          <body>
+                         <h2>${t.data.basics.name}</h2>
+                         <p>${t.data.basics.label}</p>
+                         <p>${t.data.basics.email}</p>
+                     </body>
+                   </html>
+             `}
       title={t.title}
     />
   ) : t.type === "html" ? (
     <iframe
       className="iframe-preview"
-      src={t.url}   // ✅ loads raw HTML file
+      src={t.url}   
       title={t.title}
     />
   ) : (
@@ -120,10 +121,10 @@ export default function ResumeTemplateGrid() {
       const selectedTemplate = TEMPLATE_COMPONENTS.find(t => t.id === selected);
 
       if (selectedTemplate.type === "html") {
-        // Open the full HTML resume in a new tab
+        
         window.open(selectedTemplate.url, "_blank");
       } else {
-        // For React/JSON templates, just show alert (or you can render/export)
+        
         alert(`You chose: ${selectedTemplate.title}`);
       }
     }}
@@ -132,6 +133,8 @@ export default function ResumeTemplateGrid() {
     Choose Template
   </button>
 </div>
+
+    </div>
 
     </div>
   );
