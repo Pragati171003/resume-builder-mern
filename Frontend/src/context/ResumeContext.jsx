@@ -34,8 +34,8 @@ const [selectedTemplate, setSelectedTemplate] = useState('flat');
 const [themeColor, setThemeColor] = useState('#0d6efd');
 const [fontFamily, setFontFamily] = useState("'Inter', sans-serif");
 const [fontSize, setFontSize] = useState(1);
-const [isToolbarVisible, setIsToolbarVisible] = useState(true);
-const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+const [isToolbarVisible, setIsToolbarVisible] = useState(false);
+const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 useEffect(() => {
 if (resumeId === 'new') {
 const queryParams = new URLSearchParams(location.search);

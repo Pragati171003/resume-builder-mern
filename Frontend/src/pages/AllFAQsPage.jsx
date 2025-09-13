@@ -16,6 +16,7 @@ function AllFAQsPage() {
   const [formData, setFormData] = useState({ email: '', question: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
@@ -23,14 +24,17 @@ function AllFAQsPage() {
     e.preventDefault();
     setError('');
     if (formData.email && formData.question) {
-    try {
-      await axios.post('http://localhost:5000/api/faq/submit', formData);
-      setIsSubmitted(true); 
-    } catch (err) {
-    console.error("Submission error:", err);
-    setError(err.response?.data?.msg || 'Failed to submit your question. Please try again later.');
+      setIsLoading(true);
+      try {
+        await axios.post('http://localhost:5000/api/faq/submit', formData);
+        setIsSubmitted(true); 
+      } catch (err) {
+      console.error("Submission error:", err);
+      setError(err.response?.data?.msg || 'Failed to submit your question. Please try again later.');
+      }finally{
+        setIsLoading(false);
+      }
     }
-  }
   };
 
   return (
@@ -77,7 +81,9 @@ function AllFAQsPage() {
               onChange={(e) => setFormData({ ...formData, question: e.target.value })}
               required
             ></textarea>
-            <button type="submit">Ask Question</button>
+            <button type="submit" className="submit-button" disabled={isLoading}>
+              {isLoading ? 'Sending...' : 'Ask Question'}
+            </button>
           </form>
         )}
       </section>

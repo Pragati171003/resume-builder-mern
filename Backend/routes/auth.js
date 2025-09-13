@@ -3,6 +3,7 @@ import User from "../model/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import nodemailer from "nodemailer";
 
 const router = express.Router();
 
@@ -48,21 +49,46 @@ router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "User not found" });
-
+    if (!user) {
+      return res.status(200).json({ msg: "If a user with that email exists, a reset link has been sent." });
+    }
     const resetToken = crypto.randomBytes(32).toString("hex");
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
-
     const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
-    res.json({ msg: "Password reset link generated", resetUrl });
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: `"CVCRAFT Password Reset" <${process.env.GMAIL_USER}>`,
+      to: user.email,
+      subject: 'Password Reset Request for Your CVCRAFT Account',
+      html: `
+        <div style="font-family: sans-serif; padding: 20px; line-height: 1.6;">
+          <h2>Password Reset Request</h2>
+          <p>Hi ${user.firstName},</p>
+          <p>We received a request to reset the password for your CVCRAFT account. Please click the link below to set a new password:</p>
+          <a href="${resetUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0d6efd; color: #ffffff; text-decoration: none; border-radius: 8px;">Reset Your Password</a>
+          <p>This link will expire in one hour.</p>
+          <p>If you did not request a password reset, please ignore this email.</p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.json({ msg: "If a user with that email exists, a reset link has been sent." });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server error" });
+    console.error('FORGOT PASSWORD ERROR:', err);
+    res.status(500).json({ msg: "An error occurred. Please try again." });
   }
 });
-
 
 router.post("/reset-password/:token", async (req, res) => {
   try {

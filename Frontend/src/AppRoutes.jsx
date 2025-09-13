@@ -17,11 +17,11 @@ import EditorPage from './pages/EditorPage';
 import PreviewPage from './pages/PreviewPage';
 import EditorLayout from './layout/EditorLayout';
 import ResumeTemplateGrid from './pages/ResumeTemplateGrid.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 function AppRoutes() {
   const location = useLocation();
-
-  // Flip animation variants
   const flipVariants = {
     initial: { rotateY: -90, opacity: 0 },
     animate: { rotateY: 0, opacity: 1 },
@@ -38,7 +38,8 @@ function AppRoutes() {
           <Route path="templates" element={<ResumeTemplateGrid />} />
           <Route path="faq-page" element={<FAQ />} />
           <Route path="all-faqs" element={<AllFAQsPage />} />
-
+          <Route path="forgot-password" element={<ForgotPassword/>}/>
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           {/* Animated Routes */}
           <Route
             path="/login"
