@@ -4,11 +4,11 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Save Resume
+
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const resume = new Resume({
-      userId: req.user.id, // comes from JWT
+      userId: req.user.id, 
       ...req.body
     });
     await resume.save();

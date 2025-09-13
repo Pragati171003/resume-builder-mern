@@ -2,7 +2,7 @@ import './Footer.css';
 import { FaArrowUp, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import logoImagec from '../assets/images/Screenshot 2025-09-09 172420.png'
-
+import { FaXTwitter } from "react-icons/fa6";
 function CallToAction() {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,8 +50,9 @@ export function Footer() {
                 <FaFacebook />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-icon twitter-icon">
-                <FaTwitter />
+              <FaXTwitter />
               </a>
+
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon linkedin-icon">
                 <FaLinkedin />
               </a>
