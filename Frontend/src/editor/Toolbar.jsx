@@ -31,7 +31,6 @@ const templates = [//even classy waterfall modern even crushin utils modern exte
   { id: 'caffeine', name: 'Caffeine' }, 
   //{ id: 'elegant-ryantrinkle', name: 'Elegant Ryantrinkle' }, 
   { id: 'moon', name: 'Moon' }, 
-  { id: 'spartan', name: 'Spartan' }, 
   { id: 'light-classy-concise', name: 'light-classy-concise' }, 
   { id: 'class', name: 'Class' }, 
   //{ id: 'relaxed', name: 'Relaxed' }, 

@@ -82,7 +82,7 @@ router.post("/forgot-password", async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.json({ msg: "If a user with that email exists, a reset link has been sent." });
+    res.json({ msg: "A reset link has been sent to the given email" });
 
   } catch (err) {
     console.error('FORGOT PASSWORD ERROR:', err);
