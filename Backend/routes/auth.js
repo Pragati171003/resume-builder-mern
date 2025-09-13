@@ -3,6 +3,7 @@ import User from "../model/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import { sendEmail } from "../Utils/sendemail.js"
 
 const router = express.Router();
 
@@ -43,7 +44,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Forgot Password
+// Forgot Password (send email with reset link)
+// Forgot Password (send email with reset link)
 router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
@@ -56,7 +58,22 @@ router.post("/forgot-password", async (req, res) => {
     await user.save();
 
     const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
-    res.json({ msg: "Password reset link generated", resetUrl });
+
+    await sendEmail(
+      user.email,
+      "Password Reset Request",
+      `
+        <p>Hello ${user.firstName || "User"},</p>
+        <p>You requested a password reset.</p>
+        <p>Click here to reset your password: 
+          <a href="${resetUrl}">${resetUrl}</a>
+        </p>
+        <p>If you did not request this, please ignore this email.</p>
+      `
+    );
+
+    // 🔴 old: res.json({ msg: "Password reset link sent to email", resetUrl });
+    res.json({ msg: "Password reset link sent to your email." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Server error" });
@@ -69,7 +86,11 @@ router.post("/reset-password/:token", async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+    const user = await User.findOne({ 
+      resetPasswordToken: token, 
+      resetPasswordExpires: { $gt: Date.now() } 
+    });
+
     if (!user) return res.status(400).json({ msg: "Invalid or expired token" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
