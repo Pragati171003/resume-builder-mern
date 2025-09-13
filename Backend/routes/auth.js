@@ -6,7 +6,7 @@ import crypto from "crypto";
 
 const router = express.Router();
 
-// Register
+
 router.post("/register", async (req, res) => {
   try {
     const { firstName, lastName, email, password, dob, mobile } = req.body;
@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Forgot Password
+
 router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
@@ -63,7 +63,7 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
-// Reset Password
+
 router.post("/reset-password/:token", async (req, res) => {
   try {
     const { token } = req.params;
