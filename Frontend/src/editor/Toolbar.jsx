@@ -17,7 +17,7 @@ import Template12 from '../template-previews/paper.jpg'
 import Template13 from '../template-previews/index_page-0001.jpg'
 import Template14 from '../template-previews/modern (1)_page-0001.jpg'
 import Template15 from '../template-previews/Untitled Resume (3)_pages-to-jpg-0001.jpg'
-import Template16 from '../template-previews/img23.jpg'
+import Template16 from '../template-previews/Untitled Resume (37)_page-0001.jpg'
 import Template17 from '../template-previews/Richard Hendriks — Programmer_page-0001.jpg'
 import Template18 from '../template-previews/modern (3)_page-0001.jpg'
 import Template19 from '../template-previews/phone_page-0001.jpg'
@@ -27,17 +27,19 @@ import Template22 from '../template-previews/Untitled Resume (5)_page-0001.jpg'
 import Template23 from '../template-previews/John Doe_page-0001.jpg'
 import Template24 from '../template-previews/standard-resume_page-0001.jpg'
 import Template25 from '../template-previews/Untitled Resume (6)_page-0001.jpg'
+import Template26 from '../template-previews/Untitled Resume (36)_page-0001.jpg'
 
 
-const templates = [//even classy waterfall modern even crushin utils modern extended darkclassy responsive rocket 
-// light classy  cora projects error
+const templates = [
   { id: 'tech', name: 'Tech',imageUrl:Template20 }, 
+  { id: 'onepage', name: 'Onepage' ,imageUrl:Template4},
   { id: 'onepage-plus', name: 'Onepage Plus',imageUrl:Template1 },
   { id: 'flat', name: 'Flat' ,imageUrl:Template2},
   { id: 'elegant', name: 'Elegant',imageUrl: Template3},
-  { id: 'onepage', name: 'Onepage' ,imageUrl:Template4},
   { id: 'stackoverflow', name: 'StackOverflow',imageUrl:Template7 },
+    { id: 'classy-vforesee', name: 'Classy Vforesee',imageUrl:Template16 }, 
   { id: 'macchiato', name: 'Macchiato',imageUrl:Template11 },
+    { id: 'kendall', name: 'Kendall',imageUrl:Template6 },
   { id: 'spartan', name: 'Spartan',imageUrl:Template10 },
   { id: 'paper', name: 'Paper',imageUrl:Template12 },
   //{id:'sceptile',name:'Sceptile'},
@@ -57,13 +59,11 @@ const templates = [//even classy waterfall modern even crushin utils modern exte
   { id: 'class', name: 'Class',imageUrl:Template8 }, 
   //{ id: 'relaxed', name: 'Relaxed' }, 
   { id: 'boilerplate', name: 'Boilerplate',imageUrl:Template21 }, 
-  { id: 'nominaltech-nl', name: 'Nominaltech-nl' }, 
+  { id: 'nominaltech-nl', name: 'Nominaltech-nl', imageUrl:Template26}, 
   { id: 'eternal', name: 'Eternal',imageUrl:Template22 }, 
   { id: 'compact', name: 'compact',imageUrl:Template25 }, 
   { id: 'standard-resume', name: 'Standard',imageUrl:Template24 },
   { id: 'Rnord', name: 'Rnord',imageUrl:Template23 }, 
-  { id: 'kendall', name: 'Kendall',imageUrl:Template6 },
-  { id: 'classy-vforesee', name: 'Classy Vforesee',imageUrl:Template16 }, 
 ];
 
 const colors = ['#0d6efd', '#dc3545', '#198754', '#6f42c1', '#212529'];

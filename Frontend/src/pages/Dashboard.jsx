@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 import { getAllResumes, deleteResumeById } from '../utils/resumeService';
-import { FaFileAlt } from 'react-icons/fa'; // Import a document icon
+import { FaFileAlt } from 'react-icons/fa'; 
 import './DashboardPage.css';
 
-// A magnificent helper function to calculate relative time
 const getRelativeTime = (resumeId) => {
   const timestamp = parseInt(resumeId.split('_')[1]);
   if (isNaN(timestamp)) return 'Recently';
@@ -35,7 +34,6 @@ function DashboardPage() {
   const [savedResumes, setSavedResumes] = useState([]);
 
   useEffect(() => {
-    // This robust useEffect ensures data is always fresh
     const fetchResumes = () => setSavedResumes(getAllResumes());
     fetchResumes();
     window.addEventListener('focus', fetchResumes);
@@ -70,7 +68,6 @@ function DashboardPage() {
         {savedResumes.length > 0 ? (
           <div className="resume-card-list">
             {savedResumes.map((resume) => (
-              // --- THIS IS THE NEW, MAGNIFICENT CARD STRUCTURE ---
               <div key={resume.id} className="resume-card">
                 <div className="card-thumbnail" onClick={() => handleEdit(resume.id)}>
                   <FaFileAlt className="thumbnail-icon" />

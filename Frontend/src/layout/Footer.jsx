@@ -27,7 +27,6 @@ export function Footer() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-left">
-            {/* Replace with your logo */}
             <img src={logoImagec} alt="CVCRAFT Logo" className="footer-logo" />
             <p>Talentsprint</p>
             <p>Hyderabad</p>
