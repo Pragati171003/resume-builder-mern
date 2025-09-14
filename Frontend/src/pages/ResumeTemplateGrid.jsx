@@ -26,20 +26,17 @@ const defaultResumeData = {
 
 
 const TEMPLATE_COMPONENTS = [
-  
+  { id: "tech", title: "Tech",type: "html", url: "/templates/tech.html" },
   { id: "flat", title: "Flat", type: "html", url: "/templates/flat.html" },
   { id: "elegant", title: "Elegant",type: "html", url: "/templates/elegant.html" },
   { id: "caffeine", title: "Caffeine ",type: "html", url: "/templates/caffeine.html" },
   { id: "spartan", title: "Spartan ",type: "html", url: "/templates/spartan.html" },
   { id: "kendall", title: "Kendall ",type: "html", url: "/templates/kendall.html" },
   { id: "onepage", title: "Onepage ",type: "html", url: "/templates/onepage.html" },
-  { id: "template-html6", title: "Microdata",type: "html", url: "/templates/microdata.html" },
-  { id: "template-html7", title: "Modern ",type: "html", url: "/templates/modern.html" },
   { id: "short", title: "Short",type: "html", url: "/templates/resume_short.html" },
-  { id: "template-html10", title: "Microdata",type: "html", url: "/templates/resume_microdata.html" },
-  { id: "template-html11", title: "Slick",type: "html", url: "/templates/resume_slick.html" },
   { id: "stackoverflow", title: "Stackoverflow",type: "html", url: "/templates/stackoverflow.html" },
   { id: "class", title: "Class",type: "html", url: "/templates/resume_class.html" },
+  { id: "boilerplate", title: "Boilerplate",type: "html", url: "/templates/boilerplate-preview.html" },
   
    
 ];

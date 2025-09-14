@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect,useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { getResumeById } from '../utils/resumeService';
 
@@ -91,6 +91,7 @@ const [fontFamily, setFontFamily] = useState("'Inter', sans-serif");
 const [fontSize, setFontSize] = useState(1);
 const [isToolbarVisible, setIsToolbarVisible] = useState(false);
 const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+const previewRef = useRef(null);
 useEffect(() => {
 if (resumeId === 'new') {
 const queryParams = new URLSearchParams(location.search);
@@ -109,7 +110,7 @@ setFormData(savedData);
 const value = {
 formData, setFormData, resumeId, selectedTemplate, setSelectedTemplate,
 themeColor, setThemeColor, fontFamily, setFontFamily, fontSize, setFontSize,
-isToolbarVisible, setIsToolbarVisible, isPreviewVisible, setIsPreviewVisible,
+isToolbarVisible, setIsToolbarVisible, isPreviewVisible, setIsPreviewVisible,previewRef, 
 };
 return <ResumeContext.Provider value={value}>{children}</ResumeContext.Provider>;
 }

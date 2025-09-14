@@ -10,7 +10,7 @@ function EditorHeader() {
   const { 
     isToolbarVisible, setIsToolbarVisible, 
     isPreviewVisible, setIsPreviewVisible,
-    formData, resumeId 
+    formData, resumeId,previewRef 
   } = useResume();
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ function EditorHeader() {
       <div className="editor-header-left">
         <button className="header-btn styles-toggle" onClick={() => setIsToolbarVisible(!isToolbarVisible)}>
           <FaBars />
-          <span>Styles</span>
+          <span className="btn-text">Templates</span>
         </button>
       </div>
       <div className="editor-header-right">
@@ -46,7 +46,7 @@ function EditorHeader() {
         <button className="header-btn" onClick={handleDownload}>Download PDF</button>
         <button className="header-btn preview-toggle" onClick={() => setIsPreviewVisible(!isPreviewVisible)}>
           {isPreviewVisible ? <FaEyeSlash /> : <FaEye />}
-          <span>{isPreviewVisible ? 'Hide Preview' : 'Live Preview'}</span>
+          <span className="btn-text">{isPreviewVisible ? 'Hide Preview' : 'Live Preview'}</span>
         </button>
       </div>
     </header>
