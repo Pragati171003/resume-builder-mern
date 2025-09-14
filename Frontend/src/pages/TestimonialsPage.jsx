@@ -3,9 +3,9 @@ import './TestimonialsPage.css';
 import { FaStar, FaQuoteLeft,FaUserCircle  } from 'react-icons/fa';
 
 const initialTestimonials = [
-  { name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This AI-powered resume builder made the job application process so much easier! The suggestions were spot-on...', rating: 5, avatar: 'https://i.imgur.com/nJ2Wb4A.png' },
+  { name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This resume builder made the job application process so much easier!', rating: 5, avatar: 'https://i.imgur.com/nJ2Wb4A.png' },
   { name: 'Michael B.', title: 'Software Engineer', quote: 'As a developer, I appreciate clean design and efficiency. This tool delivered both. The ATS-friendly templates gave me peace of mind...', rating: 5, avatar: 'https://i.imgur.com/Q2eY72s.png' },
-  { name: 'Jessica T.', title: 'Recent Graduate', quote: 'I was overwhelmed with creating my first professional resume. This builder guided me through every step. It’s intuitive, fast, and the final result gave me confidence...', rating: 4, avatar: 'https://i.imgur.com/k2OV5cf.png' },
+  { name: 'Jessica T.', title: 'Recent Graduate', quote: 'I was overwhelmed with creating my first professional resume. This builder helped me through every step. It’s intuitive, fast, and the final result gave me confidence...', rating: 4, avatar: 'https://i.imgur.com/k2OV5cf.png' },
 ];
 
 function TestimonialsPage() {

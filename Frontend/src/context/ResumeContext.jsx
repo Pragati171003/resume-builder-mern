@@ -85,12 +85,12 @@ export default function ResumeProvider({ children }) {
 const { resumeId } = useParams();
 const location = useLocation();
 const [formData, setFormData] = useState(initialData);
-const [selectedTemplate, setSelectedTemplate] = useState('onepage-plus');
+const [selectedTemplate, setSelectedTemplate] = useState('tech');
 const [themeColor, setThemeColor] = useState('#0d6efd');
 const [fontFamily, setFontFamily] = useState("'Inter', sans-serif");
 const [fontSize, setFontSize] = useState(1);
 const [isToolbarVisible, setIsToolbarVisible] = useState(false);
-const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 const previewRef = useRef(null);
 useEffect(() => {
 if (resumeId === 'new') {
