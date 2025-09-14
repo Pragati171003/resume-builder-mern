@@ -1,7 +1,7 @@
 .toolbar-container {
   display: flex;
   flex-direction: column;
-  gap: 30px; /* Increased gap between sections (Template, Color, etc.) */
+  gap: 30px; 
   width: 100%;
 }
 
@@ -13,46 +13,39 @@
   color: #495057;
   margin: 0 0 12px 0;
 }
-
-/* --- THE MAGNIFICENT NEW TEMPLATE GRID STYLES --- */
 .template-grid-visual {
   display: grid;
-  grid-template-columns: 1fr; /* Two magnificent, equal columns */
-  
-  /* THIS IS THE FIX for the spacing */
-  gap: 100px; /* Increased gap for more breathing room */
+  grid-template-columns: 1fr; 
+  gap: 100px; 
 }
 
 .template-card {
-  border: 2px solid #0a58ca; /* The magnificent dark blue border */
-  border-radius: 12px; /* Softer, more professional corners */
+  border: 2px solid #0a58ca;
+  border-radius: 12px; 
   padding: 10px;
-  background-color: #ffffff; /* Default is a clean white */
+  background-color: #ffffff; 
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* The magnificent "lift" on hover */
 .template-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border-color: #0d6efd; /* A slightly brighter blue on hover */
+  border-color: #0d6efd;
 }
 
-/* --- THIS IS THE FIX for the active state --- */
-/* The magnificent "active" state is now a beautiful light blue fill */
 .template-card.active {
-  background-color: #e7f5ff; /* Magnificent light blue fill */
-  border-color: #0d6efd; /* The active border is the bright blue */
-  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2); /* A magnificent blue glow */
+  background-color: #e7f5ff; 
+  border-color: #0d6efd; 
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2); 
 }
 
 .template-image-preview {
   width: 100%;
   height: auto;
   aspect-ratio: 210 / 297;
-  border-radius: 6px; /* Match the inner corners */
+  border-radius: 6px; 
   border: 1px solid #dee2e6;
 }
 

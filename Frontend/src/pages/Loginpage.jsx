@@ -78,7 +78,6 @@ export function Loginpage() {
           <button type="submit">Login</button>
         </form>
 
-        {/* Combining the links from both files */}
         <div className="bottom-links">
             <Link to="/forgot-password">Reset Password/Forgot Password?</Link>
             <p>

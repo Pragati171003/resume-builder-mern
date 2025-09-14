@@ -56,38 +56,34 @@
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
 }
 @media (max-width: 1024px) {
-  /* On mobile, the Styles panel becomes a magnificent slide-over menu */
   .toolbar-panel {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 300px; /* It has a fixed width when open */
+    width: 300px; 
     z-index: 100;
-    margin-left: 0; /* Reset the desktop margin */
+    margin-left: 0; 
     transform: translateX(-100%);
     transition: transform 0.4s ease;
   }
   .toolbar-panel.visible {
-    transform: translateX(0); /* Slide into view */
+    transform: translateX(0); 
   }
   .toolbar-panel.hidden {
-    transform: translateX(-100%); /* Ensure it slides out */
+    transform: translateX(-100%); 
   }
   
-  /* The Form panel now takes up the full width */
   .form-panel {
     width: 100%;
   }
-
-  /* The Preview panel becomes a magnificent full-screen modal */
   .preview-panel {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 200; /* On top of everything */
+    z-index: 200; 
     width: 100%;
     min-width: 100%;
     padding: 20px;
@@ -96,6 +92,6 @@
   }
   .preview-panel.hidden {
     opacity: 0;
-    pointer-events: none; /* Can't be interacted with when hidden */
+    pointer-events: none; 
   }
 }

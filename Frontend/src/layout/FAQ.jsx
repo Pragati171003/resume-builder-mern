@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "What file formats can I download my resume in?",
     answer:
-      "You can download your resume in PDF, DOCX, and TXT formats depending on your preference.",
+      "You can download your resume in PDF format only.",
   },
 ];
 

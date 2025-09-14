@@ -18,7 +18,7 @@ function ResumePreview() {
     const renderResume = async () => {
       setIsLoading(true); 
       try {
-        const mappedData = mapFormDataToSchema(formData);
+        const mappedData = mapFormDataToSchema(formData, selectedTemplate);
         const response = await axios.post('http://localhost:4000/render', {
           resume: mappedData,
           theme: selectedTemplate,

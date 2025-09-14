@@ -8,17 +8,25 @@ import './AnimatedHero.css';
 import { FaRobot, FaFileAlt, FaPalette, FaDownload } from 'react-icons/fa';
 import './Marquee.css';
 import Template1 from '../assets/resume_pages-to-jpg-0001.jpg'
+import Template20 from '../template-previews/tech_page-0001.jpg'
+import Template4 from '../template-previews/onepage_pages-to-jpg-0001.jpg'
+import Template2 from '../template-previews/img21.jpg'
+import Template7 from '../template-previews/stackoverflow_page-0001.jpg'
+import Template16 from '../template-previews/Untitled Resume (37)_page-0001.jpg'
+import Template11 from '../template-previews/visual-js-jest-image-snapshot-usage-with-an-image-received-from-puppeteer-works-1-snap.png'
+import Template12 from '../template-previews/paper.jpg'
+import Template21 from '../template-previews/boilerplate-preview_page-0001.jpg'
 
 const placeholderResumes = [
   Template1,
-  Template1,
-  Template1,
-  Template1,
-  Template1,
-  Template1,
-  Template1,
-  Template1,
-  'https://ih1.redbubble.net/image.5287552061.6571/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg',
+  Template20,
+  Template4,
+  Template2,
+  Template7,
+  Template16,
+  Template11,
+  Template12,
+  Template21,
 ];
 
 
@@ -63,8 +71,6 @@ function Body() {
         </div>
 
         <div className="features-grid">
-
-          {/* Feature Card 2 */}
           <div className="feature-card">
             <div className="feature-icon-wrapper">
               <FaFileAlt className="feature-icon" />
@@ -82,7 +88,7 @@ function Body() {
             </div>
             <h3 className="feature-title">Effortless Customization</h3>
             <p className="feature-description">
-              Easily change colors, fonts, and layouts to create a resume that perfectly matches your personal brand.
+              Easily change layouts to create a resume that perfectly matches your personal brand.
             </p>
           </div>
           
@@ -126,7 +132,7 @@ function Body() {
             <div className="step-text">
               <span className="step-number">3</span>
               <h3>Download or Share Instantly</h3>
-              <p>Once you're satisfied with your resume, download it in your preferred format or share it directly with potential employers—all in just a few clicks!</p>
+              <p>Once you're satisfied with your resume, download it in your pdf format and share it directly with potential employers—all in just a few clicks!</p>
             </div>
           </div>
         </div>
