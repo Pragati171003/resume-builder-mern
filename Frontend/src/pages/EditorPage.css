@@ -12,8 +12,8 @@
   display: flex;
   flex-grow: 1;
   overflow: hidden;
+  position:relative;
 }
-
 .toolbar-panel {
   width: 0;
   padding: 0;
@@ -54,4 +54,48 @@
   width: 210mm;
   min-height: 297mm;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 1024px) {
+  /* On mobile, the Styles panel becomes a magnificent slide-over menu */
+  .toolbar-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px; /* It has a fixed width when open */
+    z-index: 100;
+    margin-left: 0; /* Reset the desktop margin */
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  .toolbar-panel.visible {
+    transform: translateX(0); /* Slide into view */
+  }
+  .toolbar-panel.hidden {
+    transform: translateX(-100%); /* Ensure it slides out */
+  }
+  
+  /* The Form panel now takes up the full width */
+  .form-panel {
+    width: 100%;
+  }
+
+  /* The Preview panel becomes a magnificent full-screen modal */
+  .preview-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200; /* On top of everything */
+    width: 100%;
+    min-width: 100%;
+    padding: 20px;
+    background-color: rgba(229, 231, 235, 0.98);
+    backdrop-filter: blur(5px);
+  }
+  .preview-panel.hidden {
+    opacity: 0;
+    pointer-events: none; /* Can't be interacted with when hidden */
+  }
 }

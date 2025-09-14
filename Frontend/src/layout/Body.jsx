@@ -46,7 +46,7 @@ function Body() {
         <div className="hero-content-wrapper">
           <img src={fullLogo} alt="CVCRAFT Icon" className="hero-icon" />
           <h1>Build a Job-Winning <br /> Resume in Minutes</h1>
-          <p className="hero-subtitle">Our website helps you craft professional, ATS-friendly resumes effortlessly.</p>
+          <p className="hero-subtitle">Our website helps you craft professional resumes effortlessly.</p>
           <Link to="/signup" className="hero-button">
             Get Started For Free
           </Link>

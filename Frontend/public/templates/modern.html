@@ -1,129 +1,478 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> </title>
-    <link href="http://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet" />
-   <style>
-    </style>
+<style>
+  body, html {
+  padding-top:2.5em;
+  margin:0;
+  background-color:#fafafa;
+}
 
+/* Header */
+
+header {
+  width:100%;
+  vertical-align: middle;
+  text-align: center;
+ 
+}
+
+.header-content {
+  display: inline-block;
+}
+
+.pic {
+  margin: 0 auto;
+  margin-top:-2.5em;
   
-  </head>
-  <body>
-    <div class="container">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-        <h1><h1>
+  border-radius:10em;
+  height:4em;
+  width:4em;
+  background-image: url(https://pbs.twimg.com/profile_images/529377948952834048/q9fhJEKd.jpeg);
+  background-size: 100% auto;
+  
+  border: 2px solid #e0e0e0;
+  transition : all 0.5s linear;
+  
+}
 
-        <h2>San Francisco</h2>
-        </div>
-        <div class="col-md-6 col-sm-12">
-        <img class="media-object img-circle pull-right" data-src="holder.js/64x64" alt="64x64" src="&#x2F;&#x2F;www.gravatar.com&#x2F;avatar&#x2F;aa03c0126701d74d188992fcc0f67e8c?s=100&amp;r=pg&amp;d=mm" style="width: 100px; height: 100px; margin-top: 20px;">
+@-webkit-keyframes wiggle {
+  0%   {
+    transform: rotate(0deg);
+  }
+  25%  {
+    transform: rotate(-30deg);
+  }
+  50%  {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 
+.pic:hover {
+  /*Webkit fix*/
+  -webkit-transform: translateZ(0);
+  
+  cursor:pointer;
+  
+  -webkit-animation: wiggle 0.7s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.header-text {
+  margin-top:0.5em;
+  margin-left:1em;
+}
+
+header p {
+  text-align:center;
+  font-family: "Merriweather";
+  
+  margin:0;
+  
+  color: #212121;
+}
+
+.first-name {
+   font-size: 1.05em;
+}
+
+.subtitle {
+  font-family: "Merriweather";
+  padding-top:.3em;
+  font-size:0.55em;
+  font-weight:500;
+  color: #424242;
+}
+
+/* Information */
+
+.paper {
+  margin: 0 auto;
+  margin-bottom:1em;
+  
+  background-color:white;
+  width:60%;
+  
+  padding:0.5em 0 0.5em 0;
+  
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 3px solid #e0e0e0;
+  border-radius:3px;
+}
+
+/* Content Part */
+
+.content-wrapper {
+  padding-right:7.25%;
+}
+
+.content {
+  display:table;
+  width:100%;
+  
+  padding-top:1.5em;
+  
+  /*border-top: 1px solid #eeeeee;*/
+}
+
+.content:last-child {
+  padding-bottom:1.5em;
+}
+
+.row {
+    display:table-row;
+}
+.row div {
+    display:table-cell;
+}
+
+.content-cat {
+  font-family: "Merriweather";
+  font-variant:small-caps;
+  font-weight:300;
+  letter-spacing: 1px;
+  
+  color: #212121;
+  
+  font-size:0.975em;
+  
+  text-align:center;
+  vertical-align:middle;
+
+  padding-left:6.66%;
+  width:36.66%;
+}
+
+.content-cat p {
+  font-size:0.55em;
+  font-weight:600;
+  
+  margin-bottom:0;
+}
+
+.content-text {
+  border-left:1px solid #e0e0e0;
+  transition: border 0.66s ease-in;
+}
+
+.content-text:hover {
+  border-left:1px solid #bdbdbd;
+}
+
+.big-text {
+  vertical-align:top;
+  
+  padding-top:1.25em;
+}
+
+.content-text ul {
+  padding:0;
+  margin:0;
+  margin-top:0.15em;
+  
+  width:85%;
+  margin-left:1.5em;
+}
+
+.content-text ul:last-child {
+  margin-bottom:0.5em;
+}
+
+.content-text ul li {
+  font-family: "Open Sans";
+  font-size:0.7em;
+  
+  display:inline-block;
+  
+}
+
+.content-text ul li:first-child {
+  width:35%;
+  
+  color: #424242;
+  
+  font-weight:600;
+  font-size:0.75;
+}
+
+.content-text ul li a {
+  text-decoration: none;
+  color: #0277bd;
+}
+
+.content-text ul li a:hover {
+  color:#4fc3f7;
+}
+
+.work-listing p {
+  font-family: "Open Sans";
+  font-size:0.7em;
+  font-weight:400;
+  
+  line-height:1.5;
+  
+  color: #424242;
+  
+  margin-left:2em;
+  margin-top:0.25em;
+  margin-bottom:0.75em;
+}
+
+.work-listing .highlight, .content-text.skills-listing > ul > li > .highlight {
+  font-family: "Open Sans";
+  font-size:0.7em;
+  font-weight:400;
+  
+  color: #424242;
+  
+  margin-left:3.25em;
+  padding-left:0.5em;
+  
+  border-left:1px solid #e0e0e0;
+  
+}
+
+.education-listing > .heading {
+  font-weight:600;
+  
+  margin-top:0.75em;
+  margin-left:2em;
+}
+
+.education-listing > .highlight {
+  margin-left:3.25em;
+}
+
+.content-text.skills-listing > ul {
+  display:table-row;
+}
+
+.content-text.skills-listing > ul:last-child {
+  margin-bottom:0;
+}
+
+.content-text.skills-listing > ul > li {
+  display:table-cell;
+  vertical-align:top;
+  
+  padding-left:2em;
+  
+  width:50%;
+  font-weight:600;
+}
+
+.content-text.skills-listing > ul > li span {
+  font-weight:400;
+  color: #616161;
+}
+
+.content-text.skills-listing > ul > li > .highlight {
+  
+  font-size:1em;
+  font-weight:400;
+  
+  margin-left:1.25em;
+}
+
+.highlight {
+  transition: border .33s ease-in;
+}
+
+.highlight:hover, .content-text.skills-listing > ul > li > .highlight:hover {
+  border-left:1px solid #9e9e9e;
+}
+</style>
+<div class="resume-wrapper">
+  <article class="paper">
+    <header>
+      <div class="header-content">
+        <div class="header-pic" title="Wiggle Wiggle">
+          <div class="pic"></div>
         </div>
+        <div class="header-text">
+          <p>
+            <span class="first-name">Tim</span>
+            Daubenschütz
+          </p>
+          <p class="subtitle">Bachelor of Science (almost)</p>
         </div>
-      <hr style="color: #ccc; height: 4px;" />
-      <section class="row">
-        <header class="col-md-3">
-          <h3>About</h3>
-        </header>
-        <div class="col-md-9">
-        <p>Richard hails from Tulsa. He has earned degrees from the University of Oklahoma and Stanford. (Go Sooners and Cardinal!) Before starting Pied Piper, he worked for Hooli as a part time software developer. While his work focuses on applied information theory, mostly optimizing lossless compression schema of both the length-limited and adaptive variants, his non-work interests range widely, everything from quantum computing to chaos theory. He could tell you about it, but THAT would NOT be a “length-limited” conversation!</p>
-        <strong>Phone:</strong> (912) 555-4321 <br />
-        <strong>Email:</strong> rolex@gmail.com<br />
-        </div>
-      </section>
-      <section class="row">
-        <header class="col-md-3">
-          <h3>Work Experience</h3>
-        </header>
-        <div class="col-md-9">
-          <div class="skills">
-            <h3></h3>
-            <strong>CEO&#x2F;President</strong>
-            <p>2013 - 2014</p>
-            <p>Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has consistently fielded high Weisman Scores™ that are not merely competitive, but approach the theoretical limit of lossless compression.</p>
+      </div>
+    </header>
+    
+    <div class="content-wrapper">
+    
+      <!-- CONTACT -->
+      <section class="content">
+        <div class="row">
+          <div class="content-cat">
+           Contact
+          </div>
+          <div class="content-text">
             <ul>
-              <li>Build an algorithm for artist to detect if their music was violating copy right infringement laws</li>
-              <li>Successfully won Techcrunch Disrupt</li>
-              <li>Optimized an algorithm that holds the current world record for Weisman Scores</li>
+              <li>Website</li>
+              <li>daubenschuetz.de</li>
             </ul>
-            <hr />
+            <ul>
+              <li>Email</li>
+              <li>tim.daubenschuetz@gmail.com</li>
+            </ul>
+            <ul>
+              <li>Phone</li>
+              <li>+49 123 456 78</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <section class="row">
-        <header class="col-md-3">
-          <h3>Education</h3>
-        </header>
-        <div class="col-md-9">
-          <div class="skills">
-            <h3>University of Oklahoma</h3>
-            <h4>Information Technology, Bachelor</h4>
-            <p>2011 - 2014</p>
-            <p></p>
+      <!-- LOCATION -->
+      <section class="content">
+        <div class="row">
+          <div class="content-cat">
+           Location
+          </div>
+          <div class="content-text">
             <ul>
+              <li>Address</li>
+              <li>Some street</li>
             </ul>
-            <hr />
+            <ul>
+              <li>Postal Code</li>
+              <li>12345</li>
+            </ul>
+            <ul>
+              <li>City</li>
+              <li>Ulm</li>
+            </ul>
+            <ul>
+              <li>Region</li>
+              <li>Baden-Württemberg</li>
+            </ul>
           </div>
         </div>
       </section>
-      <section class="row">
-        <header class="col-md-3">
-          <h3>Skills</h3>
-        </header>
-        <div class="col-md-9">
-          <div class="row-fluid skills">
-            <ul class="col-md-6">
 
+      <!-- PROFILES -->
+      <section class="content">
+        <div class="row">
+          <div class="content-cat">
+           Profiles
+          </div>
+          <div class="content-text">
+            <ul>
+              <li>Twitter</li>
               <li>
-                <h4>Web Development</h4>
-                <ul>
-                  <li>HTML</li>
-                  <li>CSS</li>
-                  <li>Javascript</li>
-                </ul>
+                <a href="https://twitter.com/TimDaub" target="_blank">@TimDaub</a>
               </li>
             </ul>
-            <ul class="col-md-6">
-
+            <ul>
+              <li>Codepen</li>
               <li>
-                <h4>Compression</h4>
-                <ul>
-                  <li>Mpeg</li>
-                  <li>MP4</li>
-                  <li>GIF</li>
-                </ul>
+                <a href="https://codepen.io/TimDaub/" target="_blank">@TimDaub</a>
+              </li>
+            </ul>
+            <ul>
+              <li>Github</li>
+              <li>
+                <a href="https://github.com/TimDaub" target="_blank">@TimDaub</a>
               </li>
             </ul>
           </div>
         </div>
       </section>
-      <section class="row">
-        <header class="col-md-3">
-          <h3>References</h3>
-        </header>
-        <div class="col-md-9">
-          <div class="row-fluid skills">
 
-            <p>It is my pleasure to recommend Richard, his performance working as a consultant for Main St. Company proved that he will be a valuable addition to any company. -
-              <strong>Erlich Bachman</strong>
-            </p>
+      <section class="content">
+        <div class="row">
+          <div class="content-cat big-text">
+           Self-employed
+            <p>2012-05-01 till today</p>
+          </div>
+          <div class="content-text work-listing">
+            <p>Hondrt.de is a small business enterprise (dt. Kleingewerbe) specializing in serving technical needs of local customers. For example building corporate homepages, technical consulting and programming.</p>
+            <p class="highlight">Implemented and marketed Timedoublr.com, a flexible time tracking app for Apple iOS</p>
+             <p class="highlight">Consulted a medium-sized business in establishing their media presence</p>
+          </div>
+        </div>
+      </section>
+      <section class="content">
+        <div class="row">
+          <div class="content-cat big-text">
+           Ulm University
+            <p>2013-09-01 till today</p>
+          </div>
+          <div class="content-text work-listing">
+            <p>Development of Module Management System (MMS), a content management system for studycourse module handbooks introduced as part of the Bologna Process. Feature requirements included: versioning of every resource, a complex editorial process, visual representation of high level data structures (e.g. trees) and a flexible, RESTful API.</p>
+            <p class="highlight">Won the Software Construction (dt. Softwaregrundprojekt) class challenge for best usability and got employed by university</p>
           </div>
         </div>
       </section>
 
+      <section class="content">
+        <div class="row">
+          <div class="content-cat">
+            Education
+            <p>2011-10-01 till</p>
+            <p style="margin-top:0.25em;">2015-02-14</p>
+          </div>
+          <div class="content-text work-listing education-listing">
+            <p class="heading">Ulm University</p>
+            <p class="highlight">Media Informatics (Bachelor of Science)</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="row">
+          <div class="content-cat big-text">
+            Awards
+            <p>Best Usability</p>
+            <p style="margin-top:0.25em;">2013-07-13</p>
+          </div>
+          <div class="content-text work-listing education-listing">
+            <p class="heading">Faculty of Engineering and Computer Science at Ulm University:</p>
+            <p class="highlight">For developing Module Management System (MMS) a content management system for module handbooks introduced as part of the Bologna Process.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="row">
+          <div class="content-cat big-text">
+            Skills
+          </div>
+          <div class="content-text skills-listing">
+            <ul>
+              <li>
+                Web
+                <span>(Master)</span>
+                <p class="highlight">Node.js</p>
+                <p class="highlight">Angular.js</p>
+              </li>
+              <li>
+                Mobile
+                <span>(Advanced)</span>
+                <p class="highlight">Cocoa</p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                Languages 
+                <span>(Master)</span>
+                <p class="highlight">Javascript</p>
+              </li>
+              <li>
+                Software
+                <span>(Advanced)</span>
+                <p class="highlight">Adobe Photoshop</p>
+                <p class="highlight">Adobe InDesign</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    
     </div>
-  </div>
+      
+  </article>
+  
 </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-  </body>
-</html>
