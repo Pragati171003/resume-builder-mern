@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import "./ResumeForm.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { saveResume } from '../utils/resumeService'
+import {useEffect} from 'react'
+import { useResume } from '../context/ResumeContext';
+
+
 const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 
 function ResumeForm({onSubmit}) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const { formData, setFormData, resumeId } = useResume();
+  {/*const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
@@ -254,13 +261,36 @@ const handleSubmit = async (e) => {
 };
   const handleSave = (e) => {
     e.preventDefault();
-      const newId = saveResume(resumeId, formData);
-      alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
-      if (resumeId === 'new') {
-        navigate(`/editor/${newId}`, { replace: true });
-      }
-    // }
+    const newId = saveResume(resumeId, formData);
+    alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
+    if (resumeId === 'new') {
+      navigate(`/editor/${newId}`, { replace: true });
+    }
   };
+  // ---------------- CUSTOM SECTIONS ----------------
+const handleCustomSectionChange = (index, field, value) => {
+  setFormData((prev) => {
+    const customSections = [...(prev.customSections || [])];
+    customSections[index] = { ...(customSections[index] || {}), [field]: value };
+    return { ...prev, customSections };
+  });
+};
+
+const addCustomSection = () => {
+  setFormData((prev) => ({
+    ...prev,
+    customSections: [...(prev.customSections || []), { title: "", content: "" }],
+  }));
+};
+
+const removeCustomSection = (index) => {
+  setFormData((prev) => ({
+    ...prev,
+    customSections: (prev.customSections || []).filter((_, i) => i !== index),
+  }));
+};
+
+
 
   return (
     <div>
@@ -448,29 +478,31 @@ const handleSubmit = async (e) => {
           <h3 className="h3-heading">
             Skills <span style={{ color: "red" }}>*</span>
           </h3>
-          <br />
-          <div>
-            <input
-              type="text"
-              name="skillInput"
-              value={formData.skillInput}
-              onChange={handleChange}
-              placeholder="Enter a skill"
-            />
-            <button type="button" onClick={addSkill}>
-              Add
-            </button>
-          </div>
-          <div>
-            {formData.skills.map((skill, idx) => (
-              <span key={idx} style={{ marginRight: "10px" }}>
-                {skill}{" "}
-                <button type="button" onClick={() => removeSkill(skill)}>
-                  x
-                </button>
-              </span>
-            ))}
-          </div>
+          <input
+            type="text"
+            name="skillInput"
+            value={formData.skillInput}
+            onChange={handleChange}
+            placeholder="Enter a skill"
+          />
+          <button type="button-add" onClick={addSkill}>
+            Add
+          </button>
+          <div className="skills-list">
+  {formData.skills.map((skill, idx) => (
+    <div className="skill-box" key={idx}>
+      {skill}
+      <button
+        type="button"
+        className="remove-btn"
+        onClick={() => removeSkill(skill)}
+      >
+        ✖
+      </button>
+    </div>
+  ))}
+</div>
+
           <div style={{ color: "red" }}>{errors.skills}</div>
         </div>
 <div>
@@ -514,9 +546,9 @@ const handleSubmit = async (e) => {
   </button>
 </div>
 
-        {/* --- PROJECTS (with magnificent crash-proof safeguard) --- */}
 <div>
   <h3 className="h3-heading">Projects (Optional)</h3>
+
   {(formData.projects || []).map((proj, idx) => (
     <div key={idx} style={{ marginBottom: "10px" }}>
       <label>Project Title</label>
@@ -553,7 +585,7 @@ const handleSubmit = async (e) => {
           />
           <div style={{ color: "red" }}>{errors.achievements}</div>
         </div>
-        <br />
+           
 
         <div>
           <h3 className="h3-heading">
@@ -568,7 +600,42 @@ const handleSubmit = async (e) => {
           />
           <div style={{ color: "red" }}>{errors.certifications}</div>
         </div>
-        <br />
+        {/* ---------------- ADDITIONAL / CUSTOM SECTIONS ---------------- */}
+<div>
+  <h3 className="h3-heading">Additional Sections (Optional)</h3>
+  {(formData.customSections || []).map((section, idx) => (
+    <div key={idx} style={{ marginBottom: "15px" }}>
+      <label>Section Title</label>
+      <input
+        type="text"
+        value={section.title}
+        onChange={(e) =>
+          handleCustomSectionChange(idx, "title", e.target.value)
+        }
+        placeholder="e.g., Volunteer Work, Publications"
+      />
+
+      <label>Content</label>
+      <textarea
+        value={section.content}
+        onChange={(e) =>
+          handleCustomSectionChange(idx, "content", e.target.value)
+        }
+        placeholder="Enter details here..."
+      />
+
+      <button type="button" onClick={() => removeCustomSection(idx)}>
+        Remove Section
+      </button>
+    </div>
+  ))}
+
+  <button type="button" onClick={addCustomSection}>
+    + Add Section
+  </button>
+</div>
+
+           
 
         <button type="submit">Submit Resume</button>
       </form>

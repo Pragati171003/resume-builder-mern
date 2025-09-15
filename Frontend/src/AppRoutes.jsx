@@ -10,7 +10,6 @@ import AllFAQsPage from './pages/AllFAQsPage';
 import { Loginpage } from './pages/Loginpage';
 import SignUpPage from './pages/SignUpPage';
 import ResumeForm from './pages/ResumeForm';
-import TemplatesPage from './pages/TemplatesPage';
 import DashboardPage from './pages/Dashboard';
 import PrivateRoute from './layout/PrivateRoute';
 import EditorPage from './pages/EditorPage';
