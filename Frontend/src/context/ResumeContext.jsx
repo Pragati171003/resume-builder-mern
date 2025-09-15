@@ -80,18 +80,34 @@ const initialData = {
   
   achievements: "Published author on the 'Cloud-Native Weekly' tech blog; Speaker at the National Developer Conference 2023.",
   certifications: "AWS Certified Solutions Architect – Associate; Certified Kubernetes Application Developer (CKAD)",
+  customSections: [
+    {
+      title: "References",
+      content: "Dr. Evelyn Reed, Professor of Computer Science at Stanford University - ereed@stanford.edu"
+    }
+  ],
+  
 };
 export default function ResumeProvider({ children }) {
 const { resumeId } = useParams();
 const location = useLocation();
 const [formData, setFormData] = useState(initialData);
 const [selectedTemplate, setSelectedTemplate] = useState('tech');
-const [themeColor, setThemeColor] = useState('#0d6efd');
-const [fontFamily, setFontFamily] = useState("'Inter', sans-serif");
-const [fontSize, setFontSize] = useState(1);
+const [themeColor, setThemeColor] = useState(null);
+const [fontFamily, setFontFamily] = useState(null);
+const [fontSize, setFontSize] = useState(null);
 const [isToolbarVisible, setIsToolbarVisible] = useState(false);
 const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+const [activeToolbarTab, setActiveToolbarTab] = useState('templates');
 const previewRef = useRef(null);
+const resetStyles = () => {
+setThemeColor(null);
+setFontFamily(null);
+setFontSize(null);
+};
+useEffect(() => {
+resetStyles();
+}, [selectedTemplate]);
 useEffect(() => {
 if (resumeId === 'new') {
 const queryParams = new URLSearchParams(location.search);
@@ -110,7 +126,8 @@ setFormData(savedData);
 const value = {
 formData, setFormData, resumeId, selectedTemplate, setSelectedTemplate,
 themeColor, setThemeColor, fontFamily, setFontFamily, fontSize, setFontSize,
-isToolbarVisible, setIsToolbarVisible, isPreviewVisible, setIsPreviewVisible,previewRef, 
+isToolbarVisible, setIsToolbarVisible, isPreviewVisible, setIsPreviewVisible,previewRef,
+activeToolbarTab, setActiveToolbarTab,resetStyles,
 };
 return <ResumeContext.Provider value={value}>{children}</ResumeContext.Provider>;
 }
