@@ -25,6 +25,7 @@ experience: [],
 projects: [], 
 achievements: "",
 certifications: "",
+customSections: [],
 };
 export default function ResumeProvider({ children }) {
 const { resumeId } = useParams();

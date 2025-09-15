@@ -269,6 +269,30 @@ const handleSubmit = async (e) => {
       }
     // }
   };
+  // ---------------- CUSTOM SECTIONS ----------------
+const handleCustomSectionChange = (index, field, value) => {
+  setFormData((prev) => {
+    const customSections = [...(prev.customSections || [])];
+    customSections[index] = { ...(customSections[index] || {}), [field]: value };
+    return { ...prev, customSections };
+  });
+};
+
+const addCustomSection = () => {
+  setFormData((prev) => ({
+    ...prev,
+    customSections: [...(prev.customSections || []), { title: "", content: "" }],
+  }));
+};
+
+const removeCustomSection = (index) => {
+  setFormData((prev) => ({
+    ...prev,
+    customSections: (prev.customSections || []).filter((_, i) => i !== index),
+  }));
+};
+
+
 
   return (
     <div>
@@ -456,19 +480,24 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
             placeholder="Enter a skill"
           />
-          <button type="button" onClick={addSkill}>
+          <button type="button-add" onClick={addSkill}>
             Add
           </button>
-          <div>
-            {formData.skills.map((skill, idx) => (
-              <span key={idx} style={{ marginRight: "10px" }}>
-                {skill}{" "}
-                <button type="button" onClick={() => removeSkill(skill)}>
-                  x
-                </button>
-              </span>
-            ))}
-          </div>
+          <div className="skills-list">
+  {formData.skills.map((skill, idx) => (
+    <div className="skill-box" key={idx}>
+      {skill}
+      <button
+        type="button"
+        className="remove-btn"
+        onClick={() => removeSkill(skill)}
+      >
+        ✖
+      </button>
+    </div>
+  ))}
+</div>
+
           <div style={{ color: "red" }}>{errors.skills}</div>
         </div>
 <div>
@@ -550,6 +579,7 @@ const handleSubmit = async (e) => {
           />
           <div style={{ color: "red" }}>{errors.achievements}</div>
         </div>
+           
 
         {/* ---------------- CERTIFICATIONS ---------------- */}
         <div>
@@ -563,6 +593,42 @@ const handleSubmit = async (e) => {
           />
           <div style={{ color: "red" }}>{errors.certifications}</div>
         </div>
+        {/* ---------------- ADDITIONAL / CUSTOM SECTIONS ---------------- */}
+<div>
+  <h3 className="h3-heading">Additional Sections (Optional)</h3>
+  {(formData.customSections || []).map((section, idx) => (
+    <div key={idx} style={{ marginBottom: "15px" }}>
+      <label>Section Title</label>
+      <input
+        type="text"
+        value={section.title}
+        onChange={(e) =>
+          handleCustomSectionChange(idx, "title", e.target.value)
+        }
+        placeholder="e.g., Volunteer Work, Publications"
+      />
+
+      <label>Content</label>
+      <textarea
+        value={section.content}
+        onChange={(e) =>
+          handleCustomSectionChange(idx, "content", e.target.value)
+        }
+        placeholder="Enter details here..."
+      />
+
+      <button type="button" onClick={() => removeCustomSection(idx)}>
+        Remove Section
+      </button>
+    </div>
+  ))}
+
+  <button type="button" onClick={addCustomSection}>
+    + Add Section
+  </button>
+</div>
+
+           
 
         <button type="submit" className="submit-resume-btn">Submit Resume</button>
         
