@@ -6,6 +6,7 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [resetUrl, setResetUrl] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +42,11 @@ export default function ForgotPassword() {
 
         {error && <p className="error">{error}</p>}
         {message && <p className="success">{message}</p>}
+        {resetUrl && (
+          <p>
+            🔗 Reset Link (Dev Mode): <a href={resetUrl} target="_blank">{resetUrl}</a>
+          </p>
+        )}
 
         <button type="submit" className="btn-register">Send Reset Link</button>
       </form>
