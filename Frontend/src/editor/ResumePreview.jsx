@@ -5,7 +5,7 @@ import  { mapFormDataToSchema }  from '../utils/dataMapper';
 import LoadingSpinner from '../utils/LoadingSpinner';
 
 function ResumePreview() {
-  const { formData, selectedTemplate } = useResume();
+  const { formData, selectedTemplate, themeColor, fontFamily, fontSize,previewRef  } = useResume();
   const [renderedHtml, setRenderedHtml] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +18,7 @@ function ResumePreview() {
     const renderResume = async () => {
       setIsLoading(true); 
       try {
-        const mappedData = mapFormDataToSchema(formData, selectedTemplate);
+        const mappedData = mapFormDataToSchema(formData, selectedTemplate,  {themeColor, fontFamily, fontSize} );
         const response = await axios.post('http://localhost:4000/render', {
           resume: mappedData,
           theme: selectedTemplate,
@@ -34,13 +34,14 @@ function ResumePreview() {
     const timer = setTimeout(() => { renderResume(); }, 500);
     return () => clearTimeout(timer);
 
-  }, [formData, selectedTemplate]);
+  }, [formData, selectedTemplate,themeColor, fontFamily, fontSize]);
   if (isLoading) {
     return <LoadingSpinner />;
   }
   return (
     <iframe 
       id="resume-preview-iframe"
+      ref={previewRef}
       srcDoc={renderedHtml}
       title="Resume Preview"
       sandbox="allow-same-origin allow-scripts"

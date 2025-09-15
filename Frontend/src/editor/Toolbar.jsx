@@ -66,41 +66,90 @@ const templates = [
   { id: 'Rnord', name: 'Rnord',imageUrl:Template23 }, 
 ];
 
-const colors = ['#0d6efd', '#dc3545', '#198754', '#6f42c1', '#212529'];
-const fonts = ["'Inter', sans-serif", "'Georgia', serif", "'Garamond', serif"];
-const fontSizes = [
-  { name: 'S', value: 1 },
-  { name: 'M', value: 1.15 },
-  { name: 'L', value: 1.3 },
+const colors = [
+  '#2563eb', 
+  '#111827', 
+  '#4f46e5', 
+  '#059669', 
+  '#db2777', 
+  '#84cc16', 
+];
+const fonts = [
+  "'Inter', sans-serif", 
+  "'Roboto', sans-serif",
+  "'Lato', sans-serif",
+  "'Montserrat', sans-serif",
+  "'Georgia', serif", 
+  "'Garamond', serif",
+  "'Calibri', sans-serif",
+  "'Verdana', sans-serif",
 ];
 
+const fontSizes = [ 
+  { name: 'Small', value: 0.9 }, 
+  { name: 'Normal', value: 1 }, 
+  { name: 'Large', value: 1.1 },
+  { name: 'Extra Large', value: 1.2 },
+];
 function Toolbar() {
-  const { formData,resumeId,
+  const { 
+    activeToolbarTab, setActiveToolbarTab,
     selectedTemplate, setSelectedTemplate,
     themeColor, setThemeColor,
     fontFamily, setFontFamily,
-    fontSize, setFontSize,
-    isToolbarVisible, setIsToolbarVisible,
+    fontSize, setFontSize,resetStyles,
   } = useResume();
 
   return (
     <div className="toolbar-container">
-      <div className="toolbar-group">
-        <h3>Template</h3>
-        <div className="template-grid-visual">
-          {templates.map(t => (
-            <div 
-              key={t.id} 
-              className={`template-card ${selectedTemplate === t.id ? 'active' : ''}`}
-              onClick={() => setSelectedTemplate(t.id)}
-            >
-              <img src={t.imageUrl} alt={`${t.name} Template`} className="template-image-preview" />
-              <h4 className="template-card-title">{t.name}</h4>
+      <div className="toolbar-tabs">
+        <button 
+          className={`tab-btn ${activeToolbarTab === 'templates' ? 'active' : ''}`}
+          onClick={() => setActiveToolbarTab('templates')}
+        >
+          Templates
+        </button>
+        <button 
+          className={`tab-btn ${activeToolbarTab === 'styles' ? 'active' : ''}`}
+          onClick={() => setActiveToolbarTab('styles')}
+        >
+          Styles
+        </button>
+      </div>
+      <div className="toolbar-content">
+        {activeToolbarTab === 'templates' && (
+          <div className="template-grid-visual">
+            {templates.map(t => (
+              <div key={t.id} className={`template-card ${selectedTemplate === t.id ? 'active' : ''}`} onClick={() => setSelectedTemplate(t.id)}>
+                <img src={t.imageUrl} alt={`${t.name} Template`} className="template-image-preview" />
+                <h4 className="template-card-title">{t.name}</h4>
+              </div>
+            ))}
+          </div>
+        )}
+        {activeToolbarTab === 'styles' && (
+          <div className="styles-controls">
+            <div className="toolbar-group">
+              <h3>Color</h3>
+              <div className="color-picker">{colors.map(color => ( <div key={color} className={`color-swatch ${themeColor === color ? 'active' : ''}`} style={{ backgroundColor: color }} onClick={() => setThemeColor(color)} /> ))}</div>
             </div>
-          ))}
-        </div>
+            <div className="toolbar-group">
+              <h3>Font</h3>
+              <select value={fontFamily} onChange={(e) => setFontFamily(e.target.value)}>{fonts.map(font => ( <option key={font} value={font}>{font.split(',')[0].replace(/'/g, '')}</option> ))}</select>
+            </div>
+            <div className="toolbar-group">
+              <h3>Size</h3>
+              <div className="font-size-selector">{fontSizes.map(size => ( <button key={size.name} className={fontSize === size.value ? 'active' : ''} onClick={() => setFontSize(size.value)}>{size.name}</button>))}</div>
+            </div>
+            <div className="toolbar-group reset-section">
+              <button className="reset-styles-btn" onClick={resetStyles}>
+                Reset to Theme Defaults
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      </div>
+    </div>
   );
 }
 
