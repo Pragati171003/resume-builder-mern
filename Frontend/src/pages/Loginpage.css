@@ -81,6 +81,29 @@ form button[type="submit"]:hover {
   background-color: #0b5ed7;
 }
 
+.bottom-links {
+  margin-top: 25px;
+  font-size: 14px;
+  color: #718096;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bottom-links a {
+  color: #0d6efd; 
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+.bottom-links a:hover {
+  text-decoration: underline;
+  color: #0b5ed7; 
+}  
+.bottom-links p {
+    margin: 0;
+}
 .bottom-text {
   margin-top: 25px;
   color: #718096;
@@ -88,7 +111,7 @@ form button[type="submit"]:hover {
 }
 
 .bottom-text a {
-  color: #3182ce;
+  color: #0d6efd;
   text-decoration: none;
   font-weight: 600;
 }

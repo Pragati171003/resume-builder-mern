@@ -5,6 +5,81 @@ body {
   padding: 0;
 }
 
+.form-panel-container { display: flex; flex-direction: column; height: 100%; background-color: #f8f9fa; }
+.form-panel-header { padding: 20px 30px; border-bottom: 1px solid #dee2e6; flex-shrink: 0; background-color: #ffffff; }
+.form-panel-header h2 { margin: 0; font-size: 24px; }
+
+/* The scrollable area for the form fields */
+.form-scrollable-area {
+  padding: 30px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* --- THIS IS THE NEW, MAGNIFICENT TITLE STYLE --- */
+/* This is a new wrapper to center the title block */
+.editable-title-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* This is the container for the input and the icon */
+.editable-title-container {
+  position: relative;
+  display: inline-flex; /* This makes the container only as wide as its content */
+  align-items: center;
+}
+
+/* The input field itself, styled to be compact */
+.editable-title-input {
+  /* Resetting default styles */
+  outline: none;
+  
+  /* Typography */
+  font-size: 18px; /* A more refined size */
+  font-weight: 600;
+  color: #333;
+  
+  /* Sizing and spacing */
+  padding: 8px 30px 8px 12px; /* Padding for text and icon */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  
+  /* This is the key to auto-sizing */
+  width: auto; 
+  min-width: 200px; /* A minimum width for aesthetics */
+  
+  transition: all 0.2s ease-in-out;
+}
+
+/* The pencil icon */
+.edit-icon {
+  position: absolute;
+  right: 10px; /* Position inside the input padding */
+  color: #555;
+  pointer-events: none;
+}
+
+/* Magnificent focus effect */
+.editable-title-input:focus {
+  background-color: #fff;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+/* --- END OF TITLE STYLE --- */
+
+
+/* The white card that contains the main form */
+.form-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+
 /* Form container */
 .form-page-container {
   background-color: #fff;
@@ -19,6 +94,13 @@ body {
   animation: formFadeIn 0.8s ease-out forwards;
   transition: all 0.3s ease-in-out;
 }
+/* .h3-heading {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;  
+  margin-bottom: 20px;
+  color: #333;
+} */
 
 /* Form animation */
 @keyframes formFadeIn {
@@ -32,8 +114,8 @@ body {
   }
 }
 
-.form-container h2,
-.form-container h3 {
+.form-page-container h2,
+.form-page-container h3 {
   text-align: left;
   color: #222;
   margin-bottom: 15px;

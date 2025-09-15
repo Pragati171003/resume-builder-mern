@@ -6,7 +6,7 @@
   background-color: #e5e7eb;
 }
 .preview-toolbar-panel {
-  width: 320px; /* Fixed width for the toolbar */
+  width: 320px; 
   background-color: #ffffff;
   padding: 20px;
   overflow-y: auto;

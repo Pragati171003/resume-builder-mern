@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom'; 
+import { useParams } from 'react-router-dom';
 import ResumeProvider from '../context/ResumeContext'; 
 import { useResume } from '../context/ResumeContext'; 
 
@@ -31,8 +31,9 @@ function EditorPageContent() {
 }
 
 function EditorPage() {
+  const { resumeId } = useParams();
   return (
-    <ResumeProvider>
+    <ResumeProvider resumeId={resumeId}>
       <EditorPageContent />
     </ResumeProvider>
   );

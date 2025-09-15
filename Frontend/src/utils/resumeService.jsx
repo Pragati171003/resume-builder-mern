@@ -16,7 +16,7 @@ export const getResumeById = (id) => {
 };
 
 export const saveResume = (id, data) => {
-  const resumeId = id === 'new' ? `resume_${Date.now()}` : id;
+  const resumeId = (id && id !== 'new') ? id : `resume_${Date.now()}`;
   localStorage.setItem(resumeId, JSON.stringify(data));
   return resumeId; 
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from "axios"; // From File 1
+import axios from "axios"; 
 import { useAuth } from '../context/AuthContext'; // From File 2
 import './Loginpage.css'; // We will use the modern CSS
 

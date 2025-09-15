@@ -5,15 +5,15 @@ import './App.css';
 // import SignUppage from "./pages/SignUppage";
 import ResumeForm from './pages/ResumeForm.jsx';
 //import ResumeTemplate2 from './components/ResumeTemplate2.jsx'; 
-import ResumeTemplate2 from './components/resumetemplates/ResumeTemplate2.jsx';
+
 import AppRoutes from './AppRoutes.jsx';
+import ResumeTemplateGrid from './pages/ResumeTemplateGrid.jsx';
 
 function App() {
 
   return (
     <div>
-      <AppRoutes/>
-     {/* <ResumeForm/> */}
+     <AppRoutes/>
     </div>
   );
 }
