@@ -215,6 +215,52 @@ function ResumeForm({onSubmit}) {
     return genericMobileRegex.test(mobile);
   }
 };
+// ---------------- ACHIEVEMENTS ----------------
+const handleAchievementChange = (index, value) => {
+  setFormData((prev) => {
+    const achievements = [...prev.achievements];
+    achievements[index] = value;
+    return { ...prev, achievements };
+  });
+};
+
+const addAchievement = () => {
+  setFormData((prev) => ({
+    ...prev,
+    achievements: [...prev.achievements, ""],
+  }));
+};
+
+const removeAchievement = (index) => {
+  setFormData((prev) => ({
+    ...prev,
+    achievements: prev.achievements.filter((_, i) => i !== index),
+  }));
+};
+
+// ---------------- CERTIFICATIONS ----------------
+const handleCertificationChange = (index, value) => {
+  setFormData((prev) => {
+    const certifications = [...prev.certifications];
+    certifications[index] = value;
+    return { ...prev, certifications };
+  });
+};
+
+const addCertification = () => {
+  setFormData((prev) => ({
+    ...prev,
+    certifications: [...prev.certifications, ""],
+  }));
+};
+
+const removeCertification = (index) => {
+  setFormData((prev) => ({
+    ...prev,
+    certifications: prev.certifications.filter((_, i) => i !== index),
+  }));
+};
+
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -568,30 +614,56 @@ const removeCustomSection = (index) => {
 
         {/* ---------------- ACHIEVEMENTS ---------------- */}
         <div>
-          <h3 className="h3-heading">
-            Achievements <span style={{ color: "red" }}>*</span>
-          </h3>
-          <textarea
-            name="achievements"
-            value={formData.achievements}
-            onChange={handleChange}
-          />
-          <div style={{ color: "red" }}>{errors.achievements}</div>
-        </div>
+  <h3 className="h3-heading">
+    Achievements <span style={{ color: "red" }}>*</span>
+  </h3>
+
+  {(formData.achievements || []).map((ach, idx) => (
+    <div key={idx} style={{ marginBottom: "10px" }}>
+      <textarea
+        value={ach}
+        onChange={(e) => handleAchievementChange(idx, e.target.value)}
+        placeholder="Enter an achievement"
+      />
+      <button type="button" onClick={() => removeAchievement(idx)}>
+        Remove
+      </button>
+    </div>
+  ))}
+  <button type="button" onClick={addAchievement}>
+    + Add Achievement
+  </button>
+
+  <div style={{ color: "red" }}>{errors.achievements}</div>
+</div>
+
            
 
         {/* ---------------- CERTIFICATIONS ---------------- */}
         <div>
-          <h3 className="h3-heading">
-            Certifications <span style={{ color: "red" }}>*</span>
-          </h3>
-          <textarea
-            name="certifications"
-            value={formData.certifications}
-            onChange={handleChange}
-          />
-          <div style={{ color: "red" }}>{errors.certifications}</div>
-        </div>
+  <h3 className="h3-heading">
+    Certifications <span style={{ color: "red" }}>*</span>
+  </h3>
+
+  {(formData.certifications || []).map((cert, idx) => (
+    <div key={idx} style={{ marginBottom: "10px" }}>
+      <textarea
+        value={cert}
+        onChange={(e) => handleCertificationChange(idx, e.target.value)}
+        placeholder="Enter a certification"
+      />
+      <button type="button" onClick={() => removeCertification(idx)}>
+        Remove
+      </button>
+    </div>
+  ))}
+  <button type="button" onClick={addCertification}>
+    + Add Certification
+  </button>
+
+  <div style={{ color: "red" }}>{errors.certifications}</div>
+</div>
+
         {/* ---------------- ADDITIONAL / CUSTOM SECTIONS ---------------- */}
 <div>
   <h3 className="h3-heading">Additional Sections (Optional)</h3>
