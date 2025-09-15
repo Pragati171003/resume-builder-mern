@@ -57,3 +57,8 @@
   transform: translateY(-2px); 
   box-shadow: 0 8px 25px rgba(13, 110, 253, 0.3); 
 }
+@media (max-width: 768px) {
+  .editor-header { padding: 10px 15px; }
+  .header-btn .btn-text { display: none; }
+  .header-btn { padding: 10px; }
+}

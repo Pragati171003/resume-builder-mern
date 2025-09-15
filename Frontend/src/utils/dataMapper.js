@@ -1,9 +1,12 @@
-export const mapFormDataToSchema = (formData) => {
+export const mapFormDataToSchema = (formData,selectedTemplate) => {
   const safe = (value) => value || '';
-  const mappedData = {
+  let mappedData = {
     basics: {
       name: safe(formData.name),
-      label: safe(formData.careerObjective),
+      label: "Senior Software Engineer", 
+      summary: safe(formData.careerObjective),   
+      summaryBlock:safe(formData.careerObjective), 
+      about: safe(formData.careerObjective),
       email: safe(formData.email),
       phone: safe(formData.mobile),
       location: {
@@ -36,6 +39,11 @@ export const mapFormDataToSchema = (formData) => {
   }
   if (mappedData.projects.length === 0) {
     mappedData.projects.push({ name: '', description: '' });
+  }
+   if (selectedTemplate === 'tech') {
+    console.log("Applying magnificent override for 'tech' theme...");
+    mappedData.basics.label = "Senior Software Engineer";
+    mappedData.basics.summary = safe(formData.careerObjective);
   }
   if (formData.linkedin) mappedData.basics.profiles.push({ network: "LinkedIn", url: formData.linkedin });
   if (formData.gitlab) mappedData.basics.profiles.push({ network: "GitLab", url: formData.gitlab });

@@ -19,6 +19,7 @@
   display: flex;
   animation: scrollMarquee 40s linear infinite;
   will-change: transform;
+  background-color:aliceblue;
 }
 
 .marquee-container:hover .marquee-track {
@@ -36,8 +37,8 @@
 
 .resume-image-item {
   flex-shrink: 0; 
-  width: 320px; 
-  height: auto;
+  width: 500px; 
+  height: 500px;
   margin: 0 15px; 
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);

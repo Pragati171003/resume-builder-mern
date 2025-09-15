@@ -2,44 +2,68 @@ import React from 'react';
 import { useResume } from '../context/ResumeContext';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import './Toolbar.css';
+import Template1 from '../assets/resume_pages-to-jpg-0001.jpg'
+import Template2 from '../template-previews/img21.jpg'
+import Template3 from '../template-previews/elegant_page-0001.jpg';
+import Template4 from '../template-previews/onepage_pages-to-jpg-0001.jpg'
+import Template5 from '../template-previews/caffeine_page-0001.jpg'
+import Template6 from '../template-previews/kendall_page-0001.jpg'
+import Template7 from '../template-previews/stackoverflow_page-0001.jpg'
+import Template8 from '../template-previews/resume_class_pages-to-jpg-0001.jpg'
+import Template9 from '../template-previews/resume_short_page-0001.jpg'
+import Template10 from '../template-previews/spartan_page-0001.jpg'
+import Template11 from '../template-previews/visual-js-jest-image-snapshot-usage-with-an-image-received-from-puppeteer-works-1-snap.png'
+import Template12 from '../template-previews/paper.jpg'
+import Template13 from '../template-previews/index_page-0001.jpg'
+import Template14 from '../template-previews/modern (1)_page-0001.jpg'
+import Template15 from '../template-previews/Untitled Resume (3)_pages-to-jpg-0001.jpg'
+import Template16 from '../template-previews/Untitled Resume (37)_page-0001.jpg'
+import Template17 from '../template-previews/Richard Hendriks — Programmer_page-0001.jpg'
+import Template18 from '../template-previews/modern (3)_page-0001.jpg'
+import Template19 from '../template-previews/phone_page-0001.jpg'
+import Template20 from '../template-previews/tech_page-0001.jpg'
+import Template21 from '../template-previews/boilerplate-preview_page-0001.jpg'
+import Template22 from '../template-previews/Untitled Resume (5)_page-0001.jpg'
+import Template23 from '../template-previews/John Doe_page-0001.jpg'
+import Template24 from '../template-previews/standard-resume_page-0001.jpg'
+import Template25 from '../template-previews/Untitled Resume (6)_page-0001.jpg'
+import Template26 from '../template-previews/Untitled Resume (36)_page-0001.jpg'
 
-const templates = [//even classy waterfall modern even crushin utils modern extended darkclassy responsive rocket 
-// light classy  cora projects error
-  { id: 'onepage-plus', name: 'Onepage Plus' },
-  { id: 'flat', name: 'Flat' },
-  { id: 'elegant', name: 'Elegant' },
-  { id: 'onepage', name: 'Onepage' },
-  { id: 'stackoverflow', name: 'StackOverflow' },
-  { id: 'macchiato', name: 'Macchiato' },
-  { id: 'kendall', name: 'Kendall' },
-  { id: 'spartan', name: 'Spartan' },
-  { id: 'paper', name: 'Paper' },
-  {id:'sceptile',name:'Sceptile'},
-  { id: 'standard-resume', name: 'Standard' },
-  { id: 'short', name: 'Short' },   
-  { id: 'straightforward', name: 'Straightforward' },    
-  { id: 'bufferbloat', name: 'Bufferbloat' }, 
-  { id: 'simplyelegant', name: 'Simplyelegant' }, 
+
+const templates = [
+  { id: 'tech', name: 'Tech',imageUrl:Template20 }, 
+  { id: 'onepage', name: 'Onepage' ,imageUrl:Template4},
+  { id: 'onepage-plus', name: 'Onepage Plus',imageUrl:Template1 },
+  { id: 'flat', name: 'Flat' ,imageUrl:Template2},
+  { id: 'elegant', name: 'Elegant',imageUrl: Template3},
+  { id: 'stackoverflow', name: 'StackOverflow',imageUrl:Template7 },
+    { id: 'classy-vforesee', name: 'Classy Vforesee',imageUrl:Template16 }, 
+  { id: 'macchiato', name: 'Macchiato',imageUrl:Template11 },
+    { id: 'kendall', name: 'Kendall',imageUrl:Template6 },
+  { id: 'spartan', name: 'Spartan',imageUrl:Template10 },
+  { id: 'paper', name: 'Paper',imageUrl:Template12 },
+  //{id:'sceptile',name:'Sceptile'},
+  { id: 'short', name: 'Short',imageUrl:Template9 },   
+  { id: 'straightforward', name: 'Straightforward',imageUrl:Template13 },    
+  { id: 'bufferbloat', name: 'Bufferbloat',imageUrl:Template14}, 
+  { id: 'simplyelegant', name: 'Simplyelegant',imageUrl:Template15 }, 
   //not worked{ id: 'randytarampi', name: 'Randytarampi' }, 
-  { id: 'classy-vforesee', name: 'Classy Vforesee' }, 
   //{ id: 'umennel', name: 'Umennel' }, 
-  { id: 'eloquent', name: 'Eloquent' }, 
-  { id: 'paperalt', name: 'Paperalt' }, 
-  { id: 'straightforward-with-telephone', name: 'Straightforward-with-telephone' }, 
+  { id: 'eloquent', name: 'Eloquent',imageUrl:Template17 }, 
+  { id: 'paperalt', name: 'Paperalt',imageUrl:Template18 }, 
+  { id: 'straightforward-with-telephone', name: 'Straightforward-with-telephone',imageUrl:Template19 }, 
   //{ id: 'bluetime', name: 'bluetime' }, 
-  { id: 'tech', name: 'Tech' }, 
-  { id: 'caffeine', name: 'Caffeine' }, 
+  { id: 'caffeine', name: 'Caffeine',imageUrl:Template5 }, 
   //{ id: 'elegant-ryantrinkle', name: 'Elegant Ryantrinkle' }, 
-  { id: 'moon', name: 'Moon' }, 
-  { id: 'spartan', name: 'Spartan' }, 
-  { id: 'light-classy-concise', name: 'light-classy-concise' }, 
-  { id: 'class', name: 'Class' }, 
+  //{ id: 'moon', name: 'Moon' }, 
+  { id: 'class', name: 'Class',imageUrl:Template8 }, 
   //{ id: 'relaxed', name: 'Relaxed' }, 
-  { id: 'boilerplate', name: 'Boilerplate' }, 
-  { id: 'nominaltech-nl', name: 'Nominaltech-nl' }, 
-  { id: 'eternal', name: 'Eternal' }, 
-  { id: 'compact', name: 'compact' }, 
-  { id: 'Rnord', name: 'Rnord' }, 
+  { id: 'boilerplate', name: 'Boilerplate',imageUrl:Template21 }, 
+  { id: 'nominaltech-nl', name: 'Nominaltech-nl', imageUrl:Template26}, 
+  { id: 'eternal', name: 'Eternal',imageUrl:Template22 }, 
+  { id: 'compact', name: 'compact',imageUrl:Template25 }, 
+  { id: 'standard-resume', name: 'Standard',imageUrl:Template24 },
+  { id: 'Rnord', name: 'Rnord',imageUrl:Template23 }, 
 ];
 
 const colors = ['#0d6efd', '#dc3545', '#198754', '#6f42c1', '#212529'];
@@ -60,58 +84,23 @@ function Toolbar() {
   } = useResume();
 
   return (
-    <div className="toolbar-container-vertical">
+    <div className="toolbar-container">
       <div className="toolbar-group">
         <h3>Template</h3>
-        <div className="selector">
+        <div className="template-grid-visual">
           {templates.map(t => (
-            <button key={t.id} className={selectedTemplate === t.id ? 'active' : ''} onClick={() => setSelectedTemplate(t.id)}>
-              {t.name}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      <div className="toolbar-group">
-        <h3>Color</h3>
-        <div className="selector color-picker">
-          {colors.map(color => (
             <div 
-              key={color} 
-              className={`color-swatch ${themeColor === color ? 'active' : ''}`}
-              style={{ backgroundColor: color }}
-              onClick={() => setThemeColor(color)}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="toolbar-group">
-        <h3>Font</h3>
-        <div className="selector">
-          <select value={fontFamily} onChange={(e) => setFontFamily(e.target.value)}>
-            {fonts.map(font => (
-              <option key={font} value={font}>{font.split(',')[0].replace(/'/g, '')}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className="toolbar-group">
-        <h3>Size</h3>
-        <div className="selector font-size-selector">
-          {fontSizes.map(size => (
-            <button
-              key={size.name}
-              className={fontSize === size.value ? 'active' : ''}
-              onClick={() => setFontSize(size.value)}
+              key={t.id} 
+              className={`template-card ${selectedTemplate === t.id ? 'active' : ''}`}
+              onClick={() => setSelectedTemplate(t.id)}
             >
-              {size.name}
-            </button>
+              <img src={t.imageUrl} alt={`${t.name} Template`} className="template-image-preview" />
+              <h4 className="template-card-title">{t.name}</h4>
+            </div>
           ))}
         </div>
       </div>
-      
-    </div>
+      </div>
   );
 }
 
