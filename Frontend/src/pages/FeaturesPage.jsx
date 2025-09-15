@@ -19,7 +19,7 @@ const features = [
   {
     icon: <FaShareAlt size={32} className="feature-icon" />,
     title: 'Easy Download & Share',
-    description: 'Export your resume in multiple formats including PDF and DOCX. Share a unique link to your online resume with recruiters with a single click.',
+    description: 'Export your resume in multiple formats including PDF.',
   },
   {
     icon: <FaShieldAlt size={32} className="feature-icon" />,

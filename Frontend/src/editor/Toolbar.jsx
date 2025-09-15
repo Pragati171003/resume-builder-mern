@@ -37,7 +37,7 @@ const templates = [
   { id: 'flat', name: 'Flat' ,imageUrl:Template2},
   { id: 'elegant', name: 'Elegant',imageUrl: Template3},
   { id: 'stackoverflow', name: 'StackOverflow',imageUrl:Template7 },
-    { id: 'classy-vforesee', name: 'Classy Vforesee',imageUrl:Template16 }, 
+  //{ id: 'classy-vforesee', name: 'Classy Vforesee',imageUrl:Template16 }, 
   { id: 'macchiato', name: 'Macchiato',imageUrl:Template11 },
     { id: 'kendall', name: 'Kendall',imageUrl:Template6 },
   { id: 'spartan', name: 'Spartan',imageUrl:Template10 },
