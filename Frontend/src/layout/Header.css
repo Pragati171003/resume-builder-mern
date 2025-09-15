@@ -21,19 +21,20 @@
 .logo {
   height: 40px; 
   width: auto;
-  margin-right: 4px; 
+  
 }
 
 .logo-text {
   font-family: "Madurai W01 Ext Black";
   font-weight: 400;
   font-size: 32px; 
-   line-height: 0.8; 
+  line-height: 0.75; 
   background: linear-gradient(90deg, #1c3d78 15%, #1d68e2 65%, #27a4f2 100%);
   -webkit-background-clip: text; 
   background-clip: text;
   color: transparent;
   position: relative;
+  margin-left: -7px;
 }
 
 .header-nav {
