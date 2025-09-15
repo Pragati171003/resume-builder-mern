@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './TestimonialsPage.css';
-import { FaStar, FaQuoteLeft } from 'react-icons/fa';
+import { FaStar, FaQuoteLeft,FaUserCircle  } from 'react-icons/fa';
 
 const initialTestimonials = [
-  { name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This AI-powered resume builder made the job application process so much easier! The suggestions were spot-on...', rating: 5, avatar: 'https://i.imgur.com/nJ2Wb4A.png' },
+  { name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This resume builder made the job application process so much easier!', rating: 5, avatar: 'https://i.imgur.com/nJ2Wb4A.png' },
   { name: 'Michael B.', title: 'Software Engineer', quote: 'As a developer, I appreciate clean design and efficiency. This tool delivered both. The ATS-friendly templates gave me peace of mind...', rating: 5, avatar: 'https://i.imgur.com/Q2eY72s.png' },
-  { name: 'Jessica T.', title: 'Recent Graduate', quote: 'I was overwhelmed with creating my first professional resume. This builder guided me through every step. It’s intuitive, fast, and the final result gave me confidence...', rating: 4, avatar: 'https://i.imgur.com/k2OV5cf.png' },
+  { name: 'Jessica T.', title: 'Recent Graduate', quote: 'I was overwhelmed with creating my first professional resume. This builder helped me through every step. It’s intuitive, fast, and the final result gave me confidence...', rating: 4, avatar: 'https://i.imgur.com/k2OV5cf.png' },
 ];
 
 function TestimonialsPage() {
@@ -22,7 +22,7 @@ function TestimonialsPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.quote && formData.rating > 0) {
-      const newTestimonial = { ...formData, avatar: 'https://i.imgur.com/m5246RN.png' };
+      const newTestimonial = { ...formData,isIcon: true, avatar: 'https://i.imgur.com/m5246RN.png' };
       setTestimonials((prevTestimonials) => [...prevTestimonials, newTestimonial]);
       setIsSubmitted(true);
     } else {
@@ -47,7 +47,14 @@ function TestimonialsPage() {
                 {[...Array(5)].map((_, i) => ( <FaStar key={i} color={i < testimonial.rating ? '#ffc107' : '#e4e5e9'} /> ))}
               </div>
               <div className="author-info">
-                <img src={testimonial.avatar} alt={testimonial.name} className="author-avatar" />
+                
+                {testimonial.isIcon ? (
+                  <div className="author-avatar-icon">
+                    <FaUserCircle />
+                  </div>
+                ) : (
+                  <img src={testimonial.avatar} alt={testimonial.name} className="author-avatar" />
+                )}
                 <div>
                   <p className="author-name">{testimonial.name}</p>
                   <p className="author-title">{testimonial.title}</p>

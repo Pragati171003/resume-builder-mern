@@ -1,6 +1,6 @@
 import React from 'react';
 import './FeaturesPage.css'; 
-import { Link } from 'react-router-dom'; // To link the CTA button
+import { Link } from 'react-router-dom';
 
 import { FaBrain, FaRegFileAlt, FaPaintBrush, FaShareAlt, FaShieldAlt, FaCogs } from 'react-icons/fa';
 

@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+	<head>
+
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, user-scalable=no, minimal-ui'>
+
+	<title>Gaurav Bansal</title>
+
+	<style>
+	/* Base styles */
+body {
+  background: #EEEEEE;
+  font: 12px "Times New Roman", Times, serif;
+  line-height: 1.4;
+  margin: 20px 0;
+  color: #000;
+}
+
+em {
+  color: #333;
+  font-style: italic;
+}
+
+p {
+  line-height: 1.4;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+li {
+  margin-bottom: 1px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #2077b2;
+}
+
+.normal-weight {
+  font-weight: normal;
+}
+
+/* Resume container */
+.resume {
+  margin: 0 auto;
+  max-width: 750px;
+  padding: 20px 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 4px #aaa;
+  -webkit-box-shadow: 2px 2px 4px #aaa;
+}
+
+/* Section styling */
+.sectionName {
+  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.sectionLine {
+  border-bottom: 1px solid #999;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.sectionContent {
+  width: 100%;
+  margin-top: 2px;
+}
+
+/* Add spacing after each section except the last one */
+.resume > div:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+/* Reduce spacing specifically for skills section */
+.skills {
+  margin-bottom: 10px;
+}
+
+/* Common block elements */
+.sectionContent > div {
+  page-break-inside: avoid;
+  margin-bottom: 4px;
+}
+
+/* Common content elements */
+.blockHeader {
+  margin-bottom: 2px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.date {
+  float: right;
+  font-weight: normal;
+}
+
+.position, .degree {
+  margin-top: 1px;
+  margin-bottom: 2px;
+}
+
+.website {
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.summary {
+  margin-top: 2px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+/* Lists */
+.sectionContent ul {
+  padding-left: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  list-style-type: disc;
+}
+
+/* Skill lists - special case for inline display */
+.skillBlock {
+  margin-bottom: 2px;
+}
+
+.skillBlock .title {
+  margin-bottom: 1px;
+}
+
+.skillBlock ul {
+  margin-top: 1px;
+}
+
+.skillBlock ul li {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+/* Separators */
+.separator {
+  height: 1px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.divider {
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Header elements */
+.nameBlock {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.label {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.basicsBlock {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 8px;
+}
+
+/* Education elements */
+.coursesBlock {
+  margin-top: 2px;
+}
+
+.coursesList {
+  width: 28%;
+  vertical-align: top;
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 15px;
+}
+
+.course {
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.gpa {
+  margin-bottom: 5px;
+  font-size: 11px;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 40em) {
+  body {
+    margin: 0;
+    font-size: 14px;
+  }
+  .resume {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 0.5em 1em;
+    border: none;
+  }
+  .sectionContent {
+    width: 100%;
+  }
+  .sectionContent .date {
+    padding-right: 2em;
+  }
+  .sectionName {
+    width: auto;
+  }
+  .nameBlock {
+    font-size: 20px;
+  }
+  .basicsBlock {
+    font-size: 14px;
+  }
+}
+
+@media print {
+  body {
+    background: #FFFFFF;
+  }
+  .resume {
+    margin: 0 auto;
+    max-width: 750px;
+    padding: 0px 0px;
+    border: 0px;
+    background: #fff;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  a {
+    color: black;
+  }
+}
+
+	</style>
+
+	</head>
+	<body>
+
+	<div class='resume'>
+  <div class='nameBlock'>
+    <span class='name'>Gaurav Bansal</span>
+    <div class='label'>Tech Co-founder &amp; CTO</div>
+  </div>
+  <div class='basicsBlock'>
+    <div class='contactBlock'>
+      123 Innovation Drive • Mumbai, Maharashtra 400001
+      <span class='divider'>•</span><span class='phone'>Phone: (555) 123-4567</span>
+      <span class='divider'>•</span><span class='email'>Email: me@bgaurav.in</span>
+    </div>
+    <div class='profilesBlock'>
+        <span class='url'><a href='https://bgaurav.in'>Website</a></span><span class='divider'>•</span>
+        <span class='url'><a href='https://linkedin.com/in/bgaurav7'>LinkedIn</a></span><span class='divider'>•</span>
+        <span class='url'><a href='https://bgaurav7.medium.com/'>Medium</a></span>
+    </div>
+  </div>
+
+  <div class='summaryBlock'>
+    <div class='sectionName'>
+      <span>SUMMARY</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <span>Innovative tech leader with 12+ years of experience building scalable products at the intersection of AI, cloud computing, and enterprise software. As Co-founder and CTO of TechNova, I lead engineering teams developing cutting-edge solutions that transform how businesses leverage data and automation. My expertise spans distributed systems, machine learning operations, and full-stack development with a focus on creating resilient architectures that scale seamlessly with business growth.</span>
+    </div>
+  </div>
+
+	<div class='education'>
+    <div class='sectionName'>
+      <span>EDUCATION</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='educationBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://stanford.edu'>Stanford University <em>(3.9)</em></a>
+            <span class='date'>
+              2010 &mdash; 2012
+            </span>
+          </span>
+          <div class='degree'><em>Master of Science (M.S.) (Computer Science)</em></div>
+        </div>
+        <div class='coursesBlock'>
+          <ul class='coursesList'>
+            <li class='course'>Distributed Systems</li>
+            <li class='course'>Cloud Computing</li>
+          </ul>
+          <ul class='coursesList'>
+            <li class='course'>Machine Learning</li>
+          </ul>
+          <ul class='coursesList'>
+            <li class='course'>Database Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class='separator'></div>
+      <div class='educationBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://iitb.ac.in'>Indian Institute of Technology, Mumbai <em>(9.2/10)</em></a>
+            <span class='date'>
+              2006 &mdash; 2010
+            </span>
+          </span>
+          <div class='degree'><em>Bachelor of Technology (B.Tech.) (Computer Science and Engineering)</em></div>
+        </div>
+        <div class='coursesBlock'>
+          <ul class='coursesList'>
+            <li class='course'>Data Structures and Algorithms</li>
+            <li class='course'>Software Engineering</li>
+          </ul>
+          <ul class='coursesList'>
+            <li class='course'>Operating Systems</li>
+          </ul>
+          <ul class='coursesList'>
+            <li class='course'>Computer Networks</li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+	</div>
+
+  <div class='workBlock'>
+    <div class='sectionName'>
+      <span>EXPERIENCE</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+			<div class="jobBlock">
+	      <div class='blockHeader'>
+	        <span class='title'>
+	          <a href='https://technova.example.com'>Co-founder &amp; CTO - <em>TechNova</em></a>
+	        </span>
+	        <span class='date'>
+	          2019 &mdash; Present
+	        </span>
+	      </div>
+	      <div class='summary'>Co-founded TechNova to revolutionize enterprise data management through AI-powered automation and analytics. Lead all technical strategy, architecture decisions, and engineering teams.</div>
+	      <ul class='highlights'>
+	        <li>Built and scaled engineering team from 3 to 45 across 4 countries</li>
+	        <li>Architected cloud-native platform processing 10TB+ data daily with 99.99% uptime</li>
+	        <li>Secured $12M Series A funding based on technical innovation and product-market fit</li>
+	        <li>Implemented ML Ops pipeline reducing model deployment time from weeks to hours</li>
+	      </ul>
+	      <div class='separator'></div>
+			</div>
+			<div class="jobBlock">
+	      <div class='blockHeader'>
+	        <span class='title'>
+	          <a href='https://datasphere.example.com'>VP of Engineering - <em>DataSphere</em></a>
+	        </span>
+	        <span class='date'>
+	          2016 &mdash; 2019
+	        </span>
+	      </div>
+	      <div class='summary'>Led engineering for enterprise data platform serving Fortune 500 clients, focusing on scalable architecture and performance optimization.</div>
+	      <ul class='highlights'>
+	        <li>Managed team of 25 engineers across backend, frontend, and DevOps</li>
+	        <li>Redesigned core data processing pipeline improving throughput by 300%</li>
+	        <li>Implemented microservices architecture reducing deployment failures by 78%</li>
+	        <li>Established SRE practices resulting in 99.95% platform availability</li>
+	      </ul>
+	      <div class='separator'></div>
+			</div>
+			<div class="jobBlock">
+	      <div class='blockHeader'>
+	        <span class='title'>
+	          <a href='https://cloudmatrix.example.com'>Senior Software Engineer - <em>CloudMatrix</em></a>
+	        </span>
+	        <span class='date'>
+	          2013 &mdash; 2016
+	        </span>
+	      </div>
+	      <div class='summary'>Developed distributed systems for cloud infrastructure management and monitoring.</div>
+	      <ul class='highlights'>
+	        <li>Built real-time monitoring system for multi-region cloud deployments</li>
+	        <li>Implemented fault-tolerant message queue handling 50K+ messages per second</li>
+	        <li>Developed automated scaling algorithms reducing cloud costs by 35%</li>
+	        <li>Created developer SDK adopted by 200+ enterprise customers</li>
+	      </ul>
+	      
+			</div>
+    </div>
+  </div>
+
+  <div class='projects'>
+    <div class='sectionName'>
+      <span>PROJECTS</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='projectBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://technova.example.com/dataflow'><span class='normal-weight'>DataFlow <em>(https://technova.example.com/dataflow)</em></span></a>
+          </span>
+          <span class='date'>
+            2021 &mdash; Present
+          </span>
+        </div>
+        <div class='description'>TechNova&#x27;s flagship enterprise data platform that enables real-time data processing, analytics, and ML model deployment with minimal engineering overhead.</div>
+        <ul class='highlights'>
+          <li>Processes over 10TB of data daily with sub-second latency</li>
+          <li>Supports 500+ concurrent enterprise users with 99.99% uptime</li>
+          <li>Reduced data pipeline development time by 70% through no-code interfaces</li>
+          <li>Integrated with all major cloud providers and data warehouses</li>
+        </ul>
+      </div>
+      <div class='separator'></div>
+      <div class='projectBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://github.com/technova/automl-engine'><span class='normal-weight'>AutoML Engine <em>(https://github.com/technova/automl-engine)</em></span></a>
+          </span>
+          <span class='date'>
+            2020 &mdash; 2021
+          </span>
+        </div>
+        <div class='description'>An open-source framework for automated machine learning model selection, training, and deployment that democratizes AI for organizations without dedicated data science teams.</div>
+        <ul class='highlights'>
+          <li>5,000+ GitHub stars and 50+ contributors</li>
+          <li>Supports classification, regression, and time-series forecasting</li>
+          <li>Automated feature engineering and hyperparameter optimization</li>
+          <li>One-click deployment to production environments</li>
+        </ul>
+      </div>
+      <div class='separator'></div>
+      <div class='projectBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://cloudguard.example.com'><span class='normal-weight'>CloudGuard <em>(https://cloudguard.example.com)</em></span></a>
+          </span>
+          <span class='date'>
+            2018-06-01 &mdash; 2019-12-01
+          </span>
+        </div>
+        <div class='description'>Security and compliance automation platform for multi-cloud environments that continuously monitors infrastructure for vulnerabilities and configuration drift.</div>
+        <ul class='highlights'>
+          <li>Reduced security incident response time from days to minutes</li>
+          <li>Automated remediation for 80% of common security findings</li>
+          <li>Comprehensive compliance reporting for SOC2, HIPAA, and GDPR</li>
+          <li>Seamless integration with CI/CD pipelines</li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+
+	<div class='skills'>
+    <div class='sectionName'>
+      <span>SKILLS</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='skillBlock'>
+        <span class='title'>Engineering Leadership <em>(Advanced)</em>:</span>
+          <ul class='skillList'>
+            <li>Team Building</li>
+            <li>Technical Strategy</li>
+            <li>Product Vision</li>
+            <li>Agile Methodologies</li>
+            <li>Talent Development</li>
+          </ul>
+      </div>
+      <div class='skillBlock'>
+        <span class='title'>AI &amp; Machine Learning <em>(Advanced)</em>:</span>
+          <ul class='skillList'>
+            <li>MLOps</li>
+            <li>TensorFlow</li>
+            <li>PyTorch</li>
+            <li>Feature Engineering</li>
+            <li>Model Deployment</li>
+          </ul>
+      </div>
+      <div class='skillBlock'>
+        <span class='title'>System Design <em>(Expert)</em>:</span>
+          <ul class='skillList'>
+            <li>Distributed Systems</li>
+            <li>Scalable Architecture</li>
+            <li>High Availability</li>
+            <li>Fault Tolerance</li>
+          </ul>
+      </div>
+    </div>
+	</div>
+
+	<div class='publications'>
+    <div class='sectionName'>
+      <span>PUBLICATIONS</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='publicationBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            Scalable ML Pipelines for Enterprise: Lessons from the Trenches, ACM Digital Library
+          </span>
+          <span class='date'>
+            <span class='releaseDate'>2022</span>
+          </span>
+        </div>
+        <div class='summary'>Research paper detailing best practices for implementing production ML pipelines in enterprise environments.</div>
+        
+      </div>
+    </div>
+	</div>
+
+	<div class='awards'>
+    <div class='sectionName'>
+      <span>AWARDS & RECOGNITION</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='awardBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            Technology Innovator of the Year: Tech Founders Association
+          </span>
+          <span class='date'>
+            <span class='date'>2023</span>
+          </span>
+        </div>
+        <div class='separator'></div>
+      </div>
+      <div class='awardBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            Best Enterprise SaaS Platform: Cloud Computing Awards
+          </span>
+          <span class='date'>
+            <span class='date'>2022</span>
+          </span>
+        </div>
+        
+      </div>
+    </div>
+	</div>
+
+	<div class='volunteer'>
+    <div class='sectionName'>
+      <span>VOLUNTEERING</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='volunteerBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            Code For Change
+          </span>
+          <span class='date'>
+            2020 &mdash; Present
+          </span>
+        </div>
+        <div class='position'><strong>Technical Mentor</strong></div>
+        <div class='summary'>Mentor aspiring developers from underrepresented communities, providing technical guidance and career advice.</div>
+        <ul class='highlights'>
+          <li>Conducted monthly workshops on cloud architecture and system design</li>
+          <li>Mentored 15+ junior developers who secured roles at top tech companies</li>
+          <li>Developed open-source curriculum for backend development fundamentals</li>
+        </ul>
+      </div>
+      
+    </div>
+	</div>
+
+  <div class='certificates'>
+    <div class='sectionName'>
+      <span>CERTIFICATIONS</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='certificateBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://aws.amazon.com/certification'>AWS Solutions Architect - Professional - Amazon Web Services</a>
+          </span>
+          <span class='date'>2021</span>
+        </div>
+      </div>
+      <div class='separator'></div>
+      <div class='certificateBlock'>
+        <div class='blockHeader'>
+          <span class='title'>
+            <a href='https://cloud.google.com/certification'>Google Cloud Professional Data Engineer - Google Cloud</a>
+          </span>
+          <span class='date'>2020</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+	<div class='languages'>
+    <div class='sectionName'>
+      <span>LANGUAGES</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='languageBlock'>
+        <span class='language'>English</span>
+        <span class='fluency'><em>(Professional)</em></span>
+        <span>,</span>
+        <span class='language'>Hindi</span>
+        <span class='fluency'><em>(Native)</em></span>
+        <span>,</span>
+        <span class='language'>Spanish</span>
+        <span class='fluency'><em>(Conversational)</em></span>
+        
+      </div>
+    </div>
+	</div>
+
+	<div class='interests'>
+    <div class='sectionName'>
+      <span>INTERESTS</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='interestBlock'>
+        <span class='name'>Open Source</span><!--
+        --><span class='keywords'> <em>[
+          Contributor<!--
+          -->, 
+          Maintainer<!--
+          -->, 
+          Community Building<!--
+          -->, 
+          Hackathons<!--
+          -->
+        ]</em></span><!--
+        --><span>, </span>
+        <span class='name'>Technology Trends</span><!--
+        --><span class='keywords'> <em>[
+          Edge Computing<!--
+          -->, 
+          Quantum Computing<!--
+          -->, 
+          Sustainable Tech<!--
+          -->, 
+          Web3<!--
+          -->
+        ]</em></span><!--
+        --><span>, </span>
+        <span class='name'>Travel &amp; Adventure</span><!--
+        --><span class='keywords'> <em>[
+          Hiking<!--
+          -->, 
+          Photography<!--
+          -->, 
+          Cultural Immersion<!--
+          -->, 
+          Digital Nomad<!--
+          -->
+        ]</em></span><!--
+        -->
+      </div>
+    </div>
+	</div>
+
+  <div class='references'>
+    <div class='sectionName'>
+      <span>REFERENCES</span>
+    </div>
+    <div class='sectionLine'></div>
+    <div class='sectionContent'>
+      <div class='referenceBlock'>
+        <div class='blockHeader'>
+          <span class='title'>Sarah Chen</span>
+        </div>
+        <div class='reference'>"Gaurav is an exceptional technical leader who combines deep engineering expertise with strategic vision. His ability to translate complex business requirements into elegant technical solutions has been instrumental to our company&#x27;s growth."</div>
+      </div>
+      
+    </div>
+  </div>
+
+	</body>
+</html>

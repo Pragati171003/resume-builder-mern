@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ResumeForm.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { saveResume } from '../utils/resumeService'
 import {useEffect} from 'react'
 import { useResume } from '../context/ResumeContext';
 
@@ -11,7 +11,7 @@ const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 
 function ResumeForm({onSubmit}) {
   const navigate = useNavigate();
-  const { formData, setFormData } = useResume();
+  const { formData, setFormData, resumeId } = useResume();
   {/*const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -262,12 +262,11 @@ const handleSubmit = async (e) => {
 };
   const handleSave = (e) => {
     e.preventDefault();
-      const newId = saveResume(resumeId, formData);
-      alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
-      if (resumeId === 'new') {
-        navigate(`/editor/${newId}`, { replace: true });
-      }
-    // }
+    const newId = saveResume(resumeId, formData);
+    alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
+    if (resumeId === 'new') {
+      navigate(`/editor/${newId}`, { replace: true });
+    }
   };
   // ---------------- CUSTOM SECTIONS ----------------
 const handleCustomSectionChange = (index, field, value) => {
@@ -541,9 +540,9 @@ const removeCustomSection = (index) => {
   </button>
 </div>
 
-        {/* --- PROJECTS (with magnificent crash-proof safeguard) --- */}
 <div>
   <h3 className="h3-heading">Projects (Optional)</h3>
+
   {(formData.projects || []).map((proj, idx) => (
     <div key={idx} style={{ marginBottom: "10px" }}>
       <label>Project Title</label>
