@@ -45,7 +45,7 @@ function Body() {
           <h1>Build a Job-Winning <br /> Resume in Minutes</h1>
           <p className="hero-subtitle">Our website helps you craft professional, ATS-friendly resumes effortlessly.</p>
           <Link to="/signup" className="hero-button">
-            Get Started for Free
+            Get Started For Free
           </Link>
         </div>
       </section>
@@ -141,7 +141,6 @@ function Body() {
         {/* This is the marquee container */}
         <div className="marquee-container">
           <div className="marquee-track">
-            {/* We render the list of images twice for a seamless loop */}
             {placeholderResumes.map((src, index) => (
               <img key={`first-${index}`} src={src} alt={`Resume template ${index + 1}`} className="resume-image-item" />
             ))}

@@ -1,27 +1,62 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-export const downloadPdf = (elementId, filename) => {
-  const resumeElement = document.getElementById(elementId);
-
-  if (!resumeElement) {
-    console.error("Element not found for PDF generation!");
+export const downloadPdf = (iframeId, filename) => {
+  const iframe = document.getElementById(iframeId);
+  if (!iframe) {
+    console.error(`Iframe with ID '${iframeId}' not found!`);
+    alert("Could not find the resume preview to download. Please try again.");
     return;
+  }
+
+  const iframeDocument = iframe.contentWindow?.document;
+  if (!iframeDocument) {
+    console.error("Could not access the content of the iframe.");
+    alert("Could not access resume content. Please try again.");
+    return;
+  }
+  const resumeElement = iframeDocument.body;
+  
+  if (resumeElement.childElementCount === 0) {
+      alert("Resume content is empty, cannot download.");
+      return;
   }
 
   html2canvas(resumeElement, {
     scale: 2,
-    useCORS: true, 
-  }).then(canvas => {
-    const imgData = canvas.toDataURL('image/png');
-    const pdfWidth = 210; 
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    useCORS: true,
+    logging: false,
+    width: resumeElement.scrollWidth,
+    height: resumeElement.scrollHeight,
+    windowWidth: resumeElement.scrollWidth,
+    windowHeight: resumeElement.scrollHeight,
+  }).then((canvas) => {
+    const pageWidth = 210; 
+    const pageHeight = 297; 
+
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    const ratio = canvasHeight / canvasWidth;
+    const imgHeight = pageWidth * ratio;
+    
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+
+    pdf.addImage(canvas, 'PNG', 0, position, pageWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position -= pageHeight;
+      pdf.addPage();
+      pdf.addImage(canvas, 'PNG', 0, position, pageWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
     pdf.save(`${filename}.pdf`);
+  }).catch(error => {
+    console.error("PDF Generation Failed:", error);
+    alert("An error occurred while generating the PDF.");
   });
 };

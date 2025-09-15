@@ -15,27 +15,33 @@ function EditorHeader() {
   const navigate = useNavigate();
 
   const handleSave = () => {
-    const newId = saveResume(resumeId, formData);
-    alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'}!`);
+    const savedId = saveResume(resumeId, formData);
+    alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
     if (resumeId === 'new') {
-      navigate(`/editor/${newId}`, { replace: true });
+      navigate(`/editor/${savedId}`, { replace: true });
     }
   };
 
   const handleDownload = () => {
-    if (!isPreviewVisible) setIsPreviewVisible(true);
-    setTimeout(() => downloadPdf('resume-preview-paper', formData.resumeTitle || 'resume'), 200);
-  };
+  if (!isPreviewVisible) {
+    setIsPreviewVisible(true);
+    setTimeout(() => {
+      downloadPdf('resume-preview-iframe', formData.resumeTitle || 'resume');
+    }, 500);
+  } else {
+    downloadPdf('resume-preview-iframe', formData.resumeTitle || 'resume');
+  }
+};
 
   return (
     <header className="editor-header">
-      <div className="header-left">
+      <div className="editor-header-left">
         <button className="header-btn styles-toggle" onClick={() => setIsToolbarVisible(!isToolbarVisible)}>
           <FaBars />
           <span>Styles</span>
         </button>
       </div>
-      <div className="header-right">
+      <div className="editor-header-right">
         <button className="header-btn" onClick={handleSave}>Save Resume</button>
         <button className="header-btn" onClick={handleDownload}>Download PDF</button>
         <button className="header-btn preview-toggle" onClick={() => setIsPreviewVisible(!isPreviewVisible)}>

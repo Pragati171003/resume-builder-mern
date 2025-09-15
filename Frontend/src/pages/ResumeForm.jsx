@@ -9,7 +9,7 @@ function ResumeForm({onSubmit}) {
     name: "",
     email: "",
     mobile: "",
-    countryCode: "+91", // ✅ Default India
+    countryCode: "+91", 
     linkedin: "",
     gitlab: "",
     education: {
@@ -34,26 +34,69 @@ function ResumeForm({onSubmit}) {
       setFormData((prev) => ({ ...prev, email: value.toLowerCase() }));
       return;
     }
+     if (name === "mobile") {
+  let digits = value.replace(/\D/g, "");
 
-    if (name === "mobile") {
-      const digits = value.replace(/\D/g, "");
-      if (digits !== value) {
-        setErrors((prev) => ({ ...prev, mobile: "Enter only digits" }));
-      } else {
-        setErrors((prev) => ({ ...prev, mobile: "" }));
-      }
-      setFormData((prev) => ({ ...prev, mobile: digits }));
-      return;
+  if (digits.length > 10) return;
+
+  setFormData((prev) => ({ ...prev, mobile: digits }));
+
+  if (formData.countryCode === "+91") {
+    if (!/^[6-9]/.test(digits) && digits.length > 0) {
+      setErrors((prev) => ({
+        ...prev,
+        mobile: "Indian mobile must start with digits 6–9",
+      }));
+    } else if (digits.length !== 10) {
+      setErrors((prev) => ({
+        ...prev,
+        mobile: "Mobile number must be exactly 10 digits",
+      }));
+    } else {
+      setErrors((prev) => ({ ...prev, mobile: "" }));
     }
+  } else {
+    if (digits.length !== 10) {
+      setErrors((prev) => ({
+        ...prev,
+        mobile: "Mobile number must be exactly 10 digits",
+      }));
+    } else {
+      setErrors((prev) => ({ ...prev, mobile: "" }));
+    }
+  }
 
-    // ✅ Fix: handle countryCode
+  return;
+}
+
+   
+
+
     if (name === "countryCode") {
       setFormData((prev) => ({ ...prev, countryCode: value }));
       return;
     }
-
-    if (name.startsWith("education.")) {
+     if (name.startsWith("education.")) {
   const [, level, field] = name.split(".");
+
+  if (field === "marks") {
+    const numericValue = value.replace(/[^0-9.%]/g, ""); 
+    const parts = numericValue.split(".");
+    if (parts.length > 2) return; 
+
+    setFormData((prev) => ({
+      ...prev,
+      education: {
+        ...prev.education,
+        [level]: {
+          ...prev.education[level],
+          [field]: numericValue,
+        },
+      },
+    }));
+    return;
+  }
+
   setFormData((prev) => ({
     ...prev,
     education: {
@@ -66,7 +109,8 @@ function ResumeForm({onSubmit}) {
   }));
   return;
 }
-  setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleProjectChange = (index, field, value) => {
@@ -90,7 +134,31 @@ function ResumeForm({onSubmit}) {
       projects: prev.projects.filter((_, i) => i !== index),
     }));
   };
+    // ---------------- EXPERIENCE ----------------
+  const handleExperienceChange = (index, field, value) => {
+    setFormData((prev) => {
+      const experience = [...prev.experience];
+      experience[index] = { ...experience[index], [field]: value };
+      return { ...prev, experience };
+    });
+  };
 
+  const addExperience = () => {
+    setFormData((prev) => ({
+      ...prev,
+      experience: [
+        ...prev.experience,
+        { role: "", company: "", years: "", description: "" },
+      ],
+    }));
+  };
+
+  const removeExperience = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      experience: prev.experience.filter((_, i) => i !== index),
+    }));
+  };
   const addSkill = () => {
     const skill = formData.skillInput.trim();
     if (skill && !formData.skills.includes(skill)) {
@@ -113,8 +181,11 @@ function ResumeForm({onSubmit}) {
     let tempErrors = {};
     if (!formData.name.trim()) tempErrors.name = "* Required";
     if (!formData.email.trim()) tempErrors.email = "* Required";
-    if (!formData.mobile || formData.mobile.length !== 10)
-      tempErrors.mobile = "* Required (10 digits)";
+    if (!validateMobile(formData.countryCode, formData.mobile)) {
+    tempErrors.mobile = "* Invalid mobile number";
+     }
+    if (!formData.careerObjective.trim()) tempErrors.careerObjective = "* Required";
+
     if (formData.skills.length === 0) tempErrors.skills = "* Required";
     if (!formData.achievements.trim()) tempErrors.achievements = "* Required";
     if (!formData.certifications.trim()) tempErrors.certifications = "* Required";
@@ -127,31 +198,106 @@ function ResumeForm({onSubmit}) {
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
+  const validateMobile = (countryCode, mobile) => {
+  if (countryCode === "+91") {
+    const indianMobileRegex = /^[6-9][0-9]{9}$/;
+    return indianMobileRegex.test(mobile);
+  } else {
+    const genericMobileRegex = /^[0-9]{10}$/;
+    return genericMobileRegex.test(mobile);
+  }
+};
 
-   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      const fullMobile = formData.countryCode + formData.mobile;
-      const finalData = { ...formData, fullMobile };
-      
-      console.log("Resume Submitted:", finalData);
-      navigate('/templates-preview', { state: { resumeData: finalData } });
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-      // ✅ send data back to App.jsx
-      if (onSubmit) {
-        onSubmit(finalData);
+  // validating the form
+  if (!validate()) {
+    alert("Please fill all mandatory fields");
+    return;
+  }
+
+  console.log("Form data sent to preview:", formData);
+  const fullMobile = `${formData.countryCode}${formData.mobile}`;
+  const finalData = {
+    ...formData,
+    fullMobile,
+    tenthSchool: formData.education.tenth.school,
+    tenthYear: formData.education.tenth.year,
+    tenthMarks: formData.education.tenth.marks,
+    twelthCollege: formData.education.twelth.college,
+    twelthYear: formData.education.twelth.year,
+    twelthMarks: formData.education.twelth.marks,
+    ugCollege: formData.education.ug.college,
+    ugYear: formData.education.ug.year,
+    ugMarks: formData.education.ug.marks,
+    pgCollege: formData.education.pg.college,
+    pgYear: formData.education.pg.year,
+    pgMarks: formData.education.pg.marks,
+  };
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.post(
+      "http://localhost:5000/api/resume",
+      finalData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
       }
-    } else {
-      alert("Please fill all mandatory fields");
-    }
+    );
+    console.log("Resume saved in DB:", res.data);
+    navigate("/templates-preview", { state: { resumeData: res.data.resume } });
+    if (onSubmit) onSubmit(res.data.resume);
+  } catch (err) {
+    console.error("Error saving resume:", err.response?.data || err.message);
+    alert("Failed to save resume. Please try again.");
+  }
+};
+  const handleSave = (e) => {
+    e.preventDefault();
+      const newId = saveResume(resumeId, formData);
+      alert(`Resume ${resumeId === 'new' ? 'saved' : 'updated'} successfully!`);
+      if (resumeId === 'new') {
+        navigate(`/editor/${newId}`, { replace: true });
+      }
+    // }
   };
 
   return (
     <div>
-      <h2>Resume Form</h2>
-      <form onSubmit={handleSubmit}>
+      <div className="form-panel-header"><h2>Resume Form</h2></div>
+      <div className="form-scrollable-area">
+        <div className="editable-title-wrapper">
+          <div className="editable-title-container" title="Click to rename your resume">
+            <input
+              type="text"
+              name="resumeTitle"
+              className="editable-title-input"
+              value={formData.resumeTitle || ''}
+              onChange={handleChange}
+              aria-label="Resume Title"
+              size="1" 
+            />
+            <svg
+              className="edit-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16" /* Smaller icon */
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+            </svg>
+          </div>
+        </div>
+      <div className="form-page-container">
+      <form onSubmit={handleSave}>
+        {/* ---------------- BASIC INFO ---------------- */}
         <div>
-          <h3>
+          <h3 className="h3-heading">
             Full Name <span style={{ color: "red" }}>*</span>
           </h3>
           <br />
@@ -167,7 +313,7 @@ function ResumeForm({onSubmit}) {
         <br />
 
         <div>
-          <h3>
+          <h3 className="h3-heading">
             Email <span style={{ color: "red" }}>*</span>
           </h3>
           <br />
@@ -183,8 +329,8 @@ function ResumeForm({onSubmit}) {
         <br />
 
         <div>
-          <h3>
-            Mobile <span style={{ color: "red" }}>*</span> (10 digits)
+          <h3 className="h3-heading">
+            Mobile <span style={{ color: "red" }}>*</span>
           </h3>
           <br />
           <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -221,8 +367,7 @@ function ResumeForm({onSubmit}) {
         <br />
 
         <div>
-          <h3>LinkedIn (Optional)</h3>
-          <br />
+          <h3 className="h3-heading">LinkedIn (Optional)</h3>
           <input
             type="url"
             name="linkedin"
@@ -234,8 +379,7 @@ function ResumeForm({onSubmit}) {
         <br />
 
         <div>
-          <h3>GitLab (Optional)</h3>
-          <br />
+          <h3 className="h3-heading">GitLab (Optional)</h3>
           <input
             type="url"
             name="gitlab"
@@ -244,58 +388,64 @@ function ResumeForm({onSubmit}) {
             placeholder="https://gitlab.com/username"
           />
         </div>
-        <br />
-
-        <h3>Education</h3>
-        <div className="education">
-          {["tenth", "twelth", "ug", "pg"].map((level) => (
-            <div key={level} style={{ marginBottom: "15px" }}>
-              <label style={{ fontWeight: "bold" }} className="degree-label">
-                {level.toUpperCase()}
-                {level !== "pg" ? (
-                  <span style={{ color: "red" }}>*</span>
-                ) : (
-                  " (Optional)"
-                )}
-              </label>
-
-              <label>Marks/CGPA:</label>
-              <input
-                type="text"
-                name={`education.${level}.marks`}
-                value={formData.education[level].marks}
-                onChange={handleChange}
-                placeholder="e.g., 85 or 8.5"
-              />
-
-              <label>College:</label>
-              <input
-                type="text"
-                name={`education.${level}.college`}
-                value={formData.education[level].college}
-                onChange={handleChange}
-                placeholder="College Name"
-              />
-              <div style={{ color: "red" }}>{errors[level]}</div>
-
-              <label>Year of Passing:</label>
-              <select
-                name={`education.${level}.year`}
-                value={formData.education[level].year}
-                onChange={handleChange}
-              >
-                {years.map((yr) => (
-                  <option key={yr} value={yr}>
-                    {yr}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
-
+         {/* ---------------- CAREER OBJECTIVE ---------------- */}
+<div>
+  <h3 className="h3-heading">
+    Career Objective <span style={{ color: "red" }}>*</span>
+  </h3>
+  <textarea
+    name="careerObjective"
+    value={formData.careerObjective}
+    onChange={handleChange}
+    rows={4}
+    style={{ width: "100%" }}
+  />
+  <div style={{ color: "red" }}>{errors.careerObjective}</div>
+</div>
+<h3 className="h3-heading">Education <span style={{ color: "red" }}>*</span></h3>
+<div className="education">
+  {["tenth", "twelth", "ug", "pg"].map((level) => (
+    <div key={level}>
+      <label style={{ fontWeight: "bold" }} className="degree-label">
+        {level.toUpperCase()}
+        {level !== "pg" ? <span style={{ color: "red" }}>*</span> : " (Optional)"}
+      </label>
+      
+      <label>Marks/CGPA:</label>
+      <input
+        type="text"
+        name={`education.${level}.marks`}
+        value={formData.education?.[level]?.marks || ''} 
+        onChange={handleChange}
+      />
+      
+      <label>{level === "tenth" ? "School:" : "College:"}</label>
+      <input
+        type="text"
+        name={`education.${level}.${level === "tenth" ? "school" : "college"}`}
+        value={formData.education?.[level]?.[level === "tenth" ? "school" : "college"] || ''}
+        onChange={handleChange}
+      />
+      
+      <div style={{ color: "red" }}>{errors[level]}</div>
+      
+      <label>Year of Passing:</label>
+      <select
+        name={`education.${level}.year`}
+        value={formData.education?.[level]?.year || ''}
+        onChange={handleChange}
+      >
+        <option value="">Select Year</option> 
+        {years.map((yr) => (
+          <option key={yr} value={yr}>{yr}</option>
+        ))}
+      </select>
+    </div>
+  ))}
+</div>
+        {/* ---------------- SKILLS ---------------- */}
         <div>
-          <h3>
+          <h3 className="h3-heading">
             Skills <span style={{ color: "red" }}>*</span>
           </h3>
           <br />
@@ -323,71 +473,75 @@ function ResumeForm({onSubmit}) {
           </div>
           <div style={{ color: "red" }}>{errors.skills}</div>
         </div>
-        <br />
+<div>
+  <h3>Experience</h3>
+  {(formData.experience || []).map((exp, idx) => (
+    <div key={idx} style={{ marginBottom: "10px" }}>
+      <label>Job Role</label>
+      <input
+        type="text"
+        value={exp?.role || ''} 
+        onChange={(e) => handleExperienceChange(idx, "role", e.target.value)}
+      />
+      
+      <label>Company/Organization</label>
+      <input
+        type="text"
+        value={exp?.company || ''}
+        onChange={(e) => handleExperienceChange(idx, "company", e.target.value)}
+      />
+      
+      <label>Years of Experience</label>
+      <input
+        type="text"
+        value={exp?.years || ''}
+        onChange={(e) => handleExperienceChange(idx, "years", e.target.value)}
+      />
+      
+      <label>Job Description</label>
+      <textarea
+        value={exp?.description || ''}
+        onChange={(e) => handleExperienceChange(idx, "description", e.target.value)}
+      />
+      
+      <button type="button" onClick={() => removeExperience(idx)}>
+        Remove
+      </button>
+    </div>
+  ))}
+  <button type="button" onClick={addExperience}>
+    Add Experience
+  </button>
+</div>
+
+        {/* --- PROJECTS (with magnificent crash-proof safeguard) --- */}
+<div>
+  <h3 className="h3-heading">Projects (Optional)</h3>
+  {(formData.projects || []).map((proj, idx) => (
+    <div key={idx} style={{ marginBottom: "10px" }}>
+      <label>Project Title</label>
+      <input
+        type="text"
+        value={proj?.title || ''}
+        onChange={(e) => handleProjectChange(idx, "title", e.target.value)}
+      />
+      <label>Project Description</label>
+      <textarea
+        value={proj?.description || ''}
+        onChange={(e) => handleProjectChange(idx, "description", e.target.value)}
+      />
+      <button type="button" onClick={() => removeProject(idx)}>
+        Remove
+      </button>
+    </div>
+  ))}
+  <button type="button" onClick={addProject}>
+    Add Project
+  </button>
+</div>
 
         <div>
-          <h3>Experience (Optional)</h3>
-          <br />
-          <textarea
-            name="experience"
-            value={formData.experience}
-            onChange={handleChange}
-            placeholder="Write here..."
-          />
-        </div>
-        <br />
-
-        <div>
-          <h3>Projects (Optional)</h3>
-          <br />
-          {formData.projects.map((proj, idx) => (
-            <div
-              key={idx}
-              style={{
-                border: "1px solid #e6eef3",
-                padding: "12px",
-                borderRadius: "8px",
-                marginBottom: "10px",
-                background: "#fafcff",
-              }}
-            >
-              <label>Project Title</label>
-              <input
-                type="text"
-                value={proj.title}
-                onChange={(e) =>
-                  handleProjectChange(idx, "title", e.target.value)
-                }
-                placeholder="Project title"
-              />
-
-              <label>Project Description</label>
-              <textarea
-                value={proj.description}
-                onChange={(e) =>
-                  handleProjectChange(idx, "description", e.target.value)
-                }
-                placeholder="Describe the project..."
-              />
-
-              <div
-                style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}
-              >
-                <button type="button" onClick={() => removeProject(idx)}>
-                  Remove
-                </button>
-              </div>
-            </div>
-          ))}
-
-          <button type="button" onClick={addProject}>
-            Add Project
-          </button>
-        </div>
-        <br />
-
-        <div>
-          <h3>
+          <h3 className="h3-heading">
             Achievements <span style={{ color: "red" }}>*</span>
           </h3>
           <br />
@@ -402,7 +556,7 @@ function ResumeForm({onSubmit}) {
         <br />
 
         <div>
-          <h3>
+          <h3 className="h3-heading">
             Certifications <span style={{ color: "red" }}>*</span>
           </h3>
           <br />
@@ -424,11 +578,12 @@ function ResumeForm({onSubmit}) {
         {/* ... all your input fields ... */}
         <button type="submit">Preview Resume</button> {/* Changed button text */}
       </form>
+      </div>
     </div>
     </div>
   );
 }
-
+  
 export default ResumeForm;
 // import React, { useState } from "react";
 // import "./ResumeForm.css";

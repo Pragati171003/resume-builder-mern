@@ -1,16 +1,16 @@
 import jwt from "jsonwebtoken";
+const SECRET_KEY = process.env.SECRET_KEY || "secret";
 
 const authMiddleware = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1]; 
-  if (!token) return res.status(401).json({ msg: "No token, authorization denied" });
+  const token = req.headers.authorization;
+  if(!token) return res.status(401).json({ message: "Unauthorized" });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, SECRET_KEY);
     req.user = decoded;
     next();
-  } catch (err) {
-    return res.status(401).json({ msg: "Invalid token" });
+  } catch(err) {
+    res.status(401).json({ message: "Invalid token" });
   }
 };
-
 export default authMiddleware;

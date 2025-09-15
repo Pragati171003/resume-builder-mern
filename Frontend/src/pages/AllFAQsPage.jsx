@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './AllFAQsPage.css';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import axios from 'axios'; 
 
 const allFaqs = [
   { question: "Can I edit my resume after downloading?", answer: "Yes! Once you download your resume, you can edit it anytime using your preferred document editor. You can also come back to our platform to make adjustments and generate a new version." },
@@ -14,14 +15,25 @@ function AllFAQsPage() {
   const [openIndex, setOpenIndex] = useState(null);
   const [formData, setFormData] = useState({ email: '', question: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
+    setError('');
     if (formData.email && formData.question) {
-      setIsSubmitted(true);
-      console.log("Form submitted:", formData);
+      setIsLoading(true);
+      try {
+        await axios.post('http://localhost:5000/api/faq/submit', formData);
+        setIsSubmitted(true); 
+      } catch (err) {
+      console.error("Submission error:", err);
+      setError(err.response?.data?.msg || 'Failed to submit your question. Please try again later.');
+      }finally{
+        setIsLoading(false);
+      }
     }
   };
 
@@ -69,7 +81,9 @@ function AllFAQsPage() {
               onChange={(e) => setFormData({ ...formData, question: e.target.value })}
               required
             ></textarea>
-            <button type="submit">Ask Question</button>
+            <button type="submit" className="submit-button" disabled={isLoading}>
+              {isLoading ? 'Sending...' : 'Ask Question'}
+            </button>
           </form>
         )}
       </section>

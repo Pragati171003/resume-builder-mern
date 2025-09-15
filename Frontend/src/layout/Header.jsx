@@ -9,7 +9,7 @@ function Header() {
     <header className="header">
       <Link to="/" className="header-left"> 
         <img src={logoImagec} alt="CVCRAFT Logo" className="logo" />
-        <span className="logo-text">CVCRAFT</span>
+        <span className="logo-text">cvcraft</span>
       </Link>
       <nav className="header-nav">
         <NavLink to="/">Home</NavLink>
