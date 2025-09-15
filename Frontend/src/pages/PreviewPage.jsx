@@ -17,11 +17,9 @@ function PreviewPage() {
   return (
     <ResumeProvider initialData={initialData}>
       <div className="preview-page-container">
-        {/* Column 1: The Toolbar */}
         <div className="preview-toolbar-panel">
           <Toolbar />
         </div>
-        {/* Column 2: The Resume Preview */}
         <div className="preview-display-panel">
           <ResumePreview />
         </div>

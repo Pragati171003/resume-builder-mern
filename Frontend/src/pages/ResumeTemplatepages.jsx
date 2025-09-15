@@ -1,4 +1,3 @@
-// ResumeTemplateGrid.jsx
 import React, { useState } from "react";
 import "./ResumeTemplateGrid.css";
 

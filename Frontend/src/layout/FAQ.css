@@ -96,7 +96,9 @@
 
 .faq-question {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
   font-weight: 600;
   font-size: 18px;
   color: #222;
@@ -107,4 +109,31 @@
   color: #555;
   font-size: 16px;
   line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .faq-section {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px; 
+  }
+  .faq-left, .faq-right {
+    flex: none; 
+    width: 100%;
+  } 
+  .faq-left {
+    text-align: center; 
+  }
+  .faq-left h2 {
+    font-size: 24px; 
+  }
+  .faq-left p {
+    font-size: 14px; 
+  }
+  .faq-question {
+    font-size: 16px; 
+  }
+  .faq-answer {
+    font-size: 15px; 
+  }
 }

@@ -1,10 +1,10 @@
-
+import React from 'react';
 import "./ResumeTemplateGrid.css";
-
-
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import ReactDOMServer from "react-dom/server";
-
 import { useState } from "react";
+
 const defaultResumeData = {
   name: "Jhon Deo",
   email: "jhon@example.com",
@@ -26,27 +26,35 @@ const defaultResumeData = {
 
 
 const TEMPLATE_COMPONENTS = [
-  
-  { id: "template-html3", title: "Flat", type: "html", url: "/templates/flat.html" },
-  { id: "template-html1", title: "Elegant",type: "html", url: "/templates/elegant.html" },
-  { id: "template-html2", title: "Caffeine ",type: "html", url: "/templates/caffeine.html" },
-  { id: "template-html3", title: "Spartan ",type: "html", url: "/templates/spartan.html" },
-  { id: "template-html4", title: "Kendall ",type: "html", url: "/templates/kendall.html" },
-  { id: "template-html5", title: "Onepage ",type: "html", url: "/templates/onepage.html" },
-  { id: "template-html6", title: "Microdata",type: "html", url: "/templates/microdata.html" },
-  { id: "template-html7", title: "Modern ",type: "html", url: "/templates/modern.html" },
-  { id: "template-html8", title: "Onepage",type: "html", url: "/templates/onepage.html" },
-  { id: "template-html9", title: "Short",type: "html", url: "/templates/resume_short.html" },
-  { id: "template-html10", title: "Microdata",type: "html", url: "/templates/resume_microdata.html" },
-  { id: "template-html11", title: "Slick",type: "html", url: "/templates/resume_slick.html" },
-  { id: "template-html12", title: "Stackoverflow",type: "html", url: "/templates/stackoverflow.html" },
-  { id: "template-html14", title: "Class",type: "html", url: "/templates/resume_class.html" },
+  { id: "tech", title: "Tech",type: "html", url: "/templates/tech.html" },
+  { id: "flat", title: "Flat", type: "html", url: "/templates/flat.html" },
+  { id: "elegant", title: "Elegant",type: "html", url: "/templates/elegant.html" },
+  { id: "caffeine", title: "Caffeine ",type: "html", url: "/templates/caffeine.html" },
+  { id: "spartan", title: "Spartan ",type: "html", url: "/templates/spartan.html" },
+  { id: "kendall", title: "Kendall ",type: "html", url: "/templates/kendall.html" },
+  { id: "onepage", title: "Onepage ",type: "html", url: "/templates/onepage.html" },
+  { id: "short", title: "Short",type: "html", url: "/templates/resume_short.html" },
+  { id: "stackoverflow", title: "Stackoverflow",type: "html", url: "/templates/stackoverflow.html" },
+  { id: "class", title: "Class",type: "html", url: "/templates/resume_class.html" },
+  { id: "boilerplate", title: "Boilerplate",type: "html", url: "/templates/boilerplate-preview.html" },
   
    
 ];
 
 export default function ResumeTemplateGrid() {
   const [selected, setSelected] = useState(null);
+  const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
+
+  const handleTemplateSelect = (templateId) => {
+    setSelected(templateId);
+    const targetUrl = `/editor/new?template=${templateId}`;
+    if (isLoggedIn) {
+      navigate(targetUrl);
+    } else {
+      navigate(`/login?redirectTo=${encodeURIComponent(targetUrl)}`);
+    }
+  };
 
 
   return (
@@ -61,7 +69,7 @@ export default function ResumeTemplateGrid() {
             <div
               key={t.id}
               className={`card ${selected === t.id ? "selected" : ""}`}
-              onClick={() => setSelected(t.id)}
+              onClick={() => handleTemplateSelect(t.id)}
             >
               <h3 className="card-title">{t.title}</h3>
                  <div className="template-preview">
@@ -106,32 +114,13 @@ export default function ResumeTemplateGrid() {
     />
   )}
 </div>
-
-
-
-
             </div>
           );
         })}
       </div>
 
 <div className="button-container">
-  <button
-    onClick={() => {
-      const selectedTemplate = TEMPLATE_COMPONENTS.find(t => t.id === selected);
-
-      if (selectedTemplate.type === "html") {
-        
-        window.open(selectedTemplate.url, "_blank");
-      } else {
-        
-        alert(`You chose: ${selectedTemplate.title}`);
-      }
-    }}
-    className="choose-btn"
-  >
-    Choose Template
-  </button>
+  
 </div>
 
     </div>

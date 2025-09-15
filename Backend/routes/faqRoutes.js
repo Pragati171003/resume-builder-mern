@@ -1,4 +1,3 @@
-// --- Backend/routes/faqRoutes.js (Final ESM Version) ---
 import express from 'express';
 import nodemailer from 'nodemailer';
 
@@ -44,7 +43,4 @@ router.post('/submit', async (req, res) => {
     res.status(500).json({ msg: 'Server error: Could not send email.' });
   }
 });
-
-// --- THIS IS THE MAGNIFICENT FIX ---
-// Use 'export default' in ES Modules instead of 'module.exports'
 export default router;

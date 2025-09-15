@@ -362,3 +362,67 @@ main section {
   color: #495057; 
   opacity: 0.9;
 }
+@media (max-width: 992px) {
+  .hero-section,
+  .features-section,
+  .how-it-works-section,
+  .testimonial-section {
+    padding: 80px 20px; 
+  }
+  .templates-section {
+    padding: 80px 0;
+  }
+  .hero-section h1 {
+    font-size: 48px; 
+  }
+  .hero-subtitle {
+    font-size: 18px; 
+  }
+  .features-section h2,
+  .how-it-works-section h2,
+  .templates-section h2 {
+    font-size: 36px; 
+  }
+  .features-section h2 {
+    margin-left: 0; 
+    text-align: center;
+  }
+  .steps-container {
+    gap: 60px; 
+  }
+  .step,
+  .step.reverse {
+    flex-direction: column; 
+    gap: 30px;
+  }
+  .step img {
+    width: 100%; 
+    height: auto; 
+  }
+  .step-text {
+    text-align: center; 
+  }
+  .step-text h3 {
+    font-size: 28px;
+  }
+  .step-text p {
+    font-size: 16px;
+  }
+  .step-number {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .testimonial-content {
+    padding: 40px 20px; 
+  }
+  .quote {
+    font-size: 22px; 
+  }
+  .author {
+    flex-direction: column; 
+    gap: 20px;
+  }
+  .author-info {
+    text-align: center; 
+  }
+}
