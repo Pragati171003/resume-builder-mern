@@ -78,8 +78,8 @@ const initialData = {
     }
   ],
   
-  achievements: "Published author on the 'Cloud-Native Weekly' tech blog; Speaker at the National Developer Conference 2023.",
-  certifications: "AWS Certified Solutions Architect – Associate; Certified Kubernetes Application Developer (CKAD)",
+  achievements: ["Published author on the 'Cloud-Native Weekly' tech blog; Speaker at the National Developer Conference 2023."],
+  certifications: ["AWS Certified Solutions Architect – Associate; Certified Kubernetes Application Developer (CKAD)"],
   customSections: [
     {
       title: "References",
