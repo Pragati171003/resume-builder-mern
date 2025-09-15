@@ -89,7 +89,7 @@ export default function SignUppage() {
 
         {/* Password */}
         <div className="form-group input-icon">
-          <label>Password</label>
+          <label>Create Password</label>
           <input
             type="password"
             name="password"
