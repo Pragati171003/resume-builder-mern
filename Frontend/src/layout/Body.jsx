@@ -115,7 +115,7 @@ function Body() {
             <div className="step-text">
               <span className="step-number">1</span>
               <h3>Enter Your Details</h3>
-              <p>Start by providing key information such as your job title, experience, and skills. Our system tailors suggestions based on your input to match industry standards.</p>
+              <p>Start by providing key information such as your job title, experience, and skills. Our system matches your input to resume sections.</p>
             </div>
           </div>
           <div className="step reverse">
@@ -131,7 +131,7 @@ function Body() {
             <img src={myScreenshot3} alt="Download or share illustration" />
             <div className="step-text">
               <span className="step-number">3</span>
-              <h3>Download or Share Instantly</h3>
+              <h3>Download Instantly</h3>
               <p>Once you're satisfied with your resume, download it in your pdf format and share it directly with potential employers—all in just a few clicks!</p>
             </div>
           </div>
@@ -164,7 +164,7 @@ function Body() {
       <section className="testimonial-section">
         <div className="testimonial-content">
           <p className="quote">
-            “This resume builder made the job application process so much easier! The suggestions were spot-on, and my resume looks more professional than ever. I landed an interview within a week!”
+            “This resume builder made the job application process so much easier! My resume looks more professional than ever. I landed an interview within a week!”
           </p>
           <div className="author">
             {/* Replace with author's image */}

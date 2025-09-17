@@ -18,7 +18,11 @@ const resumeSchema = new mongoose.Schema({
   experience: String,
   projects: [{ title: String, description: String }],
   achievements: String,
-  certifications: String
+  certifications: String,
+  customSections: [{
+    title: String,
+    content: String,
+  }],
 }, { timestamps: true });
 
 export default mongoose.model("Resume", resumeSchema);

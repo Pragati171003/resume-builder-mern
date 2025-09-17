@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
+import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -26,6 +27,15 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get('/me', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 router.post("/login", async (req, res) => {
   try {
@@ -37,7 +47,14 @@ router.post("/login", async (req, res) => {
     if (!isMatch) return res.status(400).json({ msg: "Invalid email or password" });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.json({ token, msg: "Login successful" });
+    res.json({ 
+      token, 
+      msg: "Login successful", 
+      user: {
+        _id: user._id,
+        name: user.firstName 
+      } 
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Server error" });
