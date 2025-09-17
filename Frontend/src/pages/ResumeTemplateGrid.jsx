@@ -37,6 +37,11 @@ const TEMPLATE_COMPONENTS = [
   { id: "stackoverflow", title: "Stackoverflow",type: "html", url: "/templates/stackoverflow.html" },
   { id: "class", title: "Class",type: "html", url: "/templates/resume_class.html" },
   { id: "boilerplate", title: "Boilerplate",type: "html", url: "/templates/boilerplate-preview.html" },
+  { id: "bufferbloat", title: "Bufferbloat ",type: "html", url: "/templates/bufferbloat.html" },
+  { id: "moon", title: "Moon",type: "html", url: "/templates/moon.html" },
+  { id: "compact", title: "Comapct",type: "html", url: "/templates/compact.html" },
+  { id: "cora", title: "Cora",type: "html", url: "/templates/cora.html" },
+  { id: "macchiato", title: "Macchiato",type: "html", url: "/templates/macchiato.html" },
   
    
 ];
