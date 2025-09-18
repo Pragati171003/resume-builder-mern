@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios"; 
 import { useAuth } from '../context/AuthContext'; // From File 2
 import './Loginpage.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export function Loginpage() {
   const { login } = useAuth();
@@ -12,10 +13,14 @@ export function Loginpage() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const from = location.state?.from?.pathname || "/dashboard";
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const finalValue = name === 'email' ? value.toLowerCase() : value;
+    setFormData({ ...formData, [name]: finalValue });
     setError(""); 
   };
+
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -24,6 +29,11 @@ export function Loginpage() {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       setError("Please enter both email and password.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("Please enter a valid email address.");
       return;
     }
     try {
@@ -70,13 +80,10 @@ export function Loginpage() {
               required 
             />
             <span className="toggle-password" onClick={togglePassword}>
-              {showPassword ? "🙈" : "👁️"}
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-          
-          {/* Displaying the error message from File 1 */}
           {error && <p className="error-message">{error}</p>}
-
           <button type="submit">Login</button>
         </form>
 
