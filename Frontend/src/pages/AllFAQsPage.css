@@ -133,15 +133,14 @@
   box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
 }
 
-
 .all-faqs-page .thank-you-message {
   max-width: 650px;
   margin: 0 auto;
   padding: 30px;
-  border: 1px solid #0d6efd;
-  background-color: #e7f5ff;
+  border: 1px solid #28a745;
+  background-color: #e9f7ec;
   border-radius: 12px;
-  color: #0a58ca;
+  color: #155724;
 }
 .all-faqs-page .thank-you-message h3 {
   margin-bottom: 10px;
