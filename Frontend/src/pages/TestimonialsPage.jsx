@@ -244,6 +244,6 @@ function TestimonialsPage() {
       </section>
     </div>
   );
-}
+};
 
-export default TestimonialsPage;
+export default Testimonials;
