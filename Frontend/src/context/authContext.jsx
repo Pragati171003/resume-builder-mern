@@ -7,33 +7,36 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [user, setUser] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem('user');
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch (e) {
+      return null;
+    }
+  });
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
+  const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem('token'));
   const [isLoading, setIsLoading] = useState(true);
-   useEffect(() => {
-    const loadUser = async () => {
-      const savedToken = localStorage.getItem('token');
-      if (savedToken) {
+  
+  useEffect(() => {
+    const validateToken = async () => {
+      if (token) {
         try {
-          // --- THIS IS THE MAGNIFICENT FIX ---
-          // We now send the token directly, without "Bearer ", to match your backend.
-          const config = { headers: { 'Authorization': savedToken } };
-          
+          const config = { headers: { 'Authorization': token } };
           const { data } = await axios.get('http://localhost:5000/api/auth/me', config);
           
           setUser(data);
-          setToken(savedToken);
           setIsLoggedIn(true);
         } catch (error) {
-          console.error("Token validation failed:", error);
+          console.error("Token is invalid, logging out:", error);
           logout();
         }
       }
       setIsLoading(false);
     };
-    loadUser();
-  }, []);
+    validateToken();
+  }, [token]);
 
   const login = (newToken, userData) => {
     localStorage.setItem('token', newToken);

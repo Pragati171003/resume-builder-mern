@@ -26,7 +26,10 @@ const getRelativeTime = (resumeId) => {
   
   return 'Saved just now';
 };
-
+  const capitalizeName = (name) => {
+    if (!name) return 'Valued User'; 
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
 
 function DashboardPage() {
   const { user } = useAuth();
@@ -55,7 +58,7 @@ function DashboardPage() {
     <div className="dashboard-page">
       <header className="dashboard-header">
         <div className="welcome-message">
-          <h1>Hello, {user?.name || 'Valued User'}!</h1>
+          <h1>Hello, {capitalizeName(user?.name)}!</h1>
           <p>Manage your resumes or create a new one to get started.</p>
         </div>
         <Link to="/editor/new" className="btn-create-new">
