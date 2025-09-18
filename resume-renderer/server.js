@@ -19,7 +19,17 @@ app.post('/render', async (req, res) => {
   try {
     const theme = await import(`jsonresume-theme-${themeName}`);
     try {
-      const html = await render(resume, theme.default);
+      let html = await render(resume, theme.default);
+      if (resume.meta && resume.meta.css) {
+      console.log(`Injecting magnificent CSS for theme '${themeName}'...`);
+      const cssFix = `
+        <style>
+          ${resume.meta.css}
+        </style>
+      `;
+      html = html.replace('</head>', `${cssFix}</head>`);
+    }
+    res.send(html);
       res.send(html); 
     } catch (renderError) {
       console.error(`Error rendering the theme '${themeName}':`, renderError.message);

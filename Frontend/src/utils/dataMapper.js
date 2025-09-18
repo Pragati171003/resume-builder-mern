@@ -1,6 +1,20 @@
-export const mapFormDataToSchema = (formData,selectedTemplate) => {
+export const mapFormDataToSchema = (formData,selectedTemplate,themeOptions) => {
   const safe = (value) => value || '';
+const { themeColor, fontFamily, fontSize } = themeOptions || {};
+const fontImport = fontFamily ? `@import url('https://fonts.googleapis.com/css2?family=${fontFamily.split(',')[0].replace(/'/g, '').replace(' ', '+')}:wght@400;700&display=swap');` : '';
   let mappedData = {
+    meta: {
+      theme: selectedTemplate,
+      css: `
+        /* We import the magnificent Google Font first */
+        ${fontImport}
+
+        /* We only apply the overrides if a choice has been made */
+        ${themeColor ? `h1, h2, h3, a { color: ${themeColor} !important; }` : ''}
+        ${fontFamily ? `body, h1, h2, h3, p, li, span { font-family: ${fontFamily} !important; }` : ''}
+        ${fontSize ? `body { font-size: ${fontSize}rem !important; }` : ''}
+      `
+    },
     basics: {
       name: safe(formData.name),
       label: "Senior Software Engineer", 
@@ -32,6 +46,9 @@ export const mapFormDataToSchema = (formData,selectedTemplate) => {
     })),
     awards: formData.achievements ? [{ title: safe(formData.achievements) }] : [],
     certificates: formData.certifications ? [{ name: safe(formData.certifications) }] : [],
+    references: [],
+    volunteer: [],
+    publications: [],
   };
 
   if (mappedData.work.length === 0) {
@@ -40,6 +57,38 @@ export const mapFormDataToSchema = (formData,selectedTemplate) => {
   if (mappedData.projects.length === 0) {
     mappedData.projects.push({ name: '', description: '' });
   }
+
+  (formData.customSections || []).forEach(section => {
+    const sectionTitle = (section.title || '').toLowerCase();
+    switch (sectionTitle) {
+      case 'references':
+        mappedData.references.push({
+          reference: safe(section.content),
+        });
+        break;
+      
+      case 'volunteer work':
+      case 'volunteering':
+        mappedData.volunteer.push({
+          organization: safe(section.title),
+          summary: safe(section.content),
+        });
+        break;
+      case 'publications':
+        mappedData.publications.push({
+          name: safe(section.title),
+          summary: safe(section.content),
+        });
+        break;
+      default:
+        mappedData.awards.push({
+          title: safe(section.title),
+          summary: safe(section.content),
+        });
+        break;
+    }
+  });
+
    if (selectedTemplate === 'tech') {
     console.log("Applying magnificent override for 'tech' theme...");
     mappedData.basics.label = "Senior Software Engineer";

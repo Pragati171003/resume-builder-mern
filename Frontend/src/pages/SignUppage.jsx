@@ -23,9 +23,36 @@ export default function SignUppage() {
     setError("");
     setSuccess("");
   };
+  const validateForm = () => {
+    if (form.password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return false;
+    }
+    if (!/[A-Z]/.test(form.password)) {
+      setError("Password must contain at least one uppercase letter.");
+      return false;
+    }
+    if (!/[0-9]/.test(form.password)) {
+      setError("Password must contain at least one number.");
+      return false;
+    }
+    if (!/[!@#$%^&*]/.test(form.password)) {
+      setError("Password must contain at least one special character (!@#$%^&*).");
+      return false;
+    }
+    if (!/^\d{10}$/.test(form.mobile)) {
+      setError("Please enter a valid 10-digit mobile number.");
+      return false;
+    }
+    return true; 
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return; 
+    }
     try {
       await axios.post("http://localhost:5000/api/auth/register", form);
       setSuccess("Registered successfully! Please login.");
