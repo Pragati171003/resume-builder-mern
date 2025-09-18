@@ -10,7 +10,9 @@ const UserSchema = new mongoose.Schema({
 
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+},{ 
+  timestamps: true,
+  collection: process.env.COLLECTION_NAME 
 });
-
 const User = mongoose.model("User", UserSchema);
 export default User;

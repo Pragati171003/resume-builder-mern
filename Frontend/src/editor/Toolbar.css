@@ -135,3 +135,32 @@
 }
 .btn-download { background-color: #198754; color: white; }
 .btn-save { background-color: #0d6efd; color: white; }
+.styles-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.toolbar-group h3 {
+  display: block; text-align: left; font-size: 14px;
+  font-weight: 600; color: #495057; margin: 0 0 12px 0;
+}
+.reset-section {
+margin-top: 20px;
+padding-top: 20px;
+border-top: 1px solid #dee2e6;
+}
+.reset-styles-btn {
+width: 100%;
+padding: 10px;
+border: 1px solid #6c757d;
+border-radius: 6px;
+background-color: transparent;
+color: #6c757d;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+.reset-styles-btn:hover {
+background-color: #6c757d;
+color: #ffffff;
+}

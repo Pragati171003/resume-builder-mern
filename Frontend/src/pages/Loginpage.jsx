@@ -13,20 +13,22 @@ export function Loginpage() {
   const [showPassword, setShowPassword] = useState(false);
   const from = location.state?.from?.pathname || "/dashboard";
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     setError(""); 
   };
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password) {
+      setError("Please enter both email and password.");
+      return;
+    }
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", formData);
-      localStorage.setItem("token", res.data.token);
-      const userData = res.data.user || { email: formData.email, name: "Valued User" };
-      login(userData);
+      login(res.data.token, res.data.user);
       const queryParams = new URLSearchParams(location.search);
       const redirectTo = queryParams.get('redirectTo');
       if (redirectTo) {

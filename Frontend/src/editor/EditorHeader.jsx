@@ -38,7 +38,7 @@ function EditorHeader() {
       <div className="editor-header-left">
         <button className="header-btn styles-toggle" onClick={() => setIsToolbarVisible(!isToolbarVisible)}>
           <FaBars />
-          <span className="btn-text">Templates</span>
+          <span className="btn-text">Themes</span>
         </button>
       </div>
       <div className="editor-header-right">
