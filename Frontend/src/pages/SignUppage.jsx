@@ -109,6 +109,7 @@ export default function SignUppage() {
             ref={dateInputRef}
             value={form.dob}
             onChange={handleChange}
+            max={new Date().toISOString().split("T")[0]}  
             required
           />
           <i
