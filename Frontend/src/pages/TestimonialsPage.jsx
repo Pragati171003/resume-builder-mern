@@ -246,4 +246,4 @@ function TestimonialsPage() {
   );
 };
 
-export default Testimonials;
+export default TestimonialsPage;
