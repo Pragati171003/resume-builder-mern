@@ -114,73 +114,54 @@
   text-align: center;
 }
 
-.form-wrapper h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1a202c;
-  margin-top: 0;
-  margin-bottom: 12px;
+.submission-section {
+  padding: 100px 40px;
+  background-color: #f4f7fc;
+  text-align: center;
 }
-
+.form-wrapper h2 {
+  font-size: 42px; font-weight: 700; margin-bottom: 16px; color: #1a202c;
+}
 .form-wrapper p {
-  font-size: 16px;
-  color: #6c757d;
-  margin-bottom: 40px;
+  max-width: 600px; margin: 0 auto 40px auto; color: #495057; font-size: 18px;
 }
 
 .testimonial-form {
-  width: 100%;
-  text-align: left;
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.input-field-group {
-  position: relative;
-  margin-bottom: 25px;
-}
-
-.input-field-group input,
-.input-field-group textarea {
+.testimonial-form input,
+.testimonial-form textarea {
   width: 100%;
-  box-sizing: border-box;
-  padding: 22px 16px 8px 16px;
+  padding: 14px 18px;
+  border: 1px solid #dee2e6; 
+  background-color: #f8f9fa;
+  border-radius: 8px;
   font-size: 16px;
   font-family: inherit;
-  background-color: #f8f9fa; 
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
+  box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
-.input-field-group textarea {
-  resize: vertical;
-  min-height: 120px;
+.testimonial-form input::placeholder,
+.testimonial-form textarea::placeholder {
+  color: #a0aec0; 
 }
 
-.input-field-group label {
-  position: absolute;
-  top: 15px;
-  left: 16px;
-  font-size: 16px;
-  color: #868e96;
-  pointer-events: none; 
-  transition: all 0.2s ease-out;
-}
-
-.input-field-group input:focus + label,
-.input-field-group input:not(:placeholder-shown) + label,
-.input-field-group textarea:focus + label,
-.input-field-group textarea:not(:placeholder-shown) + label {
-  top: 6px;
-  font-size: 12px;
-  color: #0d6efd; 
-}
-
-.input-field-group input:focus,
-.input-field-group textarea:focus {
+.testimonial-form input:focus,
+.testimonial-form textarea:focus {
   outline: none;
   border-color: #0d6efd;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+  background-color: #ffffff; 
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
 }
 
 .rating-group {
@@ -230,6 +211,16 @@
   border-radius: 8px;
   color: #155724;
 }
+.form-error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
 .author-avatar-icon {
   width: 50px;
   height: 50px;
@@ -277,3 +268,77 @@
 }
 .btn-edit:hover { color: #0d6efd; }
 .btn-delete:hover { color: #dc3545; }
+
+.edit-form {
+width: 100%;
+}
+.edit-form textarea {
+width: 100%;
+box-sizing: border-box;
+padding: 10px;
+border-radius: 6px;
+border: 1px solid #ced4da;
+font-family: inherit;
+font-size: 15px;
+margin-bottom: 10px;
+}
+.edit-actions {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+}
+.btn-save, .btn-cancel {
+padding: 6px 12px;
+border: none;
+border-radius: 6px;
+font-weight: 600;
+cursor: pointer;
+}
+.btn-save { background-color: #198754; color: white; }
+.btn-cancel { background-color: #6c757d; color: white; }
+
+.my-testimonial-section {
+padding: 80px 40px;
+background-color: #f0f4f9;
+text-align: center;
+}
+.my-testimonial-section h2 {
+font-size: 32px;
+font-weight: 700;
+margin-bottom: 30px;
+}
+.my-testimonial-card {
+max-width: 700px;
+margin: 0 auto;
+border: 2px solid #0d6efd; 
+box-shadow: 0 12px 30px rgba(13, 110, 253, 0.15);
+}
+.edit-form .input-error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.15);
+}
+.edit-error-message {
+  color: #dc3545;
+  font-size: 13px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.btn-save:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+.edit-star-rating {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+.edit-star-rating .star {
+  cursor: pointer;
+  margin: 0 3px;
+  transition: transform 0.2s ease;
+}
+.edit-star-rating .star:hover {
+  transform: scale(1.2);
+}

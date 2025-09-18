@@ -30,7 +30,14 @@ router.post("/register", async (req, res) => {
 router.get('/me', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    res.json({
+      _id: user._id,
+      name: user.firstName,
+      email: user.email 
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
