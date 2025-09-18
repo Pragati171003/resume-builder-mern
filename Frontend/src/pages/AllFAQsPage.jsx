@@ -20,20 +20,40 @@ function AllFAQsPage() {
 
   const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-  const handleFormSubmit = async(e) => {
+  const validateForm = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address.');
+      return false;
+    }
+    if (formData.question.trim() === '') {
+      setError('Please enter your question.');
+      return false;
+    }
+    return true; 
+  };
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    if (formData.email && formData.question) {
+    setError(''); 
+    if (validateForm()) {
       setIsLoading(true);
       try {
         await axios.post('http://localhost:5000/api/faq/submit', formData);
         setIsSubmitted(true); 
       } catch (err) {
-      console.error("Submission error:", err);
-      setError(err.response?.data?.msg || 'Failed to submit your question. Please try again later.');
-      }finally{
+        console.error("Submission error:", err);
+        setError(err.response?.data?.msg || 'Failed to submit. Please try again.');
+      } finally {
         setIsLoading(false);
       }
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) {
+      setError('');
     }
   };
 
@@ -69,18 +89,23 @@ function AllFAQsPage() {
           <form onSubmit={handleFormSubmit} className="faq-submission-form">
             <input
               type="email"
+              name="email"
               placeholder="Your Email Address"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={handleChange}
               required
             />
             <textarea
               rows="5"
+              name="question"
               placeholder="Type your question here..."
               value={formData.question}
-              onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+              onChange={handleChange}
               required
             ></textarea>
+
+            {error && <div className="faq-error-message">{error}</div>}
+            
             <button type="submit" className="submit-button" disabled={isLoading}>
               {isLoading ? 'Sending...' : 'Ask Question'}
             </button>
