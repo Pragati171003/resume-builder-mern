@@ -18,6 +18,18 @@ router.post('/submit', async (req, res) => {
       subject: `❓ New Question from ${email}`,
       html: `<p><strong>From:</strong> ${email}</p><p><strong>Question:</strong> ${question}</p>`,
     });
+
+    await resend.emails.send({
+      from: 'CVCraft Support <onboarding@resend.dev>',
+      to: email,
+      subject: 'We Have Received Your Question!',
+      html: `
+        <div style="font-family: sans-serif; padding: 20px;">
+          <h2>Thank you for contacting CVCraft!</h2>
+          <p>We've received your question and will get back to you as soon as possible.</p>
+        </div>
+      `,
+    });
     
     res.status(200).json({ msg: "Question submitted successfully!" });
 
