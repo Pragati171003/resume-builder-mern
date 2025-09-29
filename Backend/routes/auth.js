@@ -4,10 +4,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
+import { Resend } from 'resend';
 import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 router.post("/register", async (req, res) => {
   try {
@@ -78,33 +79,24 @@ router.post("/forgot-password", async (req, res) => {
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
-    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-    });
 
-    const mailOptions = {
-      from: `"CVCRAFT Password Reset" <${process.env.GMAIL_USER}>`,
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    await resend.emails.send({
+      from: 'CVCraft Password Reset <onboarding@resend.dev>',
       to: user.email,
       subject: 'Password Reset Request for Your CVCRAFT Account',
       html: `
-        <div style="font-family: sans-serif; padding: 20px; line-height: 1.6;">
+        <div style="font-family: sans-serif; padding: 20px;">
           <h2>Password Reset Request</h2>
           <p>Hi ${user.firstName},</p>
-          <p>We received a request to reset the password for your CVCRAFT account. Please click the link below to set a new password:</p>
-          <a href="${resetUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0d6efd; color: #ffffff; text-decoration: none; border-radius: 8px;">Reset Your Password</a>
-          <p>This link will expire in one hour.</p>
-          <p>If you did not request a password reset, please ignore this email.</p>
+          <p>Click the link below to set a new password:</p>
+          <a href="${resetUrl}" style="...">Reset Your Password</a>
         </div>
       `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    res.json({ msg: "A reset link has been sent to the given email" });
+    });
+    
+    res.json({ msg: "A reset link has been sent to the given email." });
 
   } catch (err) {
     console.error('FORGOT PASSWORD ERROR:', err);
