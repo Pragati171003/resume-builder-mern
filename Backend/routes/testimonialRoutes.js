@@ -3,9 +3,10 @@ import Testimonial from '../model/Testimonial.js';
 import User from '../model/User.js'; 
 import authMiddleware from '../middleware/authMiddleware.js';
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const router = express.Router();
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 router.get('/', async (req, res) => {
   try {
     const testimonials = await Testimonial.find().sort({ createdAt: -1 });
@@ -34,28 +35,13 @@ router.post('/', authMiddleware, async (req, res) => {
     } 
     const newTestimonial = new Testimonial({ ...req.body, user: req.user.id });
     await newTestimonial.save();
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-    });
 
-    const mailOptions = {
-      from: `"CVCraft Admin" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER, 
-      subject: 'New Testimonial Submitted on CVCraft!',
-      html: `
-        <div style="font-family: sans-serif; padding: 20px;">
-          <h2>A new testimonial has been submitted!</h2>
-          <p><strong>From:</strong> ${newTestimonial.name}</p>
-          <p><strong>Rating:</strong> ${'★'.repeat(newTestimonial.rating)}</p>
-          <p><strong>Quote:</strong> "${newTestimonial.quote}"</p>
-        </div>
-      `,
-    };
-    await transporter.sendMail(mailOptions);
+    await resend.emails.send({
+      from: 'CVCraft Admin <onboarding@resend.dev>',
+      to: process.env.GMAIL_USER,
+      subject: '🎉 New Testimonial Submitted!',
+      html: `<h2>A new testimonial has been submitted:</h2>...`,
+    });
     
     res.status(201).json(newTestimonial);
   } catch (err) { res.status(500).json({ msg: "Server Error" }); }
@@ -95,27 +81,13 @@ router.put('/:id', authMiddleware, async (req, res) => {
       { $set: req.body },
       { new: true }
     );
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
+    await resend.emails.send({
+      from: 'CVCraft Admin <onboarding@resend.dev>',
+      to: process.env.GMAIL_USER,
+      subject: '✏️ A Testimonial Was Updated!',
+      html: `<h2>A testimonial has been updated:</h2>...`,
     });
-    const mailOptions = {
-      from: `"CVCraft Admin" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER, 
-      subject: 'A Testimonial Has Been Updated on CVCraft!',
-      html: `
-        <div style="font-family: sans-serif; padding: 20px;">
-          <h2>A testimonial has been updated!</h2>
-          <p><strong>From:</strong> ${updatedTestimonial.name}</p>
-          <p><strong>New Rating:</strong> ${'★'.repeat(updatedTestimonial.rating)}</p>
-          <p><strong>New Quote:</strong> "${updatedTestimonial.quote}"</p>
-        </div>
-      `,
-    };
-    await transporter.sendMail(mailOptions);
+    
     res.json(updatedTestimonial);
   } catch (err) { res.status(500).json({ msg: "Server Error" }); }
 });
