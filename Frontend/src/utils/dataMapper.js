@@ -17,7 +17,7 @@ const fontImport = fontFamily ? `@import url('https://fonts.googleapis.com/css2?
     },
     basics: {
       name: safe(formData.name),
-      label: "Senior Software Engineer", 
+      label: safe(formData.label), 
       summary: safe(formData.careerObjective),   
       summaryBlock:safe(formData.careerObjective), 
       about: safe(formData.careerObjective),
@@ -91,7 +91,6 @@ const fontImport = fontFamily ? `@import url('https://fonts.googleapis.com/css2?
 
    if (selectedTemplate === 'tech') {
     console.log("Applying magnificent override for 'tech' theme...");
-    mappedData.basics.label = "Senior Software Engineer";
     mappedData.basics.summary = safe(formData.careerObjective);
   }
   if (formData.linkedin) mappedData.basics.profiles.push({ network: "LinkedIn", url: formData.linkedin });

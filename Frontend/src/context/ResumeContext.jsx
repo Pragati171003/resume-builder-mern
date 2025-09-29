@@ -7,6 +7,7 @@ export function useResume() { return useContext(ResumeContext); }
 const initialData = {
   resumeTitle: "Untitled Resume",
   name: "Alex Chen",
+  label: "Senior Software Engineer",
   email: "alex.chen@example.com",
   mobile: "9876543210",
   countryCode: "+91",

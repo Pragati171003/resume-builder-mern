@@ -53,14 +53,8 @@ export default function ResumeTemplateGrid() {
 
   const handleTemplateSelect = (templateId) => {
     setSelected(templateId);
-    const targetUrl = `/editor/new?template=${templateId}`;
-    if (isLoggedIn) {
-      navigate(targetUrl);
-    } else {
-      navigate(`/login?redirectTo=${encodeURIComponent(targetUrl)}`);
-    }
+    navigate(`/editor/new?template=${templateId}`);
   };
-
 
   return (
     <div className="resume-builder">
