@@ -1,5 +1,5 @@
 import express from "express";
-import Resume from "../model/resume.js";
+import Resume from "../model/Resume.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
