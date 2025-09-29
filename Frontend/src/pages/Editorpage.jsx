@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ResumeProvider from '../context/ResumeContext'; 
-import { useResume } from '../context/ResumeContext'; 
+import ResumeProvider from '../context/ResumeContext.jsx'; 
+import { useResume } from '../context/ResumeContext.jsx'; 
 import ResumeForm from '../pages/ResumeForm';
 import ResumePreview from '../editor/ResumePreview';
 import Toolbar from '../editor/Toolbar';
