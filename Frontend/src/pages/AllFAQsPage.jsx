@@ -39,7 +39,7 @@ function AllFAQsPage() {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        await axios.post('http://localhost:5000/api/faq/submit', formData);
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/faq/submit`, formData);
         setIsSubmitted(true); 
       } catch (err) {
         console.error("Submission error:", err);

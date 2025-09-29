@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
       if (token) {
         try {
           const config = { headers: { 'Authorization': token } };
-          const { data } = await axios.get('http://localhost:5000/api/auth/me', config);
+          const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, config);
           
           setUser(data);
           setIsLoggedIn(true);

@@ -19,7 +19,7 @@ function ResumePreview() {
       setIsLoading(true); 
       try {
         const mappedData = mapFormDataToSchema(formData, selectedTemplate,  {themeColor, fontFamily, fontSize} );
-        const response = await axios.post('http://localhost:4000/render', {
+        const response = await axios.post(`${import.meta.env.VITE_RENDERER_URL}/render`, {
           resume: mappedData,
           theme: selectedTemplate,
         });

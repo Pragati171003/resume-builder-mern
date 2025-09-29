@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import './TestimonialsPage.css';
 import axios from 'axios';
 import { FaStar, FaQuoteLeft,FaUserCircle,FaEdit,FaTrash  } from 'react-icons/fa';
-import { useAuth } from '../context/AuthContext'; 
+import { useAuth } from '../context/authContext'; 
 
 const initialTestimonials = [
   { _id: 'initial-1', name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This resume builder made the job application process so much easier!', rating: 5 },
@@ -82,11 +82,11 @@ function TestimonialsPage() {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const { data: dbTestimonials } = await axios.get('http://localhost:5000/api/testimonials');
+        const { data: dbTestimonials } = await axios.get(`${import.meta.env.VITE_API_URL}/api/testimonials`);
         setTestimonials([...initialTestimonials, ...dbTestimonials]);
         if (isLoggedIn) {
           const config = { headers: { Authorization: token } };
-          const { data } = await axios.get('http://localhost:5000/api/testimonials/my-testimonial', config);
+          const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/testimonials/my-testimonial`, config);
           setMyTestimonial(data);
         }
       } catch (err) { 
@@ -111,7 +111,7 @@ function TestimonialsPage() {
     if (formData.name && formData.quote && formData.rating > 0) {
       try {
         const config = { headers: { Authorization: token } };
-        const { data: newTestimonial } = await axios.post('http://localhost:5000/api/testimonials', formData, config);
+        const { data: newTestimonial } = await axios.post(`${import.meta.env.VITE_API_URL}/api/testimonials`, formData, config);
         setTestimonials([newTestimonial, ...testimonials]);
         setIsSubmitted(true);
         setError('');
@@ -131,7 +131,7 @@ function TestimonialsPage() {
     if (window.confirm("Are you sure you want to delete this testimonial?")) {
       try {
         const config = { headers: { Authorization: token } };
-        await axios.delete(`http://localhost:5000/api/testimonials/${testimonialId}`, config);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/testimonials/${testimonialId}`, config);
         setTestimonials(testimonials.filter(t => t._id !== testimonialId));
       } catch (err) {
         alert("Failed to delete testimonial. You may not be authorized.");
@@ -142,7 +142,7 @@ function TestimonialsPage() {
     try {
       const config = { headers: { Authorization: token } };
       const { data: updatedTestimonial } = await axios.put(
-        `http://localhost:5000/api/testimonials/${testimonialId}`,
+        `${import.meta.env.VITE_API_URL}/api/testimonials/${testimonialId}`,
         updatedData,
         config
       );

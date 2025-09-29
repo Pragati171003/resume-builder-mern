@@ -28,12 +28,12 @@ import Template23 from '../template-previews/John Doe_page-0001.jpg'
 import Template24 from '../template-previews/standard-resume_page-0001.jpg'
 import Template25 from '../template-previews/Untitled Resume (6)_page-0001.jpg'
 import Template26 from '../template-previews/Untitled Resume (36)_page-0001.jpg'
+import Template27 from '../assets/images/image.png'
+
 
 
 const templates = [
   { id: 'tech', name: 'Tech',imageUrl:Template20 }, 
-  {id:"papirus", name : 'Papirus'},
-  {id:"actual", name : 'Actual'},
   { id: 'onepage', name: 'Onepage' ,imageUrl:Template4},
   { id: 'onepage-plus', name: 'Onepage Plus',imageUrl:Template1 },
   { id: 'flat', name: 'Flat' ,imageUrl:Template2},
@@ -64,8 +64,8 @@ const templates = [
   { id: 'nominaltech-nl', name: 'Nominaltech-nl', imageUrl:Template26}, 
   { id: 'eternal', name: 'Eternal',imageUrl:Template22 }, 
   { id: 'compact', name: 'compact',imageUrl:Template25 }, 
+  {id:"papirus", name : 'Papirus', imageUrl : Template27},
   { id: 'standard-resume', name: 'Standard',imageUrl:Template24 },
-  { id: 'Rnord', name: 'Rnord',imageUrl:Template23 }, 
 ];
 
 const colors = [
