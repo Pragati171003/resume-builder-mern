@@ -134,3 +134,12 @@ form button[type="submit"]:hover {
   font-size: 22px;
   color: #a0aec0;
 }
+.redirect-message {
+  background-color: #e7f5ff;
+  color: #0a58ca;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  border: 1px solid #b6d4fe;
+}

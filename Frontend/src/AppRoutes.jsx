@@ -90,9 +90,7 @@ function AppRoutes() {
           <Route
             path="/dashboard"
             element={
-              <PrivateRoute>
                 <DashboardPage />
-              </PrivateRoute>
             }
           />
         </Route>
@@ -100,33 +98,25 @@ function AppRoutes() {
         <Route
           path="/editor/:resumeId"
           element={
-            <PrivateRoute>
               <EditorPage />
-            </PrivateRoute>
           }
         />
         <Route
           path="/build-resume"
           element={
-            <PrivateRoute>
               <EditorPage />
-            </PrivateRoute>
           }
         />
         <Route
           path="/editor"
           element={
-            <PrivateRoute>
               <EditorPage />
-            </PrivateRoute>
           }
         />
         <Route
           path="/preview"
           element={
-            <PrivateRoute>
               <PreviewPage />
-            </PrivateRoute>
           }
         />
       </Routes>

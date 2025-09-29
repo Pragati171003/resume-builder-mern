@@ -13,7 +13,7 @@ export function Loginpage() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const from = location.state?.from?.pathname || "/dashboard";
-
+  const redirectMessage = location.state?.message;
   const handleChange = (e) => {
     const { name, value } = e.target;
     const finalValue = name === 'email' ? value.toLowerCase() : value;
@@ -54,6 +54,7 @@ export function Loginpage() {
     <div className="login-page-wrapper"> 
       <div className="login-container">
         <h2>Login</h2>
+        {redirectMessage && <p className="redirect-message">{redirectMessage}</p>}
         <p className="subtitle">Welcome back! Please enter your details.</p>
         
         <form onSubmit={handleSubmit}> 

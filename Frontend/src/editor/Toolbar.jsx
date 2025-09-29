@@ -32,6 +32,8 @@ import Template26 from '../template-previews/Untitled Resume (36)_page-0001.jpg'
 
 const templates = [
   { id: 'tech', name: 'Tech',imageUrl:Template20 }, 
+  {id:"papirus", name : 'Papirus'},
+  {id:"actual", name : 'Actual'},
   { id: 'onepage', name: 'Onepage' ,imageUrl:Template4},
   { id: 'onepage-plus', name: 'Onepage Plus',imageUrl:Template1 },
   { id: 'flat', name: 'Flat' ,imageUrl:Template2},

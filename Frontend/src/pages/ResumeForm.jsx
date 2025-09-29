@@ -12,6 +12,12 @@ const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027
 function ResumeForm({onSubmit}) {
   const navigate = useNavigate();
   const { formData, setFormData, resumeId } = useResume();
+  const toTitleCase = (str) => {
+    if (!str) return '';
+    return str.split(' ').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    ).join(' ');
+  };
   {/*const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,87 +43,52 @@ function ResumeForm({onSubmit}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // --- 1. Your magnificent, preserved special case for MOBILE ---
+    if (name === "mobile") {
+      let digits = value.replace(/\D/g, "");
+      if (digits.length > 10) return;
+      setFormData((prev) => ({ ...prev, mobile: digits }));
+      
+      if (formData.countryCode === "+91") {
+        if (!/^[6-9]/.test(digits) && digits.length > 0) { setErrors((prev) => ({ ...prev, mobile: "Indian mobile must start with digits 6–9" })); }
+        else if (digits.length !== 10) { setErrors((prev) => ({ ...prev, mobile: "Mobile number must be exactly 10 digits" })); }
+        else { setErrors((prev) => ({ ...prev, mobile: "" })); }
+      } else {
+        if (digits.length !== 10) { setErrors((prev) => ({ ...prev, mobile: "Mobile number must be exactly 10 digits" })); }
+        else { setErrors((prev) => ({ ...prev, mobile: "" })); }
+      }
+      return; 
+    }
+    const titleCaseFields = ['name', 'college', 'school', 'role', 'company', 'title','label'];
+    const keys = name.split('.');
+    const fieldKey = keys[keys.length - 1];
+
+    let finalValue = value;
     if (name === "email") {
-      setFormData((prev) => ({ ...prev, email: value.toLowerCase() }));
-      return;
+      finalValue = value.toLowerCase();
+    } else if (titleCaseFields.includes(fieldKey)) {
+      finalValue = toTitleCase(value);
+    } else if (fieldKey === "marks") {
+      const numericValue = value.replace(/[^0-9.%]/g, ""); 
+      const parts = numericValue.split(".");
+      if (parts.length > 2) return;
+      finalValue = numericValue;
     }
-     if (name === "mobile") {
-  let digits = value.replace(/\D/g, "");
 
-  if (digits.length > 10) return;
-
-  setFormData((prev) => ({ ...prev, mobile: digits }));
-
-  if (formData.countryCode === "+91") {
-    if (!/^[6-9]/.test(digits) && digits.length > 0) {
-      setErrors((prev) => ({
-        ...prev,
-        mobile: "Indian mobile must start with digits 6–9",
-      }));
-    } else if (digits.length !== 10) {
-      setErrors((prev) => ({
-        ...prev,
-        mobile: "Mobile number must be exactly 10 digits",
-      }));
+    if (keys.length === 1) {
+      setFormData(prev => ({ ...prev, [name]: finalValue }));
     } else {
-      setErrors((prev) => ({ ...prev, mobile: "" }));
+      setFormData(prev => {
+        const newState = JSON.parse(JSON.stringify(prev));
+        let current = newState;
+        for (let i = 0; i < keys.length - 1; i++) {
+          if (current[keys[i]] === undefined) { current[keys[i]] = {}; }
+          current = current[keys[i]];
+        }
+        current[keys[keys.length - 1]] = finalValue;
+        return newState;
+      });
     }
-  } else {
-    if (digits.length !== 10) {
-      setErrors((prev) => ({
-        ...prev,
-        mobile: "Mobile number must be exactly 10 digits",
-      }));
-    } else {
-      setErrors((prev) => ({ ...prev, mobile: "" }));
-    }
-  }
-
-  return;
-}
-
-   
-
-
-    if (name === "countryCode") {
-      setFormData((prev) => ({ ...prev, countryCode: value }));
-      return;
-    }
-     if (name.startsWith("education.")) {
-  const [, level, field] = name.split(".");
-
-  if (field === "marks") {
-    const numericValue = value.replace(/[^0-9.%]/g, ""); 
-    const parts = numericValue.split(".");
-    if (parts.length > 2) return; 
-
-    setFormData((prev) => ({
-      ...prev,
-      education: {
-        ...prev.education,
-        [level]: {
-          ...prev.education[level],
-          [field]: numericValue,
-        },
-      },
-    }));
-    return;
-  }
-
-  setFormData((prev) => ({
-    ...prev,
-    education: {
-      ...prev.education,
-      [level]: {
-        ...prev.education[level],
-        [field]: value,
-      },
-    },
-  }));
-  return;
-}
-
-    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleProjectChange = (index, field, value) => {
@@ -264,7 +235,7 @@ const removeCertification = (index) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-
+  
   // validating the form
   if (!validate()) {
     alert("Please fill all mandatory fields");
@@ -385,6 +356,17 @@ const removeCustomSection = (index) => {
             placeholder="John Doe"
           />
           <div style={{ color: "red" }}>{errors.name}</div>
+        </div>
+
+        <div>
+          <h3 className="h3-heading">Label (Optional)</h3>
+          <input
+            type="text"
+            name="label"
+            value={formData.label || ''} 
+            onChange={handleChange}
+            placeholder="e.g., Senior Software Engineer"
+          />
         </div>
 
         <div>
