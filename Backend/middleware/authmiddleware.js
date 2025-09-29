@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = process.env.SECRET_KEY || "secret";
 
-const authMiddleware = (req, res, next) => {
-  const SECRET_KEY = process.env.JWT_SECRET;
+module.exports = (req, res, next) => {
   const token = req.headers.authorization;
   if(!token) return res.status(401).json({ message: "Unauthorized" });
 
@@ -10,8 +10,6 @@ const authMiddleware = (req, res, next) => {
     req.user = decoded;
     next();
   } catch(err) {
-    console.error("JWT Verification Error:", err.message);
     res.status(401).json({ message: "Invalid token" });
   }
 };
-export default authMiddleware;
