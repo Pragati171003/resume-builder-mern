@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveResume } from '../utils/resumeService'
 import {useEffect} from 'react'
-import { useResume } from '../context/ResumeContext';
+import { useResume } from '../context/ResumeContext.jsx';
 
 
 const years = Array.from({ length: 28 }, (_, i) => 2000 + i); // 2000-2027

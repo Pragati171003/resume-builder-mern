@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import './TestimonialsPage.css';
 import axios from 'axios';
 import { FaStar, FaQuoteLeft,FaUserCircle,FaEdit,FaTrash  } from 'react-icons/fa';
-import { useAuth } from '../context/authContext'; 
+import { useAuth } from '../context/AuthContext'; 
 
 const initialTestimonials = [
   { _id: 'initial-1', name: 'Sarah L.', title: 'Marketing Specialist', quote: 'This resume builder made the job application process so much easier!', rating: 5 },
