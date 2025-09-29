@@ -28,7 +28,7 @@ export function Footer() {
         <div className="footer-container">
           <div className="footer-left">
             <img src={logoImagec} alt="CVCRAFT Logo" className="footer-logo" />
-            <p>Talentsprint</p>
+            <p>Organization</p>
             <p>Hyderabad</p>
             <p>+91 1234567891</p>
             <p>contactus@gmail.com</p>

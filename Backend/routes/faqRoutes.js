@@ -21,7 +21,7 @@ router.post('/submit', async (req, res) => {
 
     const mailToAdmin = {
       from: `"CVCRAFT Inquiry" <${process.env.GMAIL_USER}>`,
-      to: 'your-admin-email@example.com',
+      to: process.env.GMAIL_USER,
       subject: `New Question from ${email}`,
       html: `<p><strong>From:</strong> ${email}</p><p><strong>Question:</strong> ${question}</p>`,
     };
