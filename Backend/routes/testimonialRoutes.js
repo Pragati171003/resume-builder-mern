@@ -42,7 +42,7 @@ router.post('/', authMiddleware, async (req, res) => {
     let emailToAdmin = new SibApiV3Sdk.SendSmtpEmail();
     emailToAdmin.subject = '🎉 New Testimonial Submitted on CVCraft!';
     emailToAdmin.htmlContent = `<h2>A new testimonial has been submitted:</h2><p><strong>From:</strong> ${newTestimonial.name}</p><p><strong>Rating:</strong> ${'★'.repeat(newTestimonial.rating)}</p><p><strong>Quote:</strong> "${newTestimonial.quote}"</p>`;
-    emailToAdmin.sender = { "name": "CVCraft Admin", "email": "noreply@cvcraft.com" };
+    emailToAdmin.sender = { "name": "CVCraft Admin", "email": process.env.GMAIL_USER };
     emailToAdmin.to = [{ "email": process.env.GMAIL_USER }];
 
     await apiInstance.sendTransacEmail(emailToAdmin);
@@ -84,10 +84,11 @@ router.put('/:id', authMiddleware, async (req, res) => {
       { $set: req.body },
       { new: true }
     );
+
     let emailToAdmin = new SibApiV3Sdk.SendSmtpEmail();
     emailToAdmin.subject = '✏️ A Testimonial Was Updated on CVCraft!';
     emailToAdmin.htmlContent = `<h2>A testimonial has been updated:</h2><p><strong>From:</strong> ${updatedTestimonial.name}</p><p><strong>New Rating:</strong> ${'★'.repeat(updatedTestimonial.rating)}</p><p><strong>New Quote:</strong> "${updatedTestimonial.quote}"</p>`;
-    emailToAdmin.sender = { "name": "CVCraft Admin", "email": "noreply@cvcraft.com" };
+    emailToAdmin.sender = { "name": "CVCraft Admin", "email": process.env.GMAIL_USER };
     emailToAdmin.to = [{ "email": process.env.GMAIL_USER }];
     
     await apiInstance.sendTransacEmail(emailToAdmin);
