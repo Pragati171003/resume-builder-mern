@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-import { Resend } from 'resend';
+import SibApiV3Sdk from '@sendinblue/client';
 import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
