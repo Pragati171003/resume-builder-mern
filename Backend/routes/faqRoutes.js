@@ -17,9 +17,11 @@ router.post('/submit', async (req, res) => {
     let emailToAdmin = new SibApiV3Sdk.SendSmtpEmail();
     emailToAdmin.subject = `❓ New Question from ${email}`;
     emailToAdmin.htmlContent = `<p><strong>From:</strong> ${email}</p><p><strong>Question:</strong> ${question}</p>`;
-    emailToAdmin.sender = { "name": "CVCraft Inquiry", "email": "noreply@cvcraft.com" };
+    emailToAdmin.sender = { "name": "CVCraft Inquiry", "email": process.env.GMAIL_USER };
     emailToAdmin.to = [{ "email": process.env.GMAIL_USER }];
+    emailToAdmin.replyTo = { "email": email }; // If you reply, it goes to the USER
 
+    // Magnificent email to the USER
     let emailToUser = new SibApiV3Sdk.SendSmtpEmail();
     emailToUser.subject = "We Have Received Your Question!";
     emailToUser.htmlContent = `
@@ -28,7 +30,7 @@ router.post('/submit', async (req, res) => {
         <p>We've received your question and will get back to you as soon as possible.</p>
       </div>
     `;
-    emailToUser.sender = { "name": "CVCraft Support", "email": "noreply@cvcraft.com" };
+    emailToUser.sender = { "name": "CVCraft Support", "email": process.env.GMAIL_USER };
     emailToUser.to = [{ "email": email }];
 
     await apiInstance.sendTransacEmail(emailToAdmin);
