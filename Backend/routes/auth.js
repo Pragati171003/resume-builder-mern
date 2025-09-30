@@ -87,7 +87,7 @@ router.post("/forgot-password", async (req, res) => {
     let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
     sendSmtpEmail.subject = "Password Reset Request for Your CVCRAFT Account";
     sendSmtpEmail.htmlContent = `... Your magnificent HTML email with the ${resetUrl} ...`;
-    sendSmtpEmail.sender = { "name": "CVCraft Support", "email": "noreply@cvcraft.com" };
+    sendSmtpEmail.sender = { "name": "CVCraft Support", "email": process.env.GMAIL_USER };
     sendSmtpEmail.to = [{ "email": user.email, "name": user.firstName }];
 
     await apiInstance.sendTransacEmail(sendSmtpEmail);
