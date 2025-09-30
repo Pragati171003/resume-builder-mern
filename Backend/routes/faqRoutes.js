@@ -1,8 +1,10 @@
 import express from 'express';
-import { Resend } from 'resend';
+import SibApiV3Sdk from '@sendinblue/client';
 
 const router = express.Router();
-const resend = new Resend(process.env.RESEND_API_KEY);
+let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+let apiKey = apiInstance.authentications['apiKey'];
+apiKey.apiKey = process.env.BREVO_API_KEY;
 
 router.post('/submit', async (req, res) => {
   const { email, question } = req.body;
@@ -12,24 +14,25 @@ router.post('/submit', async (req, res) => {
   }
 
   try {
-    await resend.emails.send({
-      from: 'CVCraft Admin <onboarding@resend.dev>', 
-      to: process.env.GMAIL_USER, 
-      subject: `❓ New Question from ${email}`,
-      html: `<p><strong>From:</strong> ${email}</p><p><strong>Question:</strong> ${question}</p>`,
-    });
+    let emailToAdmin = new SibApiV3Sdk.SendSmtpEmail();
+    emailToAdmin.subject = `❓ New Question from ${email}`;
+    emailToAdmin.htmlContent = `<p><strong>From:</strong> ${email}</p><p><strong>Question:</strong> ${question}</p>`;
+    emailToAdmin.sender = { "name": "CVCraft Inquiry", "email": "noreply@cvcraft.com" };
+    emailToAdmin.to = [{ "email": process.env.GMAIL_USER }];
 
-    await resend.emails.send({
-      from: 'CVCraft Support <onboarding@resend.dev>',
-      to: email,
-      subject: 'We Have Received Your Question!',
-      html: `
-        <div style="font-family: sans-serif; padding: 20px;">
-          <h2>Thank you for contacting CVCraft!</h2>
-          <p>We've received your question and will get back to you as soon as possible.</p>
-        </div>
-      `,
-    });
+    let emailToUser = new SibApiV3Sdk.SendSmtpEmail();
+    emailToUser.subject = "We Have Received Your Question!";
+    emailToUser.htmlContent = `
+      <div style="font-family: sans-serif; padding: 20px;">
+        <h2>Thank you for contacting CVCraft!</h2>
+        <p>We've received your question and will get back to you as soon as possible.</p>
+      </div>
+    `;
+    emailToUser.sender = { "name": "CVCraft Support", "email": "noreply@cvcraft.com" };
+    emailToUser.to = [{ "email": email }];
+
+    await apiInstance.sendTransacEmail(emailToAdmin);
+    await apiInstance.sendTransacEmail(emailToUser);
     
     res.status(200).json({ msg: "Question submitted successfully!" });
 
