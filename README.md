@@ -28,8 +28,8 @@ A full-stack, MERN-based web application designed to provide a seamless, real-ti
 
 This project is deployed using a professional, hybrid "monorepo" strategy to use the best tool for each job:
 
-*   **Frontend (Vercel):** The React frontend is deployed as a static site on **Vercel** for optimal performance and global availability. It includes SPA rewrite rules to handle client-side routing.
-*   **Backend Services (Render):** Both the main **Backend API Server** (Node.js/Express) and the **Resume Renderer Server** are deployed as separate web services on **Render**, creating a decoupled and scalable microservice architecture.
+*   **Frontend (Vercel):** The React frontend is deployed as a static site on **Vercel** for optimal performance and global availability. It includes SPA rewrite rules to handle client-side routing. [resumebuilder-chi-rouge.vercel.app](https://resumebuilder-chi-rouge.vercel.app)
+*   **Backend Services (Render):** Both the main **Backend API Server** (Node.js/Express) and the **Resume Renderer Server** are deployed as separate web services on **Render**, creating a decoupled and scalable microservice architecture. [cvcraft-backend-kmki.onrender.com](https://cvcraft-backend-kmki.onrender.com)
 
 | Category      | Technologies                                            |
 |---------------|---------------------------------------------------------|
@@ -40,7 +40,6 @@ This project is deployed using a professional, hybrid "monorepo" strategy to use
 | **Deployment**| Vercel (Frontend), Render (Backend Services)            |
 
 ---
-
 ### Key Challenges & Solutions
 
 This project was a deep dive into solving real-world development challenges:
