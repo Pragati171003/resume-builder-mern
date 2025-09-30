@@ -92,9 +92,8 @@ router.post("/forgot-password", async (req, res) => {
           <p>Click the link below to set a new password:</p>
           <a href="${resetUrl}" style="...">Reset Your Password</a>
         </div>`;
-    sendSmtpEmail.sender = { "name": "CVCraft Support", "email": "support@cvcraft.dev" };
+    sendSmtpEmail.sender = { "name": "CVCraft Support", "email": process.env.GMAIL_USER };
     sendSmtpEmail.to = [{ "email": user.email, "name": user.firstName }];
-    sendSmtpEmail.replyTo = { "email": process.env.GMAIL_USER, "name": "Pragathi Kolasani" };
 
     await apiInstance.sendTransacEmail(sendSmtpEmail);
     res.json({ msg: "A reset link has been sent to the given email." });
