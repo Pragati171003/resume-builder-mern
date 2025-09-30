@@ -10,7 +10,7 @@ A full-stack, MERN-based web application designed to provide a seamless, real-ti
 
 **The core mission of this project was to solve a real-world problem: building a complex, state-intensive, single-page application and deploying it with a professional, hybrid architecture.**
 
-![CVCraft Live Preview GIF](https://i.postimg.cc/Jzr5z7Jv/demo.gif)
+![CVCraft Live Preview GIF](https://github.com/user-attachments/assets/4795d108-1b85-472f-b213-c763944e79a8)
 
 ---
 
