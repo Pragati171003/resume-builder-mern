@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-import SibApiV3Sdk from '@sendinblue/client';
+import { Resend } from 'resend';
 import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -86,9 +86,15 @@ router.post("/forgot-password", async (req, res) => {
 
     let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
     sendSmtpEmail.subject = "Password Reset Request for Your CVCRAFT Account";
-    sendSmtpEmail.htmlContent = `... Your magnificent HTML email with the ${resetUrl} ...`;
-    sendSmtpEmail.sender = { "name": "CVCraft Support", "email": process.env.GMAIL_USER };
+    sendSmtpEmail.htmlContent = `<div style="font-family: sans-serif; padding: 20px;">
+          <h2>Password Reset Request</h2>
+          <p>Hi ${user.firstName},</p>
+          <p>Click the link below to set a new password:</p>
+          <a href="${resetUrl}" style="...">Reset Your Password</a>
+        </div>`;
+    sendSmtpEmail.sender = { "name": "CVCraft Support", "email": "support@cvcraft.dev" };
     sendSmtpEmail.to = [{ "email": user.email, "name": user.firstName }];
+    sendSmtpEmail.replyTo = { "email": process.env.GMAIL_USER, "name": "Pragathi Kolasani" };
 
     await apiInstance.sendTransacEmail(sendSmtpEmail);
     res.json({ msg: "A reset link has been sent to the given email." });
